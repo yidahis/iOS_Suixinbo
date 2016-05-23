@@ -28,4 +28,4 @@ AVSDK : http://share.weiyun.com/2d7955ce57cebb00539e909ec78f7071  对应放到�
 
 ##随心播的Spear的配置
 因随心播的参数配置较高，因此对主播上行带宽有要求
-![]()
+![spear配置](https://raw.githubusercontent.com/zhaoyang21cn/iOS_Suixinbo/master/QQ%E6%88%AA%E5%9B%BE20160520170339.jpg)
