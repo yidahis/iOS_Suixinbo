@@ -4,5 +4,5 @@
 
 IMSDK : http://share.weiyun.com/6c957fdba1b5a4bffb8abd5f529e825b  对应放到工程目录  TCShow/TCAdapter/TIMAdapter/Framework/IMSDK
 
-AVSDK : http://share.weiyun.com/6255509f7178c5dd84df139f47d9b43c  对应放到工程目录  TCShow/TCAdapter/TCAVIMAdapter/Libs
+AVSDK : http://share.weiyun.com/2d7955ce57cebb00539e909ec78f7071  对应放到工程目录  TCShow/TCAdapter/TCAVIMAdapter/Libs
 

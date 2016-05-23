@@ -14,7 +14,7 @@
 #define TAVLocalizedError(avErrorTip) NSLocalizedString(avErrorTip, avErrorTip)
 
 // 是否是AppStore版本
-#define kAppStoreVersion 1
+#define kAppStoreVersion 0
 
 
 // 上传AppStore时改为0
