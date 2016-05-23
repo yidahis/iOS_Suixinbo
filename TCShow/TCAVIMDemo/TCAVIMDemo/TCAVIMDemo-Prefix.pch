@@ -1,0 +1,33 @@
+//
+//  TCAVIMDemo-Prefix.pch
+//  TCAVIMDemo
+//
+//  Created by AlexiChen on 16/5/16.
+//  Copyright © 2016年 AlexiChen. All rights reserved.
+//
+
+#ifndef TCAVIMDemo_Prefix_h
+#define TCAVIMDemo_Prefix_h
+
+#define kDefaultMargin  8
+
+
+#define kDefaultUserIcon            [UIImage imageNamed:@"default_head@2x.jpg"]
+#define kDefaultCoverIcon            [UIImage imageNamed:@"default_cover@2x.jpg"]
+
+
+#define kAppLargeTextFont       [UIFont systemFontOfSize:16]
+#define kAppMiddleTextFont      [UIFont systemFontOfSize:14]
+#define kAppSmallTextFont       [UIFont systemFontOfSize:12]
+
+#import "CommonLibrary.h"
+
+#import "TCAdapterHeader.h"
+
+#import "TCAVIMModelHeader.h"
+
+#import "AppDelegate.h"
+
+#import "AppUIHeader.h"
+
+#endif /* TCAVIMDemo_Prefix_h */

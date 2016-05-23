@@ -1,0 +1,27 @@
+//
+//  LiveIMTool-Prefix.pch
+//  LiveIMTool
+//
+//  Created by AlexiChen on 16/4/18.
+//  Copyright © 2016年 AlexiChen. All rights reserved.
+//
+
+#ifndef LiveIMTool_Prefix_h
+#define LiveIMTool_Prefix_h
+
+
+#define kTextRedColor       RGBOF(0xD54A45)
+
+// 上传AppStore时改为0
+// 方便测试去查看房间号等相关信息，以便测试
+#define kBetaVersion        1
+
+#import "CommonLibrary.h"
+
+#import "AVIMAble.h"
+
+#import "TIMAdapter.h"
+
+#import "AppDelegate.h"
+
+#endif /* LiveIMTool_Prefix_h */

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C2CVideoUIViewController">
+            <connections>
+                <outlet property="beautySlider" destination="Myq-Bc-Dgv" id="zoI-bI-fkJ"/>
+                <outlet property="smallView" destination="J5a-lf-TtA" id="oec-yR-w42"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wof-I2-Lzt">
+                    <rect key="frame" x="250" y="490" width="100" height="30"/>
+                    <color key="backgroundColor" red="0.68928372270000005" green="1" blue="0.93156322499999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="9SO-LF-31M"/>
+                        <constraint firstAttribute="height" constant="30" id="RUA-Vt-5BC"/>
+                    </constraints>
+                    <state key="normal" title="挂断"/>
+                    <connections>
+                        <action selector="onHangUp:" destination="-1" eventType="touchUpInside" id="u04-Ff-0vn"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="61B-5B-rLI">
+                    <rect key="frame" x="278" y="60" width="45" height="30"/>
+                    <color key="backgroundColor" red="0.68928372270000005" green="1" blue="0.93156322499999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="AG5-ag-bHN"/>
+                        <constraint firstAttribute="height" constant="30" id="D2o-ma-hrk"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="30" id="Toj-rU-DXs"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="eIC-WY-BM5"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="70" id="ihh-VT-pce"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="扬声器">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="eIC-WY-BM5"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="onEnableSpeaker:" destination="-1" eventType="touchUpInside" id="8OT-cD-BlB"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iW7-Qo-jkP">
+                    <rect key="frame" x="353" y="60" width="45" height="30"/>
+                    <color key="backgroundColor" red="0.68928372270000005" green="1" blue="0.93156322499999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="fbt-Y5-HUM"/>
+                        <constraint firstAttribute="height" constant="30" id="iMo-do-cFN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="摄像头">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onEnableCamera:" destination="-1" eventType="touchUpInside" id="Chb-TM-Otp"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TxT-BZ-2XQ">
+                    <rect key="frame" x="278" y="120" width="45" height="30"/>
+                    <color key="backgroundColor" red="0.68928372270000005" green="1" blue="0.93156322499999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="6au-mN-ooM"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="bB6-J2-5Qr"/>
+                        <constraint firstAttribute="height" constant="30" id="dFK-qD-BTd"/>
+                    </constraints>
+                    <state key="normal" title="美颜"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="6au-mN-ooM"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="onBeauty:" destination="-1" eventType="touchUpInside" id="ZLc-rM-0B7"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJ8-on-8KE">
+                    <rect key="frame" x="203" y="60" width="45" height="30"/>
+                    <color key="backgroundColor" red="0.68928372270000005" green="1" blue="0.93156322499999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="IKa-Eh-PZD"/>
+                        <constraint firstAttribute="height" constant="30" id="Nql-h3-7hK"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="ZTf-7U-VyE"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="麦克风">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="IKa-Eh-PZD"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="onEnableMic:" destination="-1" eventType="touchUpInside" id="Tyv-cZ-972"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J5a-lf-TtA">
+                    <rect key="frame" x="490" y="360" width="90" height="120"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="120" id="RER-lK-KSL"/>
+                        <constraint firstAttribute="width" constant="90" id="UV0-Dh-urk"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="5Mt-yt-gJv" appends="YES" id="jDv-GW-4ir"/>
+                    </connections>
+                </view>
+                <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="Myq-Bc-Dgv">
+                    <rect key="frame" x="38" y="550" width="524" height="31"/>
+                    <connections>
+                        <action selector="onBeautyChanged:" destination="-1" eventType="valueChanged" id="dtD-mY-1qA"/>
+                    </connections>
+                </slider>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4A-1t-NBe">
+                    <rect key="frame" x="250" y="430" width="100" height="30"/>
+                    <color key="backgroundColor" red="0.68928372270000005" green="1" blue="0.93156322499999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="Nkc-zk-NCR"/>
+                        <constraint firstAttribute="height" constant="30" id="g7y-TM-Uwe"/>
+                    </constraints>
+                    <state key="normal" title="切换摄像头"/>
+                    <connections>
+                        <action selector="onSwitchCamera:" destination="-1" eventType="touchUpInside" id="wh6-ZQ-QK3"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="TxT-BZ-2XQ" firstAttribute="width" secondItem="61B-5B-rLI" secondAttribute="width" id="421-Sm-LzJ"/>
+                <constraint firstItem="61B-5B-rLI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="6s5-xX-NqH"/>
+                <constraint firstItem="iW7-Qo-jkP" firstAttribute="width" secondItem="61B-5B-rLI" secondAttribute="width" id="9Ba-FX-GEp"/>
+                <constraint firstItem="iW7-Qo-jkP" firstAttribute="centerY" secondItem="61B-5B-rLI" secondAttribute="centerY" id="A48-gi-GRw"/>
+                <constraint firstItem="Wof-I2-Lzt" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="AE0-kP-N9E"/>
+                <constraint firstItem="61B-5B-rLI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="60" id="BFY-qX-Hd0"/>
+                <constraint firstItem="Wof-I2-Lzt" firstAttribute="top" secondItem="p4A-1t-NBe" secondAttribute="bottom" constant="30" id="EPU-V9-aiR"/>
+                <constraint firstItem="TxT-BZ-2XQ" firstAttribute="centerX" secondItem="61B-5B-rLI" secondAttribute="centerX" id="ExT-VA-mKB"/>
+                <constraint firstItem="p4A-1t-NBe" firstAttribute="centerX" secondItem="Wof-I2-Lzt" secondAttribute="centerX" id="FU4-eN-Dwn"/>
+                <constraint firstItem="Myq-Bc-Dgv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="Ia2-0f-GLj"/>
+                <constraint firstAttribute="bottom" secondItem="J5a-lf-TtA" secondAttribute="bottom" constant="120" id="Kwm-XT-XvR"/>
+                <constraint firstItem="iW7-Qo-jkP" firstAttribute="height" secondItem="61B-5B-rLI" secondAttribute="height" id="OKr-jK-rrj"/>
+                <constraint firstItem="RJ8-on-8KE" firstAttribute="centerY" secondItem="61B-5B-rLI" secondAttribute="centerY" id="QKu-Lf-KbX"/>
+                <constraint firstAttribute="trailing" secondItem="J5a-lf-TtA" secondAttribute="trailing" constant="20" id="Rz0-UO-hV1"/>
+                <constraint firstItem="TxT-BZ-2XQ" firstAttribute="height" secondItem="61B-5B-rLI" secondAttribute="height" id="Xep-ew-ceO"/>
+                <constraint firstAttribute="bottom" secondItem="Wof-I2-Lzt" secondAttribute="bottom" constant="80" id="gRE-FV-Hoq"/>
+                <constraint firstAttribute="bottom" secondItem="Myq-Bc-Dgv" secondAttribute="bottom" constant="20" id="gqJ-JR-Way"/>
+                <constraint firstItem="iW7-Qo-jkP" firstAttribute="leading" secondItem="61B-5B-rLI" secondAttribute="trailing" constant="30" id="pJe-sQ-kM2"/>
+                <constraint firstItem="RJ8-on-8KE" firstAttribute="width" secondItem="61B-5B-rLI" secondAttribute="width" id="q2m-s1-Cfq"/>
+                <constraint firstItem="61B-5B-rLI" firstAttribute="leading" secondItem="RJ8-on-8KE" secondAttribute="trailing" constant="30" id="qZq-np-y3o"/>
+                <constraint firstAttribute="trailing" secondItem="Myq-Bc-Dgv" secondAttribute="trailing" constant="40" id="syM-TL-LYn"/>
+                <constraint firstItem="RJ8-on-8KE" firstAttribute="height" secondItem="61B-5B-rLI" secondAttribute="height" id="u9J-0U-Toj"/>
+                <constraint firstItem="TxT-BZ-2XQ" firstAttribute="top" secondItem="61B-5B-rLI" secondAttribute="bottom" constant="30" id="xeG-mu-REM"/>
+            </constraints>
+        </view>
+        <tapGestureRecognizer id="5Mt-yt-gJv">
+            <connections>
+                <action selector="switchMainScreen:" destination="-1" id="ckB-VH-pQW"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+</document>

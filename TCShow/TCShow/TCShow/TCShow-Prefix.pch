@@ -1,0 +1,32 @@
+//
+//  TCShow-Prefix.pch
+//  TCShow
+//
+//  Created by AlexiChen on 16/4/11.
+//  Copyright © 2016年 AlexiChen. All rights reserved.
+//
+
+#ifndef TCShow_Prefix_h
+#define TCShow_Prefix_h
+
+#define kTextRedColor       RGBOF(0xD54A45)
+
+#define kTCShowMultiSubViewSize CGSizeMake(80, 120)
+
+
+#import "CommonLibrary.h"
+
+#import "TCAdapterHeader.h"
+
+#import "TCShowModelHeader.h"
+
+#import "CustomUIHeader.h"
+
+#import "ConstHeader.h"
+
+#import "AppDelegate.h"
+
+#import "AppUIHeader.h"
+
+
+#endif /* TCShow_Prefix_h */
