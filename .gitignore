@@ -44,3 +44,15 @@ TCShow/TCAdapter/TIMAdapter/Framework/IMSDK/ImSDK.framework/Headers/TIMMessage.h
 TCShow/TCAdapter/TIMAdapter/Framework/IMSDK/ImSDK.framework/Headers/TIMRelay.h
 
 TCShow/TCAdapter/TIMAdapter/Framework/IMSDK/ImSDK.framework/Headers/TIMVersion.h
+
+TCShow/TCAdapter/TIMAdapter/Framework/IMSDK/IMSDKBugly.framework/Headers/IMSDKBugly.h
+
+TCShow/TCAdapter/TIMAdapter/Framework/IMSDK/IMSDKBugly.framework/IMSDKBugly
+
+TCShow/TCAdapter/TIMAdapter/Framework/IMSDK/IMSDKBugly.framework/Resources/Info.plist
+
+TCShow/TCAdapter/TIMAdapter/Framework/IMSDK/QALSDK.framework/Headers/QalSDKCallbackProtocol.h
+
+TCShow/TCAdapter/TIMAdapter/Framework/IMSDK/QALSDK.framework/Headers/QalSDKProxy.h
+
+TCShow/TCAdapter/TIMAdapter/Framework/IMSDK/QALSDK.framework/QALSDK
