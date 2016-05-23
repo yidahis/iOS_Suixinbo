@@ -77,7 +77,7 @@ static NSDateFormatter *kTCAVIMLogDateFormatter = nil;
                                     [kTCAVIMLogDateFormatter setTimeStyle:NSDateFormatterShortStyle];\
                                     [kTCAVIMLogDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];\
                                 }\
-                                [[TIMManager sharedInstance] log:TIM_LOG_INFO tag:@"TCAdapter时间统计" msg:[NSString stringWithFormat:(@"时间点:%@ [%s Line %d] ------->>>>>>\n" fmt), [kTCAVIMLogDateFormatter stringFromDate:[NSDate date]], __PRETTY_FUNCTION__, __LINE__,  ##__VA_ARGS__]];\
+                                [[TIMManager sharedInstance] log:TIM_LOG_INFO tag:@"TCAdapter时间统计" msg:[NSString stringWithFormat:(@"时间点:%@ [%s Line %d] ------->>>>>>" fmt), [kTCAVIMLogDateFormatter stringFromDate:[NSDate date]], __PRETTY_FUNCTION__, __LINE__,  ##__VA_ARGS__]];\
                             }
 
 #endif

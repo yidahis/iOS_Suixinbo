@@ -26,6 +26,12 @@
 @protected
     BOOL                           _isExiting;      // 正在退出，主要是防止界面上多次弹出退出提醒框
     BOOL                           _isHost;         // YES：当前是主播，NO：当前是观众
+    
+@private
+    // 用于音频退出直播时还原现场
+    NSString                        *_audioSesstionCategory;    // 进入房间时的音频类别
+    NSString                        *_audioSesstionMode;        // 进入房间时的音频模式
+    AVAudioSessionCategoryOptions   _audioSesstionCategoryOptions;       // 进入房间时的音频类别选项
 }
 
 @property (nonatomic, readonly) BOOL isExiting;

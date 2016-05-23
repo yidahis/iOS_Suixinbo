@@ -18,6 +18,10 @@
     _roomEngine = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[TIMManager sharedInstance] setUserStatusListener:[IMAPlatform sharedInstance]];
+    
+    AVAudioSession *aSession = [AVAudioSession sharedInstance];
+    [aSession setCategory:_audioSesstionCategory withOptions:_audioSesstionCategoryOptions error:nil];
+    [aSession setMode:_audioSesstionMode error:nil];
 }
 
 - (instancetype)initWith:(id<AVRoomAble>)info user:(id<IMHostAble>)user
@@ -507,6 +511,13 @@ static BOOL kIsAlertingForceOfflineOnLiving = NO;
 {
     NSError* error=nil;
     AVAudioSession *aSession = [AVAudioSession sharedInstance];
+    
+    _audioSesstionCategory = [aSession category];
+    _audioSesstionMode = [aSession mode];
+    _audioSesstionCategoryOptions = [aSession categoryOptions];
+
+    
+    
     [aSession setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionAllowBluetooth error:&error];
     [aSession setMode:AVAudioSessionModeDefault error:&error];
     [aSession setActive:YES error: &error];
