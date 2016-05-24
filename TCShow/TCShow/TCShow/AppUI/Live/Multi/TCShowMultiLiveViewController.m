@@ -9,6 +9,33 @@
 #import "TCShowMultiLiveViewController.h"
 
 
+@interface TCShowMultiUserListViewCell : UITableViewCell
+
+@end
+
+@implementation TCShowMultiUserListViewCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])
+    {
+        self.imageView.layer.cornerRadius = 20;
+        self.imageView.layer.masksToBounds = YES;
+    }
+    return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self.imageView sizeWith:CGSizeMake(40, 40)];
+    [self.imageView layoutParentVerticalCenter];
+    [self.imageView alignParentLeftWithMargin:kDefaultMargin];
+}
+
+@end
+
+
 @implementation TCShowMultiUserListView
 
 - (instancetype)initWith:(NSArray *)array
@@ -29,6 +56,19 @@
     _backView.backgroundColor = [kBlackColor colorWithAlphaComponent:0.4];
     [self addSubview:_backView];
     
+    _tipLabel = [[InsetLabel alloc] init];
+    _tipLabel.contentInset = UIEdgeInsetsMake(0, kDefaultMargin, 0, kDefaultMargin);
+    _tipLabel.backgroundColor = kWhiteColor;
+    NSString *tip = @"邀请互动连线";
+    NSString *t = [NSString stringWithFormat:@"%@(最多可与三个观众进行互动直播)", tip];
+    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:t];
+
+    [text addAttribute:NSFontAttributeName value:kAppMiddleTextFont range:NSMakeRange(0, tip.length)];
+    [text addAttribute:NSForegroundColorAttributeName value:kBlackColor range:NSMakeRange(0, tip.length)];
+    [text addAttribute:NSFontAttributeName value:kAppMiddleTextFont range:NSMakeRange(tip.length, t.length - tip.length)];
+    [text addAttribute:NSForegroundColorAttributeName value:kGrayColor range:NSMakeRange(tip.length, t.length - tip.length)];
+    _tipLabel.attributedText = text;
+    [self addSubview:_tipLabel];
     
     _tableView = [[UITableView alloc] init];
     _tableView.delegate = self;
@@ -44,6 +84,7 @@
 - (void)show
 {
     [self animation:^(id selfPtr) {
+        [_tipLabel slideInFrom:kFTAnimationTop duration:0.25 delegate:nil];
         [_tableView slideInFrom:kFTAnimationTop duration:0.25 delegate:nil];
         [_backView fadeIn:0.25 delegate:nil];
     } duration:0.3 completion:nil];
@@ -60,6 +101,7 @@
 - (void)hide
 {
     [self animation:^(id selfPtr) {
+        [_tipLabel slideOutTo:kFTAnimationTop duration:0.25 delegate:nil];
         [_tableView slideOutTo:kFTAnimationTop duration:0.25 delegate:nil];
         [_backView fadeOut:0.25 delegate:nil];
     } duration:0.3 completion:^(id selfPtr) {
@@ -71,8 +113,11 @@
 {
     _backView.frame = self.bounds;
     
+    [_tipLabel sizeWith:CGSizeMake(self.bounds.size.width, 40)];
+    
     NSInteger rows = _userList.count > 7 ? 7 : _userList.count;
     [_tableView sizeWith:CGSizeMake(self.bounds.size.width, rows * kDefaultCellHeight)];
+    [_tableView layoutBelow:_tipLabel];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -90,7 +135,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MultiUserCell"];
     if (!cell)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MultiUserCell"];
+        cell = [[TCShowMultiUserListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MultiUserCell"];
+        
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 65, 20)];
 
         btn.tag = 1000 + indexPath.row;

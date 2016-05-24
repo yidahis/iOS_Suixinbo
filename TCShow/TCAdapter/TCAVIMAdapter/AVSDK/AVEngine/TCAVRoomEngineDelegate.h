@@ -55,6 +55,8 @@
 // 用户请求画面成功（QAVEndpoint requestViewList）后，首帧画面到到
 - (void)onAVEngineFirstRemoteFrameRender:(TCAVBaseRoomEngine *)engine;
 
+// 修改controlRole回调
+- (void)onAVEngine:(TCAVBaseRoomEngine *)engine changeRole:(BOOL)succ tipInfo:(NSString *)tip;
 
 @optional
 

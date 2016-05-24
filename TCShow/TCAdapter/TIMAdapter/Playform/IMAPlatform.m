@@ -124,6 +124,10 @@ static Class kHostClass = Nil;
     [IMAPlatform setAutoLogin:NO];
     _host = nil;
     
+#if kIsUseAVSDKAsLiveScene
+    [TCAVSharedContext destroyContext];
+#endif
+    
 }
 
 - (void)offlineLogin

@@ -21,7 +21,9 @@
 - (void)dealloc
 {
     DebugLog(@"======>>>>> [%@] %@ 释放成功 <<<<======", [self class], self);
+#if kIsUseAVSDKAsLiveScene
     [QAVContext DestroyContext:_avContext];
+#endif
     [UIApplication sharedApplication].idleTimerDisabled = NO;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -40,15 +42,28 @@
     {
         _isAtForeground = YES;
         
-        QAVContextConfig *config = [[QAVContextConfig alloc] init];
+#if kIsUseAVSDKAsLiveScene
+        QAVContext *context = [TCAVSharedContext sharedContext];
+        if (context)
+        {
+            _avContext = context;
+            _isUseSharedContext = YES;
+        }
+        else
+#endif
+        {
+            QAVContextConfig *config = [[QAVContextConfig alloc] init];
+            
+            NSString *appid = [host imSDKAppId];
+            
+            config.sdk_app_id = appid;
+            config.app_id_at3rd = appid;
+            config.identifier = [host imUserId];
+            config.account_type = [host imSDKAccountType];
+            _avContext = [QAVContext CreateContext:config];
+        }
         
-        NSString *appid = [host imSDKAppId];
-        
-        config.sdk_app_id = appid;
-        config.app_id_at3rd = appid;
-        config.identifier = [host imUserId];
-        config.account_type = [host imSDKAccountType];
-        _avContext = [QAVContext CreateContext:config];
+       
         
         _IMUser = host;
         
@@ -177,15 +192,29 @@
     if(QAV_OK == result)
     {
         TCAVIMLog(@"进入AV房间成功");
+#if kIsUseAVSDKAsLiveScene
+        // 配置共享的context
+        if (_isUseSharedContext)
+        {
+            [TCAVSharedContext configWithStartedContext:_avContext];
+        }
+#endif
         [self onEnterAVRoomSucc];
+    
     }
     else
     {
         TCAVIMLog(@"进入AV房间失败: %d, 开始StopContext", result);
+#if kIsUseAVSDKAsLiveScene
+        [self onContextCloseComplete:QAV_OK];
+#else
+        // 不
         __weak TCAVBaseRoomEngine *ws = self;
         [_avContext stopContext:^(QAVResult result) {
             [ws onContextCloseComplete:@"进入AV房间失败"];
         }];
+#endif
+        
         
     }
 }
@@ -205,10 +234,15 @@
     
     DebugLog(@"退出AVRoom完毕");
 #endif
+    
     __weak TCAVBaseRoomEngine *ws = self;
+#if kIsUseAVSDKAsLiveScene
+    [ws onContextCloseComplete:nil];
+#else
     [_avContext stopContext:^(QAVResult result) {
         [ws onContextCloseComplete:nil];
     }];
+#endif
     
 }
 
@@ -260,6 +294,41 @@
     {
         DebugLog(@"[%@] 当前room不是直播状态", [self class]);
         return nil;
+    }
+}
+
+// 修改角色 此前，角色被设定为在进入房间之前指定、进入房间之后不能动态修改。这个接口的作用就是修改这一设定，即：在进入房间之后也能动态修改角色。业务测可以通过此接口让用户在房间内动态调整音视频、网络参数，如将视频模式从清晰切换成流畅。
+// role 角色字符串，可为空，为空时对应后台默认角色，注意传入的参数，要与腾讯云台Spear引擎配置一致
+// 修改角色不包括修改音频场景，音频场景仍然需要在进入房间前指定而且进入房间以后不能修改
+- (QAVResult)changeAVControlRole:(NSString *)role
+{
+    if ([self isRoomRunning])
+    {
+        QAVMultiRoom *room = (QAVMultiRoom *)_avContext.room;
+        if ([room respondsToSelector:@selector(ChangeAVControlRole:delegate:)])
+        {
+            QAVResult res = [room ChangeAVControlRole:role delegate:self];
+            return res;
+        }
+        else
+        {
+            DebugLog(@"创建房间时，传入的参数不是QAVMultiParam类型，无法修改role");
+        }
+        
+    }
+    else
+    {
+        DebugLog(@"房间状态不正确，无法changeRole");
+    }
+    return QAV_ERR_FAILED;
+}
+
+- (void)OnChangeRoleDelegate:(int)ret_code
+{
+    if ([_delegate respondsToSelector:@selector(onAVEngine:changeRole:tipInfo:)])
+    {
+        BOOL succ = ret_code == QAV_OK;
+        [_delegate onAVEngine:self changeRole:succ tipInfo:succ ? @"修改成功" : @"修改失败"];
     }
 }
 
@@ -412,10 +481,24 @@
     TCAVIMLog(@"-----[%@]>>>>>开始进入直播间：StartContext", [self isHostLive] ? @"主播" : @"观众");
     _roomInfo = room;
     
-    __weak TCAVBaseRoomEngine *ws = self;
-    [_avContext startContext:^(QAVResult result) {
-        [ws onContextStartComplete:(int)result];
-    }];
+    
+#if kIsUseAVSDKAsLiveScene
+    if (_isUseSharedContext)
+    {
+        [self creatAVRoom];
+    }
+    else
+#endif
+    {
+        __weak TCAVBaseRoomEngine *ws = self;
+        [_avContext startContext:^(QAVResult result) {
+            [ws onContextStartComplete:(int)result];
+        }];
+    }
+    
+    
+    
+    
 }
 
 - (QAVMultiParam *)createdAVRoomParam
@@ -423,13 +506,20 @@
     QAVMultiParam *param = [[QAVMultiParam alloc] init];
     param.roomID = [_roomInfo liveAVRoomId];
     param.audioCategory = 0;
-    param.controlRole = 0;
+    param.controlRole = [self roomControlRole];
     param.authBitMap = QAV_AUTH_BITS_DEFAULT;
     param.autoCreateRoom = [self isHostLive];
     param.videoRecvMode = VIDEO_RECV_MODE_SEMI_AUTO_RECV_CAMERA_VIDEO;
     return param;
 }
 
+- (NSString *)roomControlRole
+{
+    // 具体与云平台speae引擎配置有关
+    // 所返回的内容必须要与云端一致
+    // 若返回nil，使用默认配置
+    return nil;
+}
 
 - (void)onContextStartComplete:(int)result
 {

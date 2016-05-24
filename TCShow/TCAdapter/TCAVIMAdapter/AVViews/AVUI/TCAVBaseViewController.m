@@ -365,6 +365,11 @@ static BOOL kIsAlertingForceOfflineOnLiving = NO;
     // do nothing
 }
 
+- (void)onAVEngine:(TCAVBaseRoomEngine *)engine changeRole:(BOOL)succ tipInfo:(NSString *)tip
+{
+    // do nothing
+}
+
 @end
 
 

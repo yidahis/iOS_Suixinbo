@@ -8,17 +8,36 @@
 
 #import <Foundation/Foundation.h>
 
+/* 修改日志
+ *================================================================
+ * 时间: 20160524
+ * 改动项: 新增加controlRole说明配置说明，主要是后端新增，App代码进行指定，以及直播过程中修改controlRole
+ * 描述: 使用代码控制不同的role,详见TCShowLiveEngine
+ *================================================================
+ * 时间: 20160524
+ * 改动项: 当用户量较大时，用户长时间使用直播场景时，用户每次进入直播的时候，如果重新创建context，会去拉取配置，导致进入房间变慢
+ *        新增TCAVSharedContext，方便处理上面的逻辑，添加kIsUseAVSDKAsLiveScene ＝ 1在TCAVBaseRoomEngine不再重复创建context
+ *        即用户在直播过程中，不再stopContext，只有enterRoom/ExitRoom操作，用户在IMSDK登出(logout时)作销毁context
+ * 描述: 相关关有TCAVSharedContext, TCAVBaseRoomEngine, IMAPlatform logout
+ *
+ */
+
+
 /*
  * TCAVBaseRoomEngine AVSDK封装的基类，主要将AVSDK进出房间流程作封装
  */
 
 
-@interface TCAVBaseRoomEngine : NSObject<QAVRoomDelegate, QAVLocalVideoDelegate, QAVRemoteVideoDelegate>
+@interface TCAVBaseRoomEngine : NSObject<QAVRoomDelegate, QAVLocalVideoDelegate, QAVRemoteVideoDelegate, QAVChangeRoleDelegate>
 {
 @protected
-    QAVContext                              *_avContext;
+    QAVContext                              *_avContext;    // kIsUseAVSDKAsLiveScene = 1时，不需要在dealloc中销毁
     __weak id<TCAVRoomEngineDelegate>       _delegate;
     
+#if kIsUseAVSDKAsLiveScene
+@private
+    BOOL                                    _isUseSharedContext;// 是否使用的是共用的context
+#endif
 
     
 @protected
@@ -78,6 +97,12 @@
 // 获取运行日志
 - (NSString *)engineLog;
 
+
+// 修改角色 此前，角色被设定为在进入房间之前指定、进入房间之后不能动态修改。这个接口的作用就是修改这一设定，即：在进入房间之后也能动态修改角色。业务测可以通过此接口让用户在房间内动态调整音视频、网络参数，如将视频模式从清晰切换成流畅。
+// role 角色字符串，可为空，为空时对应后台默认角色，注意传入的参数，要与腾讯云台Spear引擎配置一致
+// 修改角色不包括修改音频场景，音频场景仍然需要在进入房间前指定而且进入房间以后不能修改
+- (QAVResult)changeAVControlRole:(NSString *)role;
+
 @end
 
 
@@ -100,6 +125,9 @@
 // 创建房间的信息，重写此方法来修改房间参数
 - (QAVMultiParam *)createdAVRoomParam;
 
+// 增加此方法方便用户调试时，将不同的版本作隔离，避免因修改参数导致其他版本不能观看
+// TCAdapter中使用的默认值，具体如何操作，可看Demo中的配置
+- (NSString *)roomControlRole;
 
 // 进入AVRoom成功之后要进行的操作
 - (void)onEnterAVRoomSucc;

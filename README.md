@@ -1,10 +1,10 @@
 # iOS随心播
-因GitHub有文件大小限制，其中IMSDK以及AVSDK上传到微云
-更新时，请到对应的目录下更新，并添加到工程下面对应的目录下
+因GitHub有文件大小限制，以及微云限制，现将IMSDK以及AVSDK上传到腾讯云COS上。
+更新时，请到对应的地址进行更新，并添加到工程下面对应的目录下
 
-IMSDK : http://share.weiyun.com/6c957fdba1b5a4bffb8abd5f529e825b  对应放到工程目录  TCShow/TCAdapter/TIMAdapter/Framework/IMSDK
+IMSDK : http://tcshowsdks-10022853.file.myqcloud.com/20160524/IMSDK.zip 下载后解压，然后再放至对应放到工程目录  TCShow/TCAdapter/TIMAdapter/Framework/IMSDK
 
-AVSDK : http://share.weiyun.com/2d7955ce57cebb00539e909ec78f7071  对应放到工程目录  TCShow/TCAdapter/TCAVIMAdapter/Libs
+AVSDK : http://tcshowsdks-10022853.file.myqcloud.com/20160524/Libs.zip  下载后解压，然后再放至对应放到工程目录  TCShow/TCAdapter/TCAVIMAdapter/Libs
 
 新版本随心播经过重构，完善了功能，处理了大量的异常情况，请开发者在编码过程中注意，异常情况包括如下：
 

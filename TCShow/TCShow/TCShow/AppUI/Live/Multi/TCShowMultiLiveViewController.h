@@ -23,6 +23,7 @@
 {
 @protected
     UIView          *_backView;
+    InsetLabel      *_tipLabel;
     UITableView     *_tableView;
 @protected
     NSArray         *_userList;

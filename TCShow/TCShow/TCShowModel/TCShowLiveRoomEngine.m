@@ -36,6 +36,36 @@
     }];
 }
 
+
+- (NSString *)roomControlRole
+{
+#if DEBUG
+    // 说明是开发
+    return @"TCShowDEV";
+    
+#else
+    
+#if kAppStoreVersion
+    // 上传AppStore时使用的配置
+    return @"TCShowAppStore";
+#else
+    
+#if kBetaVersion
+    // 说明是用于演示
+    return @"TCShowBeta";
+#else
+    // 说明是测试在用
+    return @"TCShowTest";
+#endif
+    
+#endif
+    
+#endif
+    
+    
+}
+
+
 @end
 
 
@@ -63,6 +93,35 @@
     } fail:^(int code, NSString *msg) {
         [wd onAVEngine:ws enterRoom:wr succ:NO tipInfo:isHost ? @"创建直播聊天室失败" : @"加入直播聊天室失败"];
     }];
+}
+
+- (NSString *)roomControlRole
+{
+    
+#if DEBUG
+    // 说明是开发
+    return @"TCShowDEV";
+    
+#else
+    
+#if kAppStoreVersion
+    // 上传AppStore时使用的配置
+    return @"TCShowAppStore";
+#else
+    
+#if kBetaVersion
+    // 说明是用于演示
+    return @"TCShowBeta";
+#else
+    // 说明是测试在用
+    return @"TCShowTest";
+#endif
+    
+#endif
+    
+#endif
+    
+    
 }
 
 @end

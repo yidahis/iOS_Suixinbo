@@ -51,5 +51,211 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TCAdapter/TCAVIMAdapter/AVSDK/AVEngine/TCAVLiveRoomEngine.m"
+            timestampString = "485750700.803983"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1010"
+            endingLineNumber = "1010"
+            landmarkName = "-onEnableCameraComplete:enable:result:needNotify:completion:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TCAdapter/TCAVIMAdapter/AVSDK/AVEngine/TCAVLiveRoomEngine.m"
+            timestampString = "485750700.803983"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1020"
+            endingLineNumber = "1020"
+            landmarkName = "-onEnableCameraComplete:enable:result:needNotify:completion:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__98-[TCAVLiveRoomEngine(ProtectedMethod) onEnableCameraComplete:enable:result:needNotify:completion:]_block_invoke"
+                  moduleName = "TCShow"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexichen/SVNCode/WorkSpace/TCShow/TCAdapter/TCAVIMAdapter/AVSDK/AVEngine/TCAVLiveRoomEngine.m"
+                  timestampString = "485781975.958028"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1020"
+                  endingLineNumber = "1020"
+                  offsetFromSymbolStart = "84">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_.401"
+                  moduleName = "TCShow"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexichen/SVNCode/WorkSpace/TCShow/TCAdapter/TCAVIMAdapter/AVSDK/AVEngine/TCAVLiveRoomEngine.m"
+                  timestampString = "485781975.958143"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1020"
+                  endingLineNumber = "1020"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.402"
+                  moduleName = "TCShow"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexichen/SVNCode/WorkSpace/TCShow/TCAdapter/TCAVIMAdapter/AVSDK/AVEngine/TCAVLiveRoomEngine.m"
+                  timestampString = "485781975.95823"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1020"
+                  endingLineNumber = "1020"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TCAdapter/TCAVIMAdapter/AVSDK/AVEngine/TCAVLiveRoomEngine.m"
+            timestampString = "485750645.705309"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "674"
+            endingLineNumber = "674"
+            landmarkName = "-requestHostView"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__37-[TCAVLiveRoomEngine requestHostView]_block_invoke_2"
+                  moduleName = "TCShow"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexichen/SVNCode/WorkSpace/TCShow/TCAdapter/TCAVIMAdapter/AVSDK/AVEngine/TCAVLiveRoomEngine.m"
+                  timestampString = "485781975.959073"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "674"
+                  endingLineNumber = "674"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_.243"
+                  moduleName = "TCShow"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexichen/SVNCode/WorkSpace/TCShow/TCAdapter/TCAVIMAdapter/AVSDK/AVEngine/TCAVLiveRoomEngine.m"
+                  timestampString = "485781975.95917"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "674"
+                  endingLineNumber = "674"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.244"
+                  moduleName = "TCShow"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexichen/SVNCode/WorkSpace/TCShow/TCAdapter/TCAVIMAdapter/AVSDK/AVEngine/TCAVLiveRoomEngine.m"
+                  timestampString = "485781975.959352"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "674"
+                  endingLineNumber = "674"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TCAdapter/TCAVIMAdapter/AVSDK/AVEngine/TCAVLiveRoomEngine.m"
+            timestampString = "485750650.531689"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
+            landmarkName = "-enableMic:completion:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TCAdapter/TCAVIMAdapter/AVSDK/AVEngine/TCAVLiveRoomEngine.m"
+            timestampString = "485750654.009008"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
+            landmarkName = "-enableSpeaker:completion:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TCAdapter/TCAVIMAdapter/AVSDK/AVEngine/TCAVLiveRoomEngine.m"
+            timestampString = "485750656.831843"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "494"
+            endingLineNumber = "494"
+            landmarkName = "-tryEnableCamera:needNotify:completion:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TCAdapter/TCAVIMAdapter/AVSDK/AVEngine/TCAVLiveRoomEngine.m"
+            timestampString = "485750659.576998"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "581"
+            endingLineNumber = "581"
+            landmarkName = "-trySwitchCameraWith:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

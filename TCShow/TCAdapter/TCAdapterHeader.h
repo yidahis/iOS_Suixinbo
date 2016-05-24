@@ -13,6 +13,11 @@
 //  内部错误码转写
 #define TAVLocalizedError(avErrorTip) NSLocalizedString(avErrorTip, avErrorTip)
 
+// 是否是将AVSDK在直播场景下使用
+// 直播场景下，不要频繁切换context（用户使用过程中会不会频繁切换房间，即kIsUseAVSDKAsLiveScene为1, 如果使用不频繁，可以在退出的时候stopContext）
+// kIsUseAVSDKAsLiveScene 为 1时，如果用户注销，或被踢下线，此时要stopContext
+#define kIsUseAVSDKAsLiveScene 1
+
 // 是否是AppStore版本
 #define kAppStoreVersion 0
 

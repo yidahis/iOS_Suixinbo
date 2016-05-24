@@ -208,6 +208,7 @@
 		92377D2D1CEA0B31007AD22B /* IMAPlatform+TCAVLive.m in Sources */ = {isa = PBXBuildFile; fileRef = 92377C881CEA0B31007AD22B /* IMAPlatform+TCAVLive.m */; };
 		92377D2E1CEA0B31007AD22B /* IMAPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 92377C8A1CEA0B31007AD22B /* IMAPlatform.m */; };
 		92377D2F1CEA0B31007AD22B /* IMAPlatformConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 92377C8C1CEA0B31007AD22B /* IMAPlatformConfig.m */; };
+		92B7E1E71CF455FD0008CC21 /* TCAVSharedContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B7E1E61CF455FD0008CC21 /* TCAVSharedContext.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -663,6 +664,8 @@
 		92377C8C1CEA0B31007AD22B /* IMAPlatformConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMAPlatformConfig.m; sourceTree = "<group>"; };
 		92377C8D1CEA0B31007AD22B /* IMAPlatformHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMAPlatformHeaders.h; sourceTree = "<group>"; };
 		92377C8E1CEA0B31007AD22B /* TIMAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIMAdapter.h; sourceTree = "<group>"; };
+		92B7E1E51CF455FD0008CC21 /* TCAVSharedContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAVSharedContext.h; sourceTree = "<group>"; };
+		92B7E1E61CF455FD0008CC21 /* TCAVSharedContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCAVSharedContext.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1408,6 +1411,8 @@
 		92377C1D1CEA0B31007AD22B /* AVEngine */ = {
 			isa = PBXGroup;
 			children = (
+				92B7E1E51CF455FD0008CC21 /* TCAVSharedContext.h */,
+				92B7E1E61CF455FD0008CC21 /* TCAVSharedContext.m */,
 				92377C1E1CEA0B31007AD22B /* AVEngineHeaders.h */,
 				92377C1F1CEA0B31007AD22B /* TCAVBaseRoomEngine.h */,
 				92377C201CEA0B31007AD22B /* TCAVBaseRoomEngine.m */,
@@ -1722,6 +1727,7 @@
 				92377CF81CEA0B31007AD22B /* UIView+Layout.m in Sources */,
 				92377CC11CEA0B31007AD22B /* IOSDeviceConfig.m in Sources */,
 				92377CA01CEA0B31007AD22B /* KeyChainHelper.m in Sources */,
+				92B7E1E71CF455FD0008CC21 /* TCAVSharedContext.m in Sources */,
 				92377CD91CEA0B31007AD22B /* SDWebImagePrefetcher.m in Sources */,
 				92377CDE1CEA0B31007AD22B /* UIImageView+HighlightedWebCache.m in Sources */,
 				92377CCE1CEA0B31007AD22B /* NetworkUtility.m in Sources */,
