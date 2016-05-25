@@ -22,6 +22,7 @@
 {
     DebugLog(@"======>>>>> [%@] %@ 释放成功 <<<<======", [self class], self);
 #if kIsUseAVSDKAsLiveScene
+#else
     [QAVContext DestroyContext:_avContext];
 #endif
     [UIApplication sharedApplication].idleTimerDisabled = NO;
@@ -43,7 +44,9 @@
         _isAtForeground = YES;
         
 #if kIsUseAVSDKAsLiveScene
+        // 
         QAVContext *context = [TCAVSharedContext sharedContext];
+        DebugLog(@"=====>>>>>使用的QAVContext = %p", context);
         if (context)
         {
             _avContext = context;
@@ -192,13 +195,6 @@
     if(QAV_OK == result)
     {
         TCAVIMLog(@"进入AV房间成功");
-#if kIsUseAVSDKAsLiveScene
-        // 配置共享的context
-        if (_isUseSharedContext)
-        {
-            [TCAVSharedContext configWithStartedContext:_avContext];
-        }
-#endif
         [self onEnterAVRoomSucc];
     
     }
@@ -478,7 +474,7 @@
         _logStartDate = [NSDate date];
     }
 #endif
-    TCAVIMLog(@"-----[%@]>>>>>开始进入直播间：StartContext", [self isHostLive] ? @"主播" : @"观众");
+    TCAVIMLog(@"-----[%@]>>>>>开始进入直播间：%@", [self isHostLive] ? @"主播" : @"观众", _isUseSharedContext ? @"" : @"StartContext");
     _roomInfo = room;
     
     
@@ -528,6 +524,14 @@
         DebugLog(@"avContext已销毁");
         return;
     }
+    
+#if kIsUseAVSDKAsLiveScene
+    if (!_isUseSharedContext)
+    {
+        // 配置共享的context
+        [TCAVSharedContext configWithStartedContext:_avContext];
+    }
+#endif
     
     if (result == QAV_OK)
     {

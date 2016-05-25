@@ -48,7 +48,7 @@ typedef cameraPos TCAVEngineCamera;
 }
 
 // 当前摄像头ID
-@property (nonatomic, readonly) TCAVEngineCamera cameraId;
+@property (nonatomic, assign) TCAVEngineCamera cameraId;
 
 // 用户是否在该类中创建聊天室
 // enable YES: 外部不需要要创建IM聊天室，TCAVLiveRoomEngine内部自动帮助创建AV聊天室
@@ -84,7 +84,6 @@ typedef cameraPos TCAVEngineCamera;
 
 - (void)asyncEnableCamera:(BOOL)enable needNotify:(BOOL)notify;
 
-// 目前AVSDK还未支持开启指定的后置摄像头
 - (void)asyncEnableCamera:(BOOL)enable camera:(TCAVEngineCamera)camera;
 
 // 根据本地的状态，作开关摄像头

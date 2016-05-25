@@ -8,46 +8,88 @@
 #if kIsUseAVSDKAsLiveScene
 #import "TCAVSharedContext.h"
 
+@interface TCAVSharedContext ()
+
+@property (nonnull, strong) QAVContext *sharedContext;
+
+@end
+
 @implementation TCAVSharedContext
 
-static QAVContext *kSharedConext = nil;
-static BOOL isQAVContextInitSucc = NO;
+static TCAVSharedContext *kSharedConext = nil;
+
++ (instancetype)sharedInstance
+{
+    static dispatch_once_t predicate;
+    
+    dispatch_once(&predicate, ^{
+        kSharedConext = [[TCAVSharedContext alloc] init];
+    });
+    
+    return kSharedConext;
+}
 
 
 + (QAVContext *)sharedContext
 {
-    if (!isQAVContextInitSucc)
-    {
-        return nil;
-    }
-    return kSharedConext;
+    return [TCAVSharedContext sharedInstance].sharedContext;
 }
 
 + (void)configWithStartedContext:(QAVContext *)context
 {
-    if (!context && !isQAVContextInitSucc)
+    if ([TCAVSharedContext sharedInstance].sharedContext)
     {
-        TCAVIMLog(@"配置Context");
-        isQAVContextInitSucc = YES;
-        kSharedConext = context;
+        [TCAVSharedContext destroyContextCompletion:^{
+            [TCAVSharedContext sharedInstance].sharedContext = context;
+        }];
+    }
+    else
+    {
+        [TCAVSharedContext sharedInstance].sharedContext = context;
+    }
+    
+}
+
++ (void)configWithStartedContext:(id<IMHostAble>)host completion:(CommonVoidBlock)block
+{
+    if (kSharedConext == nil)
+    {
+        QAVContextConfig *config = [[QAVContextConfig alloc] init];
+        
+        NSString *appid = [host imSDKAppId];
+        
+        config.sdk_app_id = appid;
+        config.app_id_at3rd = appid;
+        config.identifier = [host imUserId];
+        config.account_type = [host imSDKAccountType];
+        QAVContext *context = [QAVContext CreateContext:config];
+        
+        [context startContext:^(QAVResult result) {
+            if (block)
+            {
+                block();
+            }
+            [TCAVSharedContext sharedInstance].sharedContext = context;
+        }];
     }
 }
 
-+ (void)destroyContext;
++ (void)destroyContextCompletion:(CommonVoidBlock)block
 {
     if (kSharedConext)
     {
         TCAVIMLog(@"销毁Context");
-        QAVResult res = [kSharedConext stopContext:^(QAVResult result) {
-            [QAVContext DestroyContext:kSharedConext];
-            isQAVContextInitSucc = NO;
+        QAVResult res = [[TCAVSharedContext sharedInstance].sharedContext stopContext:^(QAVResult result) {
+            [QAVContext DestroyContext:[TCAVSharedContext sharedInstance].sharedContext];
+            kSharedConext = nil;
+            
+            if (block)
+            {
+                block();
+            }
         }];
         
-        if (res != QAV_OK)
-        {
-            isQAVContextInitSucc = NO;
-            DebugLog(@"stopContext 不成功:%d", (int)res);
-        }
+        DebugLog(@"res = %d", (int)res);
     }
 }
 

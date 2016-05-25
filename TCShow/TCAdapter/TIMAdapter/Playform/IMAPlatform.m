@@ -91,6 +91,7 @@ static Class kHostClass = Nil;
 
 #endif
     
+    // Demo中使用了自定义字段，如果用户的App没有将这行注释// setting.userCustom
     TIMFriendshipSetting *setting =  [[TIMFriendshipSetting alloc] init];
     setting.userCustom = @[kIMCustomFlag];
     setting.friendFlags = 0xFFFFFFFF;
@@ -125,7 +126,7 @@ static Class kHostClass = Nil;
     _host = nil;
     
 #if kIsUseAVSDKAsLiveScene
-    [TCAVSharedContext destroyContext];
+    [TCAVSharedContext destroyContextCompletion:nil];
 #endif
     
 }
@@ -174,6 +175,10 @@ static Class kHostClass = Nil;
     }
     _host.loginParm = param;
     [_host asyncProfile];
+    
+#if kIsUseAVSDKAsLiveScene
+    [TCAVSharedContext configWithStartedContext:_host completion:nil];
+#endif
 }
 
 

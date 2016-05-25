@@ -12,13 +12,19 @@
 // 新增TCAVSharedContext，方便处理上面的逻辑，添加kIsUseAVSDKAsLiveScene ＝ 1在TCAVBaseRoomEngine不再重复创建context
 
 @interface TCAVSharedContext : NSObject
+{
+    QAVContext      *_sharedContext;
+}
+
+// 防止因configWith创建context不成功时，为保留现有逻辑不变，则在原有TCAVBaseRoomEngine中添加
++ (QAVContext *)sharedContext;
 
 // 防止因configWith创建context不成功时，为保留现有逻辑不变，则在原有TCAVBaseRoomEngine中添加
 + (void)configWithStartedContext:(QAVContext *)context;
 
-+ (QAVContext *)sharedContext;
++ (void)configWithStartedContext:(id<IMHostAble>)host completion:(CommonVoidBlock)block;
 
-+ (void)destroyContext;
++ (void)destroyContextCompletion:(CommonVoidBlock)block;
 
 @end
 #endif
