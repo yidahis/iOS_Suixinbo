@@ -94,7 +94,7 @@ static NSDateFormatter *kTCAVIMLogDateFormatter = nil;
 // 添加开关，调试状态下不打开Mic
 #if DEBUG
 
-#define kAVSDKDefaultOpenMic 0
+#define kAVSDKDefaultOpenMic 1
 
 #else
 
