@@ -23,6 +23,8 @@
     {
         _imageView = [[AVGLBaseView alloc] initWithFrame:self.bounds];
         _imageView.backgroundColor = kBlackColor;
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        [_imageView setBackGroundTransparent:YES];
         [self addSubview:_imageView];
         
         @try
