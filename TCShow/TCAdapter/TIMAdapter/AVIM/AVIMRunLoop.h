@@ -16,7 +16,7 @@
 
 @property(nonatomic, readonly) NSThread *thread;
 
-- (instancetype)init;
++ (AVIMRunLoop *)sharedAVIMRunLoop;
 - (void)start;
 
 @end

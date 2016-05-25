@@ -18,6 +18,24 @@ static void AVIMSourceEvent(void* info __unused)
     // do nothing
 }
 
+- (void)dealloc
+{
+    DebugLog(@"%@ [%@] Release", self, [AVIMRunLoop class]);
+}
+
+static AVIMRunLoop *_sharedRunLoop = nil;
+
+
++ (AVIMRunLoop *)sharedAVIMRunLoop
+{
+    static dispatch_once_t predicate;
+    
+    dispatch_once(&predicate, ^{
+        _sharedRunLoop = [[AVIMRunLoop alloc] init];
+    });
+    
+    return _sharedRunLoop;
+}
 
 - (id)init
 {
@@ -40,10 +58,9 @@ static void AVIMSourceEvent(void* info __unused)
     
     while (YES)
     {
+        DebugLog(@"123123");
         [[NSRunLoop currentRunLoop] run];
     }
-    
-    NSAssert(NO, @"no");
 }
 
 - (void)start
@@ -67,8 +84,6 @@ static void AVIMSourceEvent(void* info __unused)
     }
     [_thread start];
 }
-
-
 
 
 @end
