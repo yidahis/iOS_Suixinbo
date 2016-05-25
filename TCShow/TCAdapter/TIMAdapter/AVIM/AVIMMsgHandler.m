@@ -27,6 +27,8 @@
     //#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     //    [[TIMManager sharedInstance] setGroupMemberListener:nil];
     //#pragma clang diagnostic pop
+    
+    _sharedRunLoopRef = nil;
 }
 
 - (instancetype)initWith:(id<AVRoomAble>)imRoom
@@ -38,7 +40,7 @@
         _imRoomInfo = imRoom;
         
         // 为了不影响视频，runloop线程优先级较低，用户可根据自身需要去调整
-        _msgRunLoop = [[AVIMRunLoop alloc] init];
+        _sharedRunLoopRef = [AVIMRunLoop sharedAVIMRunLoop];
         
         // 看情况是否可换成并发队DISPATCH_QUEUE_CONCURRENT 或 DISPATCH_QUEUE_SERIAL
         //        _recvMsgQueue = dispatch_queue_create("AVIMMsgHandler_RecvMsgQueue", DISPATCH_QUEUE_CONCURRENT);
@@ -51,8 +53,24 @@
         // [[TIMManager sharedInstance] setGroupMemberListener:self];
         //#pragma clang diagnostic pop
         _chatRoomConversation = [[TIMManager sharedInstance] getConversation:TIM_GROUP receiver:cid];
+        
+        self.isCacheMode = kSupportIMMsgCache;
+        _msgCacheLock = OS_SPINLOCK_INIT;
     }
     return self;
+}
+
+- (void)setIsCacheMode:(BOOL)isCacheMode
+{
+    _isCacheMode = isCacheMode;
+    if (_isCacheMode)
+    {
+        [self createMsgCache];
+    }
+    else
+    {
+        [self releaseMsgCache];
+    }
 }
 
 
@@ -262,7 +280,7 @@
 
 - (void)onNewMessage:(NSArray *)msgs
 {
-    [self performSelector:@selector(onHandleNewMessage:) onThread:_msgRunLoop.thread withObject:msgs waitUntilDone:NO];
+    [self performSelector:@selector(onHandleNewMessage:) onThread:_sharedRunLoopRef.thread withObject:msgs waitUntilDone:NO];
 }
 
 - (void)notifyUsers:(NSArray *)array tipType:(TIMGroupTipsType)tipType
@@ -339,10 +357,12 @@
 - (void)onRecvGroupSender:(id<IMUserAble>)sender textMsg:(NSString *)msg
 {
     id<AVIMMsgAble> cachedMsg = [self cacheRecvGroupSender:sender textMsg:msg];
+    [self enCache:cachedMsg noCache:^{
     if (cachedMsg)
     {
         [self performSelectorOnMainThread:@selector(onRecvGroupMsgInMainThread:) withObject:cachedMsg waitUntilDone:YES];
     }
+    }];
 }
 
 - (void)onRecvGroupMsgInMainThread:(id<AVIMMsgAble>)cachedMsg
@@ -366,6 +386,8 @@
                 case AVIMCMD_EnterLive:
                 {
                     AVIMMsg *enterMsg = [self onRecvSenderEnterLiveRoom:sender];
+                    
+                    [self enCache:enterMsg noCache:^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         DebugLog(@"收到消息：%@", enterMsg);
                         if (enterMsg)
@@ -375,11 +397,14 @@
                         
                         [_roomIMListner onIMHandler:self joinGroup:@[sender]];
                     });
+                    }];
+                    
                 }
                     break;
                 case AVIMCMD_ExitLive:
                 {
                     AVIMMsg *exitMsg = [self onRecvSenderExitLiveRoom:sender];
+                    [self enCache:exitMsg noCache:^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         DebugLog(@"收到消息：%@", exitMsg);
                         
@@ -399,6 +424,7 @@
                             [_roomIMListner onIMHandler:self exitGroup:@[sender]];
                         }
                     });
+                    }];
                 }
                     break;
                     
@@ -410,9 +436,11 @@
         
         if (!hasHandle)
         {
+            [self enCache:cachedMsg noCache:^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_roomIMListner onIMHandler:self recvCustomGroup:cachedMsg];
             });
+            }];
         }
     }
 }
@@ -425,34 +453,46 @@
 // 收到C2C自定义消息
 - (void)onRecvC2CSender:(id<IMUserAble>)sender customMsg:(TIMCustomElem *)msg
 {
+    id<AVIMMsgAble> cachedMsg =[self cacheRecvC2CSender:sender customMsg:msg];
+    [self enCache:cachedMsg noCache:^{
     dispatch_async(dispatch_get_main_queue(), ^{
         // Demo中此类不处理C2C消息
-        id<AVIMMsgAble> cachedMsg =[self cacheRecvC2CSender:sender customMsg:msg];
         if (cachedMsg)
         {
             DebugLog(@"收到消息：%@", cachedMsg);
             [_roomIMListner onIMHandler:self recvCustomC2C:cachedMsg];
         }
     });
+    }];
+    
 }
 
 - (id<AVIMMsgAble>)cacheRecvGroupSender:(id<IMUserAble>)sender textMsg:(NSString *)msg
 {
     AVIMMsg *amsg = [[AVIMMsg alloc] initWith:sender message:msg];
+    if (!_isPureMode)
+    {
     [amsg prepareForRender];
+    }
     return amsg;
 }
 
 - (id<AVIMMsgAble>)onRecvSenderEnterLiveRoom:(id<IMUserAble>)sender
 {
     AVIMMsg *amsg = [[AVIMMsg alloc] initWith:sender message:@"进来了"];
+    if (!_isPureMode)
+    {
     [amsg prepareForRender];
+    }
     return amsg;
 }
 - (id<AVIMMsgAble>)onRecvSenderExitLiveRoom:(id<IMUserAble>)sender
 {
     AVIMMsg *amsg = [[AVIMMsg alloc] initWith:sender message:@"离开了"];
+    if (!_isPureMode)
+    {
     [amsg prepareForRender];
+    }
     return amsg;
 }
 
@@ -461,7 +501,10 @@
     NSString *datastring = [[NSString alloc] initWithData:msg.data encoding:NSUTF8StringEncoding];
     AVIMCMD *cmsg = [NSObject parse:[AVIMCMD class] jsonString:datastring];
     cmsg.sender = sender;
+    if (!_isPureMode)
+    {
     [cmsg prepareForRender];
+    }
     return cmsg;
 }
 
@@ -470,9 +513,77 @@
     NSString *datastring = [[NSString alloc] initWithData:msg.data encoding:NSUTF8StringEncoding];
     AVIMCMD *cmsg = [NSObject parse:[AVIMCMD class] jsonString:datastring];
     cmsg.sender = sender;
+    if (!_isPureMode)
+    {
     [cmsg prepareForRender];
+    }
     return cmsg;
     
 }
 
+
+
+@end
+
+
+@implementation AVIMMsgHandler (CacheMode)
+
+- (void)createMsgCache
+{
+    _msgCache = [NSMutableDictionary dictionary];
+    [_msgCache setObject:[[AVIMCache alloc] initWith:50] forKey:@(AVIMCMD_Text)];
+    [_msgCache setObject:[[AVIMCache alloc] initWith:5] forKey:@(AVIMCMD_Praise)];
+}
+
+- (void)resetMsgCache
+{
+    [self createMsgCache];
+}
+- (void)releaseMsgCache
+{
+    _msgCache = nil;
+}
+
+- (void)enCache:(id<AVIMMsgAble>)msg noCache:(CommonVoidBlock)noCacheblock;
+{
+    if (!_isCacheMode)
+    {
+        if (noCacheblock)
+        {
+            noCacheblock();
+        }
+    }
+    else
+    {
+        if (msg)
+        {
+            OSSpinLockLock(&_msgCacheLock);
+            AVIMCache *cache = [_msgCache objectForKey:@([msg msgType])];
+            if (cache)
+            {
+                [cache enCache:msg];
+            }
+            else
+            {
+                if (noCacheblock)
+                {
+                    noCacheblock();
+                }
+            }
+            OSSpinLockUnlock(&_msgCacheLock);
+        }
+    }
+    
+}
+
+- (NSDictionary *)getMsgCache
+{
+    OSSpinLockLock(&_msgCacheLock);
+    NSDictionary *dic = _msgCache;
+    
+    [self resetMsgCache];
+    OSSpinLockUnlock(&_msgCacheLock);
+    
+    return dic;
+}
 @end

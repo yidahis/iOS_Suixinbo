@@ -14,14 +14,20 @@
 - (id<AVIMMsgAble>)onRecvSenderEnterLiveRoom:(id<IMUserAble>)sender
 {
     TCShowLiveMsg *lm = [[TCShowLiveMsg alloc] initWith:sender message:@"进来了"];
+    if (!_isPureMode)
+    {
     [lm prepareForRender];
+    }
     lm.isMsg = NO;
     return lm;
 }
 - (id<AVIMMsgAble>)onRecvSenderExitLiveRoom:(id<IMUserAble>)sender
 {
     TCShowLiveMsg *lm = [[TCShowLiveMsg alloc] initWith:sender message:@"离开了"];
+    if (!_isPureMode)
+    {
     [lm prepareForRender];
+    }
     lm.isMsg = NO;
     return lm;
 }
@@ -30,7 +36,10 @@
 {
     TCShowLiveMsg *lm = [[TCShowLiveMsg alloc] initWith:sender message:msg];
     lm.isMsg = YES;
+    if (!_isPureMode)
+    {
     [lm prepareForRender];
+    }
     return lm;
 }
 
@@ -42,14 +51,20 @@
 - (id<AVIMMsgAble>)onRecvSenderEnterLiveRoom:(id<IMUserAble>)sender
 {
     TCShowLiveMsg *lm = [[TCShowLiveMsg alloc] initWith:sender message:@"进来了"];
+    if (!_isPureMode)
+    {
     [lm prepareForRender];
+    }
     lm.isMsg = NO;
     return lm;
 }
 - (id<AVIMMsgAble>)onRecvSenderExitLiveRoom:(id<IMUserAble>)sender
 {
     TCShowLiveMsg *lm = [[TCShowLiveMsg alloc] initWith:sender message:@"离开了"];
+    if (!_isPureMode)
+    {
     [lm prepareForRender];
+    }
     lm.isMsg = NO;
     return lm;
 }
@@ -58,7 +73,10 @@
 {
     TCShowLiveMsg *lm = [[TCShowLiveMsg alloc] initWith:sender message:msg];
     lm.isMsg = YES;
+    if (!_isPureMode)
+    {
     [lm prepareForRender];
+    }
     return lm;
 }
 

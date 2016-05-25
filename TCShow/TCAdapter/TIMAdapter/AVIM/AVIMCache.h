@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+// 单种消息的缓存
 // 固定capacity容量，不会自动增大
 @interface AVIMCache : NSObject
 {

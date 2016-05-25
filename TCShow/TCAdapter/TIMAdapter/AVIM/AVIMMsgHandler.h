@@ -8,6 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+/* 修改日志
+ *================================================================
+ * 时间: 20160525
+ * 改动项: 增加缓存模式，
+ * 详细介绍:  缓存模式下，消息不再主动往UI上报，而是等UI定时来取，目前直播大群中，主要针对群文本消息，以及群点赞消息作缓存处理，其他类型消息依然使用直接上报UI，进缓存不成功的消息，也会直接上报
+ *          取消息频率由外部控制，另外缓存的消息如果超长不取会自动丢掉
+ *          用户如果要增加其他其他的式
+ *================================================================
+ *
+ */
+
 // 主要处理直播房间中的IM消息
 // AVIMMsgHandler内处理的TIMMessage只包含一个Elem情况，不处理多个Elem，使用时请不要发送多个elem情况
 @class AVIMMsgHandler;
@@ -52,14 +63,27 @@
     TIMConversation         *_chatRoomConversation; // 群会话上下文
     
 @protected
-    AVIMRunLoop             *_msgRunLoop;           // 消息处理线程
+   __weak AVIMRunLoop      *_sharedRunLoopRef;           // 消息处理线程的引用
+    
+    
+@protected
+    BOOL                    _isCacheMode;           // 是否是缓存模式，详见修改日志时间: 20160525
+    NSMutableDictionary     *_msgCache;             // 以key为id<AVIMMsgAble> msgtype的, value不AVIMCache，在runloop线程中执行
+    OSSpinLock              _msgCacheLock;
     
 @protected
     __weak id<AVIMMsgListener> _roomIMListner;
+    
+@protected
+    BOOL                        _isPureMode;    // 纯净模工下，收到消息后，不作渲染计算
 }
 
 @property (nonatomic, weak) id<AVIMMsgListener> roomIMListner;
-//@property (nonatomic, readonly) NSMutableArray *roomMembers;
+// 是否使用纯净模式
+@property (nonatomic, assign) BOOL isPureMode;
+
+// 运行过程中，如果先是YES，再置为NO，设置前使用者注意将_msgCache的取出，内部自动作清空处理
+@property (nonatomic, assign) BOOL isCacheMode;     // 是否是缓存模式
 
 // 外部逻辑保证imRoom对应的直播聊天室已经创建成功
 - (instancetype)initWith:(id<AVRoomAble>)imRoom;
@@ -118,5 +142,27 @@
 - (id<AVIMMsgAble>)cacheRecvGroupSender:(id<IMUserAble>)sender textMsg:(NSString *)msg;
 - (id<AVIMMsgAble>)cacheRecvGroupSender:(id<IMUserAble>)sender customMsg:(TIMCustomElem *)msg;
 - (id<AVIMMsgAble>)cacheRecvC2CSender:(id<IMUserAble>)sender customMsg:(TIMCustomElem *)msg;
+
+
+
+
+@end
+
+
+
+
+@interface AVIMMsgHandler (CacheMode)
+
+// 用户通过设置此方法，监听要处理的消息类型
+- (void)createMsgCache;
+
+- (void)resetMsgCache;
+- (void)releaseMsgCache;
+
+// 如果cache不成功，会继续上报
+- (void)enCache:(id<AVIMMsgAble>)msg noCache:(CommonVoidBlock)noCacheblock;
+
+
+- (NSDictionary *)getMsgCache;
 
 @end

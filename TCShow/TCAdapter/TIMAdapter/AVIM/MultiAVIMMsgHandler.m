@@ -14,9 +14,10 @@
 // 收到C2C自定义消息
 - (void)onRecvC2CSender:(id<IMUserAble>)sender customMsg:(TIMCustomElem *)msg
 {
+    id<AVIMMsgAble> cachedMsg = [self cacheRecvC2CSender:sender customMsg:msg];
+    [self enCache:cachedMsg noCache:^{
     dispatch_async(dispatch_get_main_queue(), ^{
         // Demo中此类不处理C2C消息
-        id<AVIMMsgAble> cachedMsg = [self cacheRecvC2CSender:sender customMsg:msg];
         if (cachedMsg)
         {
             NSInteger type = [cachedMsg msgType];
@@ -36,6 +37,7 @@
             }
         }
     });
+    }];
 }
 
 
@@ -104,12 +106,14 @@
                     //处理取消互动逻辑
                 case AVIMCMD_Multi_CancelInteract:
                 {
+                    [self enCache:cachedMsg noCache:^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if ([_roomIMListner respondsToSelector:@selector(onIMHandler:recvCustomGroupMultiMsg:)])
                         {
                             [(id<MultiAVIMMsgListener>)_roomIMListner onIMHandler:self recvCustomGroupMultiMsg:cachedMsg];
                         }
                     });
+                    }];
                 }
                     break;
                     
