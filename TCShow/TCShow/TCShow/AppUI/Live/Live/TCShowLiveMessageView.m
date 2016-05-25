@@ -189,6 +189,20 @@
 - (void)insertMsg:(id<AVIMMsgAble>)item
 {
     _msgCount++;
+    
+    if (_isPureMode)
+    {
+        @synchronized(_liveMessages)
+        {
+            if (_liveMessages.count >= kMaxMsgCount)
+            {
+                [_liveMessages removeObjectAtIndex:0];
+            }
+            [_liveMessages addObject:item];
+        }
+    }
+    else
+    {
     @synchronized(_liveMessages)
     {
         CGFloat scrolloff = 0;
@@ -214,7 +228,7 @@
         
         [self updateTableViewFrame:heigt offsert:scrolloff];
     }
-
+    }
     
 }
 - (void)insertText:(NSString *)message from:(id<IMUserAble>)user isMsg:(BOOL)isMsg
@@ -228,6 +242,21 @@
     TCShowLiveMsg *item = [[TCShowLiveMsg alloc] initWith:user message:message];
     item.isMsg = isMsg;
     
+    if (_isPureMode)
+    {
+        @synchronized(_liveMessages)
+        {
+            if (_liveMessages.count >= kMaxMsgCount)
+            {
+                [_liveMessages removeObjectAtIndex:0];
+            }
+            
+            [_liveMessages addObject:item];
+        }
+
+    }
+    else
+    {
     @synchronized(_liveMessages)
     {
         CGFloat scrolloff = 0;
@@ -253,6 +282,8 @@
         
         [self updateTableViewFrame:heigt offsert:scrolloff];
     }
+    }
+    
     
 }
 
@@ -266,11 +297,50 @@
     
     _msgCount += msgCacheCount;
     
-    CGFloat heigt = 0;
+    
+    
+    if (_isPureMode)
+    {
+        
     
     NSMutableArray *items = [NSMutableArray array];
+        while (msgCache.count > 0)
+        {
+            TCShowLiveMsg *item = [msgCache deCache];
+            if (item)
+            {
+                [items addObject:item];
+            }
+        }
+        
+        
+        @synchronized(_liveMessages)
+        {
+            if (_liveMessages.count + items.count > kMaxMsgCount)
+            {
     
+                NSInteger count = _liveMessages.count + items.count - kMaxMsgCount;
+                NSInteger i = 0;
+                while (count > 0 && _liveMessages.count)
+                {
+                    [_liveMessages removeObjectAtIndex:0];
+                    i++;
+                    count--;
+                }
+            }
     
+            for (NSInteger i = 0; i < items.count; i++)
+            {
+                [_liveMessages addObject:items[i]];
+            }
+        }
+
+    }
+    else
+    {
+        CGFloat heigt = 0;
+    
+        NSMutableArray *items = [NSMutableArray array];
     while (msgCache.count > 0)
     {
         TCShowLiveMsg *item = [msgCache deCache];
@@ -329,6 +399,9 @@
         
         [self updateTableViewFrame:heigt offsert:scrolloff];
     }
+    }
+    
+    
     
 
 }
@@ -355,6 +428,15 @@
     TCShowLiveMsg *item = [_liveMessages objectAtIndex:indexPath.row];
     [cell config:item];
     return cell;
+}
+
+- (void)changeToMode:(BOOL)pure
+{
+    _isPureMode = pure;
+    if (!_isPureMode)
+    {
+        [_tableView reloadData];
+    }
 }
 
 @end

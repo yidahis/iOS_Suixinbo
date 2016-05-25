@@ -35,6 +35,7 @@
 
 @property (nonatomic, weak) TCAVLiveRoomEngine *roomEngine;
 @property (nonatomic, weak) AVIMMsgHandler *msgHandler;
+@property (nonatomic, readonly) BOOL isPureMode;
 
 
 - (instancetype)initWith:(id<TCShowLiveRoomAble>)room;

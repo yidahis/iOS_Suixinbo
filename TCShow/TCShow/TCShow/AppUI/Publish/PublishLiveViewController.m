@@ -109,6 +109,13 @@
 
 - (void)onPublish
 {
+    if (![IMAPlatform sharedInstance].isConnected)
+    {
+        [HUDHelper alert:@"当前无网络"];
+        return;
+    }
+    
+    
 #if DEBUG
     
     //    IMAHost *host = [IMAPlatform sharedInstance].host;

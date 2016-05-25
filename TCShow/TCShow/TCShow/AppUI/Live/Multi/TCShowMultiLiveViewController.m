@@ -836,11 +836,15 @@ static BOOL kRectHostCancelInteract = NO;
 {
     // AVSDK采集为15帧每秒
     // 可通过此处的控制显示的频率
-    if (_canRenderNow)
+    TCShowLiveUIViewController *vc = (TCShowLiveUIViewController *)_liveView;
+    if (_canRenderNow && ![vc isPureMode])
     {
-        TCShowLiveUIViewController *vc = (TCShowLiveUIViewController *)_liveView;
-        [vc onUIRefreshPraise];
-        [vc onUIRefreshIMMsg];
+        NSDictionary *dic = [_msgHandler getMsgCache];
+        AVIMCache *msgcache = dic[@(AVIMCMD_Text)];
+        [vc onUIRefreshIMMsg:msgcache];
+        
+        AVIMCache *praisecache = dic[@(AVIMCMD_Praise)];
+        [vc onUIRefreshPraise:praisecache];
         _canRenderNow = NO;
     }
 }
@@ -873,7 +877,7 @@ static BOOL kRectHostCancelInteract = NO;
 {
     if (!_renderTimer)
     {
-        _renderTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(onRefreshUI) userInfo:nil repeats:YES];
+        _renderTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(onRefreshUI) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:_renderTimer forMode:NSRunLoopCommonModes];
     }
 }

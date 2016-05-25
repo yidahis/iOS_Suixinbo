@@ -171,7 +171,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapBlank:)];
     tap.numberOfTapsRequired = 1;
     tap.numberOfTouchesRequired = 1;
-    [self addGestureRecognizer:tap];
+    [_msgView addGestureRecognizer:tap];
     
 }
 
@@ -279,7 +279,7 @@
 
 - (void)onBottomViewSwitchToPureMode:(TCShowLiveBottomView *)bottomView
 {
-    if (_inputView)
+    if (_inputView && !_inputView.hidden)
     {
         if (_inputView.isInputViewActive)
         {
@@ -289,12 +289,18 @@
         [_inputView slideOutTo:kFTAnimationBottom duration:0.25 delegate:nil];
         
     }
+    _isPureMode = YES;
     [_topView slideOutTo:kFTAnimationTop duration:0.25 delegate:nil];
+    [_msgView changeToMode:YES];
+    _msgHandler.isPureMode = YES;
     [_msgView slideOutTo:kFTAnimationLeft duration:0.25 delegate:nil];
 }
 - (void)onBottomViewSwitchToNonPureMode:(TCShowLiveBottomView *)bottomView
 {
+    _isPureMode = NO;
     [_topView slideInFrom:kFTAnimationTop duration:0.25 delegate:nil];
+    [_msgView changeToMode:NO];
+    _msgHandler.isPureMode = NO;
     [_msgView slideInFrom:kFTAnimationLeft duration:0.25 delegate:nil];
 }
 

@@ -130,6 +130,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (![IMAPlatform sharedInstance].isConnected)
+    {
+        [HUDHelper alert:@"当前无网络"];
+        return;
+    }
     // 进入直播间
     TCShowLiveListItem *item = _datas[indexPath.row];
     TCShowMultiLiveViewController *vc = [[TCShowMultiLiveViewController alloc] initWith:item user:[IMAPlatform sharedInstance].host];

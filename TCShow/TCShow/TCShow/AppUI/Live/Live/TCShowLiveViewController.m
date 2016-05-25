@@ -20,18 +20,22 @@
     [self.view addSubview:_liveView];
 }
 
-#if kSupportIMMsgCache
-
-- (void)onUIRefreshIMMsg
+- (BOOL)isPureMode
 {
-    [_liveView.msgView insertCachedMsg:_textMsgCache];
-    _textMsgCache = nil;
+    return [_liveView isPureMode];
 }
 
-- (void)onUIRefreshPraise
+#if kSupportIMMsgCache
+
+- (void)onUIRefreshIMMsg:(AVIMCache *)cache
 {
-    [_liveView onRecvPraise:_praiseCache];
-    _praiseCache = nil;
+    [_liveView.msgView insertCachedMsg:cache];
+    
+}
+
+- (void)onUIRefreshPraise:(AVIMCache *)cache
+{
+    [_liveView onRecvPraise:cache];
 }
 
 #endif
@@ -205,15 +209,7 @@
 // 收到群聊天消息: (主要是文本类型)
 - (void)onIMHandler:(AVIMMsgHandler *)receiver recvGroupMsg:(id<AVIMMsgAble>)msg
 {
-#if kSupportIMMsgCache
-    if (!_textMsgCache)
-    {
-        _textMsgCache = [[AVIMMutableCache alloc] initWith:10];
-    }
-    [_textMsgCache enCache:msg];
-#else
     [_liveView.msgView insertMsg:msg];
-#endif
 }
 
 - (void)onIMHandler:(AVIMMsgHandler *)receiver recvCustomGroup:(AVIMCMD *)msg
@@ -222,17 +218,8 @@
     {
         case AVIMCMD_Praise:
         {
-#if kSupportIMMsgCache
-            // 点赞消息
-            if (!_praiseCache)
-            {
-                _praiseCache = [[AVIMMutableCache alloc] initWith:10];
-            }
-            [_praiseCache enCache:msg];
-#else
-            
             [_liveView onRecvPraise];
-#endif
+            
         }
             break;
             
@@ -279,8 +266,11 @@
 {
     id<AVUserAble> ah = (id<AVUserAble>)_currentUser;
     [ah setAvCtrlState:[self defaultAVHostConfig]];
-    _roomEngine = [[TCShowLiveRoomEngine alloc] initWith:(id<IMHostAble, AVUserAble>)_currentUser enableChat:_enableIM];
-    _roomEngine.delegate = self;
+    TCShowLiveRoomEngine *roomEngine = [[TCShowLiveRoomEngine alloc] initWith:(id<IMHostAble, AVUserAble>)_currentUser enableChat:_enableIM];
+    // 测试默认开启后置摄像头
+    // roomEngine.cameraId = CameraPosBack;
+    roomEngine.delegate = self;
+    _roomEngine = roomEngine;
     
     if (!_isHost)
     {
@@ -352,18 +342,14 @@
     TCShowLiveUIViewController *vc = (TCShowLiveUIViewController *)_liveView;
     
     // 1秒更新点赞
-    if (_uiRefreshCount %20 == 0)
+    if (_uiRefreshCount % 40 == 0 && ![vc isPureMode])
     {
-        [vc onUIRefreshPraise];
-    }
-    
-    // 2秒更新消息
-    if (_uiRefreshCount == 40)
-    {
-        // 1秒刷新一次
-        [vc onUIRefreshIMMsg];
+        NSDictionary *dic = [_msgHandler getMsgCache];
+        AVIMCache *msgcache = dic[@(AVIMCMD_Text)];
+        [vc onUIRefreshIMMsg:msgcache];
         
-        _uiRefreshCount = 0;
+        AVIMCache *praisecache = dic[@(AVIMCMD_Praise)];
+        [vc onUIRefreshPraise:praisecache];
     }
 }
 #endif

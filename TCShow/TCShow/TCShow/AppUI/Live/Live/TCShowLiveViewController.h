@@ -16,13 +16,6 @@
     TCShowLiveView      *_liveView;
     NSTimer             *_heartTimer;
     BOOL                _isPostLiveStart;
-    
-#if kSupportIMMsgCache
-@protected
-    AVIMMutableCache    *_textMsgCache;     // 文本消息缓存
-    AVIMMutableCache    *_praiseCache;      // 点赞消息缓存
-#endif
-    
 }
 
 @property (nonatomic, assign) BOOL isPostLiveStart;
@@ -30,11 +23,13 @@
 #if kSupportIMMsgCache
 
 // 更新消息
-- (void)onUIRefreshIMMsg;
+- (void)onUIRefreshIMMsg:(AVIMCache *)cache;
 // 更新点赞
-- (void)onUIRefreshPraise;
+- (void)onUIRefreshPraise:(AVIMCache *)cache;
 
 #endif
+
+- (BOOL)isPureMode;
 
 - (void)uiStartLive;
 

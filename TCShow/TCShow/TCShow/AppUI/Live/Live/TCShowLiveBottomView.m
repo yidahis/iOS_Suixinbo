@@ -49,6 +49,11 @@
 {
     btn.selected = !btn.selected;
     
+    if ([_roomEngine isFrontCamera])
+    {
+        [[HUDHelper sharedInstance] tipMessage:@"前置摄像头下开闪光灯，会影响直播"];
+        return;
+    }
     // 是否有麦克风
     // 是否有摄像头
     // 打开LED
