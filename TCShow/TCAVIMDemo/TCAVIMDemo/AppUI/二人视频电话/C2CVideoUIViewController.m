@@ -102,6 +102,9 @@
     }];
 }
 - (IBAction)onEnableCamera:(UIButton *)sender {
+    
+    sender.selected = [(TCAVLiveRoomEngine *)_roomEngine isCameraEnable];
+    
     [(TCAVLiveRoomEngine *)_roomEngine asyncEnableCamera:!sender.selected completion:^(BOOL succ, NSString *tip) {
         if (succ)
         {

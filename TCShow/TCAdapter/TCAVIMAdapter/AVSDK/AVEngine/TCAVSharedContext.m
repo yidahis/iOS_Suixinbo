@@ -70,6 +70,7 @@ static TCAVSharedContext *kSharedConext = nil;
                 block();
             }
             [TCAVSharedContext sharedInstance].sharedContext = context;
+            DebugLog(@"共享的QAVContext = %p", context);
         }];
     }
 }

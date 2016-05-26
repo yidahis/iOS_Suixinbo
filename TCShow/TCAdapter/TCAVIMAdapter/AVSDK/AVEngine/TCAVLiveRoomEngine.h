@@ -74,6 +74,7 @@ typedef cameraPos TCAVEngineCamera;
 - (void)asyncEnableSpeaker:(BOOL)enable completion:(TCAVCompletion)completion;
 
 
+// 进入房时时推荐使用该方法打开相机
 // 打开相机走delegate回调
 // 默认开启前置摄像头
 // notify 是否需要回调- (void)onAVEngine:(TCAVBaseRoomEngine *)engine enableCamera:(BOOL)succ tipInfo:(NSString *)tip;
@@ -89,6 +90,7 @@ typedef cameraPos TCAVEngineCamera;
 // 根据本地的状态，作开关摄像头
 - (void)asyncSwitchEnableCameraCompletion:(TCAVCompletion)completion;
 
+// 需要在相机打开条件下使用
 // 正常使用过程中切换摄像头
 // 切换摄像头
 - (void)asyncSwitchCameraWithCompletion:(TCAVCompletion)completion;

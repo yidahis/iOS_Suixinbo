@@ -10,7 +10,7 @@
 
 @interface TCAVLiveRoomEngine ()
 {
-    
+
     // Mic重试
     NSInteger   _handleMicTryCount;
     BOOL        _isHandlingMic;
@@ -63,7 +63,7 @@
         _handleCameraTryCount = 0;
         _isHandlingCamera = NO;
         
-        _handleCameraTryCount = 0;
+        _requestHostViewTryCount = 0;
         _isRequestingHostView = NO;
         
         _lastBeautyValue = 0;
@@ -147,7 +147,8 @@
     
     id<AVUserAble> ah = (id<AVUserAble>) _IMUser;
     NSInteger state = [ah avCtrlState];
-    if (!ise && (enable == (state & EAVCtrlState_Mic)))
+    BOOL tarMic = (state & EAVCtrlState_Mic);
+    if (!ise && enable == tarMic)
     {
         DebugLog(@"当前Mic已%@，不需要重复操作", enable ? @"打开" : @"关闭");
         if (completion)
@@ -250,7 +251,8 @@
     
     id<AVUserAble> ah = (id<AVUserAble>) _IMUser;
     NSInteger state = [ah avCtrlState];
-    if (!ise && (enable == (state & EAVCtrlState_Speaker)))
+    BOOL tarSpeaker = (state & EAVCtrlState_Speaker);
+    if (!ise && enable == tarSpeaker)
     {
         DebugLog(@"当前Speaker已%@，不需要重复操作", enable ? @"打开" : @"关闭");
         if (completion)
@@ -390,7 +392,8 @@
     
     id<AVUserAble> ah = (id<AVUserAble>) _IMUser;
     NSInteger state = [ah avCtrlState];
-    if (!ise && ( enable == (state & EAVCtrlState_Camera)))
+    BOOL tarCar = (state & EAVCtrlState_Camera);
+    if (!ise && enable == tarCar)
     {
         DebugLog(@"当前Camera已%@，不需要重复操作", enable ? @"打开" : @"关闭");
         if (completion)
@@ -443,9 +446,17 @@
                 }
                 else
                 {
+                    if (result == QAV_ERR_HAS_IN_THE_STATE)
+                    {
+                        // 已是重复状态不处理
+                        [ws onEnableCameraComplete:camerid enable:enable result:QAV_OK needNotify:notify completion:completion];
+                    }
+                    else
+                    {
                     // 打开相机重试
                     [ws tryEnableCamera:enable needNotify:notify completion:completion];
                 }
+            }
             }
             else
             {
@@ -454,15 +465,11 @@
         }];
         if (result != QAV_OK)
         {
-            DebugLog(@"videoCtrl enableCamera 第%d次 失败: %d ", (int)_handleCameraTryCount, (int)result);
-            if (needTry)
+            DebugLog(@"videoCtrl enableCamera : %d ", (int)result);
+            if (result == QAV_ERR_EXCLUSIVE_OPERATION)
             {
-                // 视频源未获取到，重试
-                [self tryEnableCamera:enable needNotify:notify completion:completion];
-            }
-            else
-            {
-                [self onEnableCameraComplete:_cameraId enable:enable result:QAV_ERR_FAILED needNotify:notify completion:completion];
+                // 互斥操作时，不会走回调
+                [ws onEnableCameraComplete:camerid enable:enable result:result needNotify:notify completion:completion];
             }
             
         }
@@ -518,6 +525,20 @@
         }
         return;
     }
+    
+    if (![self isCameraEnable])
+    {
+        DebugLog(@"当前相机未打开");
+        // 相机未打开情况下，后置摄像头，直接switch切换不到前置，
+        if (completion)
+        {
+            completion(NO, @"当前相机未打开");
+        }
+
+        return;
+    }
+    
+    
     _isHandlingCamera = YES;
     _handleCameraTryCount = 0;
     
@@ -542,16 +563,36 @@
         {
             TCAVEngineCamera camera = _cameraId;
             __weak TCAVLiveRoomEngine *ws = self;
-            [avvc switchCamera:camera complete:^(int result) {
+           QAVResult res = [avvc switchCamera:camera complete:^(int result) {
                 if (QAV_OK == result)
                 {
                     [ws onSwitchCameraComplete:camera result:result completion:completion];
                 }
                 else
                 {
+                    if (result == QAV_ERR_HAS_IN_THE_STATE)
+                    {
+                        // 已是重复状态不处理
+                        [ws onSwitchCameraComplete:_cameraId result:QAV_OK completion:completion];
+                    }
+                    else
+                    {
                     [ws trySwitchCameraWith:completion];
                 }
+                    
+                }
             }];
+            
+            if (res != QAV_OK)
+            {
+                if (res == QAV_ERR_EXCLUSIVE_OPERATION)
+                {
+                    //  互斥操作时是会走回调
+                    // 重置参数
+                    [self onSwitchCameraComplete:_cameraId result:QAV_ERR_FAILED completion:completion];
+                }
+                
+            }
         }
         else
         {
@@ -562,8 +603,6 @@
     {
         // 重置参数
         [self onSwitchCameraComplete:_cameraId result:QAV_ERR_FAILED completion:completion];
-        _handleCameraTryCount = 0;
-        _isHandlingCamera = NO;
     }
     
 }
@@ -974,6 +1013,7 @@
     
     BOOL succ = result == QAV_OK;
     NSString *tip = succ ? @"切换摄像头成功" : @"切换摄像头失败";
+    DebugLog(@"%@", tip);
     
     if (completion)
     {
@@ -991,6 +1031,11 @@
         {
             _cameraId = CameraPosFront;
         }
+    }
+    else
+    {
+        // 关闭状态下，可以直接打开摄像头
+        [self enableHostCtrlState:EAVCtrlState_Camera];
     }
 }
 
