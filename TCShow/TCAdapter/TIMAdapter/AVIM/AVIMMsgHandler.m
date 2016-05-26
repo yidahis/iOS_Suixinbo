@@ -394,10 +394,13 @@
                         {
                             [_roomIMListner onIMHandler:self recvGroupMsg:enterMsg];
                         }
+                        });
+                    }];
+                    
                         
+                    dispatch_async(dispatch_get_main_queue(), ^{
                         [_roomIMListner onIMHandler:self joinGroup:@[sender]];
                     });
-                    }];
                     
                 }
                     break;
@@ -412,7 +415,10 @@
                         {
                             [_roomIMListner onIMHandler:self recvGroupMsg:exitMsg];
                         }
+                        });
+                    }];
 
+                    dispatch_async(dispatch_get_main_queue(), ^{
                         if ([[sender imUserId] isEqualToString:[[_imRoomInfo liveHost] imUserId]])
                         {
                             DebugLog(@"主播主动退群");
@@ -424,7 +430,6 @@
                             [_roomIMListner onIMHandler:self exitGroup:@[sender]];
                         }
                     });
-                    }];
                 }
                     break;
                     
