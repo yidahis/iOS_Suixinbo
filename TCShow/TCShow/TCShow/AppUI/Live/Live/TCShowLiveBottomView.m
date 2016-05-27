@@ -47,13 +47,13 @@
 
 - (void)onTurnLED:(MenuButton *)btn
 {
-    btn.selected = !btn.selected;
     
     if ([_roomEngine isFrontCamera])
     {
         [[HUDHelper sharedInstance] tipMessage:@"前置摄像头下开闪光灯，会影响直播"];
         return;
     }
+    btn.selected = !btn.selected;
     // 是否有麦克风
     // 是否有摄像头
     // 打开LED

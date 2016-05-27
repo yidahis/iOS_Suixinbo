@@ -13,9 +13,9 @@
 @protected
     TCShowLiveTopView           *_topView;
     
-#if kBetaVersion
+@protected
     UITextView                  *_parTextView;
-#endif
+
     
     TCShowLiveMessageView       *_msgView;
     TCShowLiveBottomView        *_bottomView;
@@ -53,10 +53,8 @@
 
 - (void)onTapBlank:(UITapGestureRecognizer *)tap;
 
-#if kBetaVersion
 - (void)showPar:(BOOL)show;
 - (void)onRefreshPAR;
-#endif
 
 // for 多人互动
 - (void)onClickSub:(id<AVMultiUserAble>)user;

@@ -43,7 +43,7 @@
         image.data = (Byte *)frame.data;
         image.width = (int)frame.frameDesc.width;
         image.height = (int)frame.frameDesc.height;
-        image.isFullScreenShow = YES;
+        image.isFullScreenShow = [self calcFullScr:peerFrameAngle selfAngle:selfFrameAngle];
         image.viewStatus = VIDEO_VIEW_DRAWING;
         image.dataFormat = isLocal ?  Data_Format_NV12  : Data_Format_I420;
         

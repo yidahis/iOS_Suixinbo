@@ -11,6 +11,8 @@
 
 @class TCAVBaseRoomEngine;
 
+@class TCAVLiveRoomPushRequest;
+
 @protocol TCAVRoomEngineDelegate <NSObject>
 
 @required
@@ -67,6 +69,12 @@
 - (void)onAVEngine:(TCAVBaseRoomEngine *)engine users:(NSArray *)users exitRoom:(id<AVRoomAble>)room;
 - (void)onAVEngine:(TCAVBaseRoomEngine *)engine users:(NSArray *)users enterRoom:(id<AVRoomAble>)room;
 - (void)onAVEngine:(TCAVBaseRoomEngine *)engine users:(NSArray *)users event:(QAVUpdateEvent)event;
+
+
+@optional
+
+// 添加推流返回
+- (void)onAVEngine:(TCAVBaseRoomEngine *)engine onStartPush:(BOOL)succ pushRequest:(TCAVLiveRoomPushRequest *)req;
 
 @end
 

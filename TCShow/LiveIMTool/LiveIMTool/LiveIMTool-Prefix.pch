@@ -12,10 +12,6 @@
 
 #define kTextRedColor       RGBOF(0xD54A45)
 
-// 上传AppStore时改为0
-// 方便测试去查看房间号等相关信息，以便测试
-#define kBetaVersion        1
-
 #import "CommonLibrary.h"
 
 #import "AVIMAble.h"

@@ -208,6 +208,8 @@
 		92377D2D1CEA0B31007AD22B /* IMAPlatform+TCAVLive.m in Sources */ = {isa = PBXBuildFile; fileRef = 92377C881CEA0B31007AD22B /* IMAPlatform+TCAVLive.m */; };
 		92377D2E1CEA0B31007AD22B /* IMAPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 92377C8A1CEA0B31007AD22B /* IMAPlatform.m */; };
 		92377D2F1CEA0B31007AD22B /* IMAPlatformConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 92377C8C1CEA0B31007AD22B /* IMAPlatformConfig.m */; };
+		926DEC941CF738CF00F9251B /* TCAVLiveRoomEngine+PushStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 926DEC911CF738CF00F9251B /* TCAVLiveRoomEngine+PushStream.m */; };
+		926DEC951CF738CF00F9251B /* TCAVTryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 926DEC931CF738CF00F9251B /* TCAVTryItem.m */; };
 		92B7E1E71CF455FD0008CC21 /* TCAVSharedContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B7E1E61CF455FD0008CC21 /* TCAVSharedContext.m */; };
 /* End PBXBuildFile section */
 
@@ -664,6 +666,10 @@
 		92377C8C1CEA0B31007AD22B /* IMAPlatformConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMAPlatformConfig.m; sourceTree = "<group>"; };
 		92377C8D1CEA0B31007AD22B /* IMAPlatformHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMAPlatformHeaders.h; sourceTree = "<group>"; };
 		92377C8E1CEA0B31007AD22B /* TIMAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIMAdapter.h; sourceTree = "<group>"; };
+		926DEC901CF738CF00F9251B /* TCAVLiveRoomEngine+PushStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TCAVLiveRoomEngine+PushStream.h"; sourceTree = "<group>"; };
+		926DEC911CF738CF00F9251B /* TCAVLiveRoomEngine+PushStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TCAVLiveRoomEngine+PushStream.m"; sourceTree = "<group>"; };
+		926DEC921CF738CF00F9251B /* TCAVTryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAVTryItem.h; sourceTree = "<group>"; };
+		926DEC931CF738CF00F9251B /* TCAVTryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCAVTryItem.m; sourceTree = "<group>"; };
 		92B7E1E51CF455FD0008CC21 /* TCAVSharedContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAVSharedContext.h; sourceTree = "<group>"; };
 		92B7E1E61CF455FD0008CC21 /* TCAVSharedContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCAVSharedContext.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1411,6 +1417,10 @@
 		92377C1D1CEA0B31007AD22B /* AVEngine */ = {
 			isa = PBXGroup;
 			children = (
+				926DEC901CF738CF00F9251B /* TCAVLiveRoomEngine+PushStream.h */,
+				926DEC911CF738CF00F9251B /* TCAVLiveRoomEngine+PushStream.m */,
+				926DEC921CF738CF00F9251B /* TCAVTryItem.h */,
+				926DEC931CF738CF00F9251B /* TCAVTryItem.m */,
 				92B7E1E51CF455FD0008CC21 /* TCAVSharedContext.h */,
 				92B7E1E61CF455FD0008CC21 /* TCAVSharedContext.m */,
 				92377C1E1CEA0B31007AD22B /* AVEngineHeaders.h */,
@@ -1685,6 +1695,7 @@
 			files = (
 				92377CFE1CEA0B31007AD22B /* TCAVMultiLiveRoomEngine.m in Sources */,
 				92377AE11CEA052E007AD22B /* C2CVideoViewController.m in Sources */,
+				926DEC941CF738CF00F9251B /* TCAVLiveRoomEngine+PushStream.m in Sources */,
 				92377CD31CEA0B31007AD22B /* SDImageCache.m in Sources */,
 				92377C8F1CEA0B31007AD22B /* ADTransition.m in Sources */,
 				92377ADC1CEA052E007AD22B /* SettingViewController.m in Sources */,
@@ -1751,6 +1762,7 @@
 				92377C931CEA0B31007AD22B /* UIViewController+ADFlipTransition.m in Sources */,
 				92377CB31CEA0B31007AD22B /* UIView+ModifyFrame.m in Sources */,
 				92377CA61CEA0B31007AD22B /* NSObject+KVOCategory.m in Sources */,
+				926DEC951CF738CF00F9251B /* TCAVTryItem.m in Sources */,
 				92377CC61CEA0B31007AD22B /* NSData+MKBase64.m in Sources */,
 				92377D131CEA0B31007AD22B /* AVIMCache.m in Sources */,
 				92377AD61CEA052E007AD22B /* RichMenuTableViewCell.m in Sources */,

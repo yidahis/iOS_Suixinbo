@@ -44,6 +44,8 @@
 		925A50AA1CD0B58F002FF25F /* LiveHostHeartBeatRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 925A50A91CD0B58F002FF25F /* LiveHostHeartBeatRequest.m */; };
 		925A50AD1CD0B59C002FF25F /* LiveEndRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 925A50AC1CD0B59C002FF25F /* LiveEndRequest.m */; };
 		925C833A1CD0C1EF00157101 /* LiveAVRoomIDRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 925C83391CD0C1EF00157101 /* LiveAVRoomIDRequest.m */; };
+		926DEC8C1CF6E73F00F9251B /* TCAVLiveRoomEngine+PushStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 926DEC8B1CF6E73F00F9251B /* TCAVLiveRoomEngine+PushStream.m */; };
+		926DEC8F1CF6F34A00F9251B /* TCAVTryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 926DEC8E1CF6F34A00F9251B /* TCAVTryItem.m */; };
 		9277BB7D1CBF7E1B00B51809 /* TCShowLiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9277BB7C1CBF7E1B00B51809 /* TCShowLiveViewController.m */; };
 		9277BB801CBFA77700B51809 /* TCShowSettingBeautyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9277BB7F1CBFA77700B51809 /* TCShowSettingBeautyView.m */; };
 		928ADB121CBE66E4002CC4FF /* TCShowHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 928ADB111CBE66E4002CC4FF /* TCShowHost.m */; };
@@ -247,6 +249,7 @@
 		92E20EF71CEEDA3C00DBBAE9 /* UserProtocol.html in Resources */ = {isa = PBXBuildFile; fileRef = 92E20EF31CEEDA3C00DBBAE9 /* UserProtocol.html */; };
 		92E20EF81CEEDA3C00DBBAE9 /* UserProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E20EF51CEEDA3C00DBBAE9 /* UserProtocolViewController.m */; };
 		92E20EF91CEEDA3C00DBBAE9 /* UserProtocolViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92E20EF61CEEDA3C00DBBAE9 /* UserProtocolViewController.xib */; };
+		92F850131CF80396006EB63A /* TCShowAVParView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F850121CF80396006EB63A /* TCShowAVParView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -306,6 +309,10 @@
 		925A50AC1CD0B59C002FF25F /* LiveEndRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveEndRequest.m; sourceTree = "<group>"; };
 		925C83381CD0C1EF00157101 /* LiveAVRoomIDRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveAVRoomIDRequest.h; sourceTree = "<group>"; };
 		925C83391CD0C1EF00157101 /* LiveAVRoomIDRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveAVRoomIDRequest.m; sourceTree = "<group>"; };
+		926DEC8A1CF6E73F00F9251B /* TCAVLiveRoomEngine+PushStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TCAVLiveRoomEngine+PushStream.h"; sourceTree = "<group>"; };
+		926DEC8B1CF6E73F00F9251B /* TCAVLiveRoomEngine+PushStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TCAVLiveRoomEngine+PushStream.m"; sourceTree = "<group>"; };
+		926DEC8D1CF6F34A00F9251B /* TCAVTryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAVTryItem.h; sourceTree = "<group>"; };
+		926DEC8E1CF6F34A00F9251B /* TCAVTryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCAVTryItem.m; sourceTree = "<group>"; };
 		9277BB7B1CBF7E1B00B51809 /* TCShowLiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCShowLiveViewController.h; sourceTree = "<group>"; };
 		9277BB7C1CBF7E1B00B51809 /* TCShowLiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCShowLiveViewController.m; sourceTree = "<group>"; };
 		9277BB7E1CBFA77700B51809 /* TCShowSettingBeautyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCShowSettingBeautyView.h; sourceTree = "<group>"; };
@@ -765,6 +772,8 @@
 		92E20EF41CEEDA3C00DBBAE9 /* UserProtocolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProtocolViewController.h; sourceTree = "<group>"; };
 		92E20EF51CEEDA3C00DBBAE9 /* UserProtocolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProtocolViewController.m; sourceTree = "<group>"; };
 		92E20EF61CEEDA3C00DBBAE9 /* UserProtocolViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProtocolViewController.xib; sourceTree = "<group>"; };
+		92F850111CF80396006EB63A /* TCShowAVParView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCShowAVParView.h; sourceTree = "<group>"; };
+		92F850121CF80396006EB63A /* TCShowAVParView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCShowAVParView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -927,6 +936,8 @@
 				9277BB7C1CBF7E1B00B51809 /* TCShowLiveViewController.m */,
 				929408C51CD893D2004A0FE2 /* TCShowLiveResultView.h */,
 				929408C61CD893D2004A0FE2 /* TCShowLiveResultView.m */,
+				92F850111CF80396006EB63A /* TCShowAVParView.h */,
+				92F850121CF80396006EB63A /* TCShowAVParView.m */,
 			);
 			path = Live;
 			sourceTree = "<group>";
@@ -1527,10 +1538,14 @@
 				92D2CB1B1CC4E4D200501760 /* TCAVBaseRoomEngine.m */,
 				92D2CB1C1CC4E4D200501760 /* TCAVLiveRoomEngine.h */,
 				92D2CB1D1CC4E4D200501760 /* TCAVLiveRoomEngine.m */,
+				926DEC8A1CF6E73F00F9251B /* TCAVLiveRoomEngine+PushStream.h */,
+				926DEC8B1CF6E73F00F9251B /* TCAVLiveRoomEngine+PushStream.m */,
 				92D2CB1F1CC4E4D200501760 /* TCAVMultiLiveRoomEngine.h */,
 				92D2CB201CC4E4D200501760 /* TCAVMultiLiveRoomEngine.m */,
 				92B7E1E21CF44E480008CC21 /* TCAVSharedContext.h */,
 				92B7E1E31CF44E480008CC21 /* TCAVSharedContext.m */,
+				926DEC8D1CF6F34A00F9251B /* TCAVTryItem.h */,
+				926DEC8E1CF6F34A00F9251B /* TCAVTryItem.m */,
 			);
 			path = AVEngine;
 			sourceTree = "<group>";
@@ -1919,6 +1934,7 @@
 				92D2CB901CC4E4D200501760 /* FTUtils+UIGestureRecognizer.m in Sources */,
 				92D2CBAD1CC4E4D200501760 /* ImageTitleButton.m in Sources */,
 				92D2CB9C1CC4E4D200501760 /* NSString+RegexCheck.m in Sources */,
+				92F850131CF80396006EB63A /* TCShowAVParView.m in Sources */,
 				929BCA231CBF706800482611 /* TCShowLiveTopView.m in Sources */,
 				92285E351CD8D5AC00F2D88E /* HostProfileViewController.m in Sources */,
 				92D3834D1CD987F50001EA04 /* RichCellMenuItem.m in Sources */,
@@ -2069,10 +2085,12 @@
 				92D2CBD71CC4E4D200501760 /* BaseAppDelegate.m in Sources */,
 				92D2CBB31CC4E4D200501760 /* NSObject+FBKVOController.m in Sources */,
 				92D2CBAC1CC4E4D200501760 /* EGORefreshTableHeaderView.m in Sources */,
+				926DEC8F1CF6F34A00F9251B /* TCAVTryItem.m in Sources */,
 				92BC94331CBDEDC0003D9EF1 /* LiveListTableViewCell.m in Sources */,
 				92D2CBDE1CC4E4D200501760 /* LibraryViewController.m in Sources */,
 				92D2CBA21CC4E4D200501760 /* UITextField+UITextField_Tip.m in Sources */,
 				92D2CBF91CC4E4D200501760 /* AVGLShareInstance.m in Sources */,
+				926DEC8C1CF6E73F00F9251B /* TCAVLiveRoomEngine+PushStream.m in Sources */,
 				92D2CBEC1CC4E4D200501760 /* UIView+Layout.m in Sources */,
 				92D2CBB01CC4E4D200501760 /* MenuTableViewController.m in Sources */,
 				921DA4CE1CC9C12E007DFE11 /* TCShowMultiSubView.m in Sources */,
@@ -2202,6 +2220,7 @@
 					"$(SRCROOT)/TCShowModel/QCloudUploadSDK",
 				);
 				OTHER_CFLAGS = "-O0";
+				OTHER_CPLUSPLUSFLAGS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.TCShow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2336,6 +2355,7 @@
 					"$(SRCROOT)/TCShowModel/QCloudUploadSDK",
 				);
 				OTHER_CFLAGS = "-O0";
+				OTHER_CPLUSPLUSFLAGS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.TCShow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2370,6 +2390,7 @@
 					"$(SRCROOT)/TCShowModel/QCloudUploadSDK",
 				);
 				OTHER_CFLAGS = "-O0";
+				OTHER_CPLUSPLUSFLAGS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.TCShow;
 				PRODUCT_NAME = "$(TARGET_NAME)";

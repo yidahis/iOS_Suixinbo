@@ -34,16 +34,21 @@
     }
 }
 
-- (void)relayoutFrameOfSubViews
+- (void)relayoutPARView
 {
-    [super relayoutFrameOfSubViews];
     if (_interactButton)
     {
         [_interactButton sizeWith:CGSizeMake(45, 25)];
         [_interactButton alignLeft:_timeView];
         [_interactButton layoutBelow:_timeView margin:kDefaultMargin];
+        
+        [_parView sameWith:_interactButton];
+        [_parView layoutToRightOf:_interactButton margin:kDefaultMargin];
+        [_parView scaleToParentRightWithMargin:kDefaultMargin];
+        [_parView relayoutFrameOfSubViews];
     }
 }
+
 @end
 
 @implementation TCShowMultiLiveView
@@ -82,11 +87,10 @@
     [_msgView scaleToAboveOf:_bottomView margin:kDefaultMargin];
     [_msgView relayoutFrameOfSubViews];
     
-#if kBetaVersion
+
     [_parTextView sameWith:_topView];
     [_parTextView layoutBelow:_topView margin:kDefaultMargin];
     [_parTextView scaleToAboveOf:_bottomView margin:kDefaultMargin];
-#endif
 
 }
 

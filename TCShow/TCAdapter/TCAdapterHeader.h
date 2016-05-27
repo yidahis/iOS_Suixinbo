@@ -21,13 +21,16 @@
 // 是否是AppStore版本
 #define kAppStoreVersion 0
 
-
+#if DEBUG
+#define kBetaVersion        1
+#else
 // 上传AppStore时改为0
 // 方便测试去查看房间号等相关信息，以便测试
 #if kAppStoreVersion
 #define kBetaVersion        0
 #else
 #define kBetaVersion        1
+#endif
 #endif
 
 // 是否支持消息缓存，而不是立即显示，主要是看大消息量时，立即显示会导致界面卡顿

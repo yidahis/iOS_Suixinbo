@@ -9,7 +9,7 @@
 #ifndef LiveHeader_h
 #define LiveHeader_h
 
-
+#import "TCShowAVParView.h"
 #import "TCShowLiveTopView.h"
 #import "TCShowLiveMessageView.h"
 

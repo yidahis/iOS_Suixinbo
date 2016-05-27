@@ -22,9 +22,10 @@
 // for 互动直播
 - (void)onTopViewClickInteract:(TCShowLiveTopView *)topView;
 
-#if kBetaVersion
+@optional
 - (void)onTopView:(TCShowLiveTopView *)topView clickPAR:(UIButton *)par;
-#endif
+- (void)onTopView:(TCShowLiveTopView *)topView clickPush:(UIButton *)push;
+
 
 @end
 
@@ -69,15 +70,18 @@
 @end
 
 
-@interface TCShowLiveTopView : UIView
+@interface TCShowLiveTopView : UIView<TCShowAVParViewDelegate>
 {
 @protected
     TCShowLiveTimeView *_timeView;
     UIButton           *_close;
 #if kBetaVersion
     UILabel            *_roomTip;
-    UIButton           *_parButton;
 #endif
+    
+@protected
+    TCShowAVParView     *_parView;
+    
     
 @protected
     __weak id<TCShowLiveRoomAble> _room;

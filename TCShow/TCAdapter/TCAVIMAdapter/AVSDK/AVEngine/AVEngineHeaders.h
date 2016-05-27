@@ -9,11 +9,15 @@
 #ifndef AVEngineHeaders_h
 #define AVEngineHeaders_h
 
+#import "TCAVTryItem.h"
+
 #import "TCAVRoomEngineDelegate.h"
 
 #import "TCAVBaseRoomEngine.h"
 
 #import "TCAVLiveRoomEngine.h"
+
+#import "TCAVLiveRoomEngine+PushStream.h"
 
 #import "TCAVMultiLiveRoomEngine.h"
 

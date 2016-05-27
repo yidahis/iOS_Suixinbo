@@ -370,6 +370,11 @@ static BOOL kIsAlertingForceOfflineOnLiving = NO;
     // do nothing
 }
 
+- (void)onAVEngine:(TCAVBaseRoomEngine *)engine onStartPush:(BOOL)succ pushRequest:(TCAVLiveRoomPushRequest *)req
+{
+    // do nothing
+}
+
 @end
 
 

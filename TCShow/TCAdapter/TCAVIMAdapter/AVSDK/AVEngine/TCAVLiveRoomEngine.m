@@ -775,7 +775,10 @@
     [[IMAPlatform sharedInstance] asyncExitAVChatRoom:_roomInfo succ:nil fail:nil];
     _enableChat = NO;
     
+    [self onAsyncStopPushStreamOnExitRoom:^(BOOL succ, NSString *tip) {
     [super exitLive];
+    }];
+    
 }
 
 - (void)turnOnFlash:(BOOL)on
@@ -1003,6 +1006,8 @@
         }
         [self asyncEnableCamera:YES isEnterRoom:YES needNotify:YES completion:nil];
     }
+    
+    [self onEnterRoomCheckPush];
     
 }
 

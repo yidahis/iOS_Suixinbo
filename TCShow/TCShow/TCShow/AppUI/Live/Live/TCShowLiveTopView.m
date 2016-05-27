@@ -264,7 +264,7 @@
 {
     [_timeView startLive];
 #if kBetaVersion
-    _roomTip.text = [NSString stringWithFormat:@"AV:%d IM:%@", [_room liveAVRoomId], [_room liveIMChatRoomId]];
+    _roomTip.text = [NSString stringWithFormat:@"AV:%d\nIM:%@", [_room liveAVRoomId], [_room liveIMChatRoomId]];
 #endif
 }
 - (void)pauseLive
@@ -316,17 +316,11 @@
     _roomTip = [[UILabel alloc] init];
     _roomTip.backgroundColor = [kLightGrayColor colorWithAlphaComponent:0.2];
     _roomTip.textColor = kWhiteColor;
+    _roomTip.numberOfLines = 0;
+    _roomTip.lineBreakMode = NSLineBreakByWordWrapping;
     _roomTip.adjustsFontSizeToFitWidth = YES;
-    _roomTip.font = [UIFont systemFontOfSize:9];
+    _roomTip.font = kAppSmallTextFont;
     [self addSubview:_roomTip];
-    
-    _parButton = [[UIButton alloc] init];
-    [_parButton setBackgroundImage:[UIImage imageWithColor:[kLightGrayColor colorWithAlphaComponent:0.7]] forState:UIControlStateNormal];
-    [_parButton setBackgroundImage:[UIImage imageWithColor:[kDarkGrayColor colorWithAlphaComponent:0.7]] forState:UIControlStateSelected];
-    [_parButton addTarget:self action:@selector(onClickPar:) forControlEvents:UIControlEventTouchUpInside];
-    [_parButton setTitle:@"PAR" forState:UIControlStateNormal];
-    [_parButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
-    [self addSubview:_parButton];
 #endif
     
 //    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -343,18 +337,13 @@
 //    _userlist.dataSource = self;
 //    _userlist.backgroundColor = [kLightGrayColor colorWithAlphaComponent:0.3];
 //    [self addSubview:_userlist];
-}
-
-#if kBetaVersion
-- (void)onClickPar:(UIButton *)btn
+    if ([[IMAPlatform sharedInstance].host isCurrentLiveHost:room])
 {
-    _parButton.selected = !_parButton.selected;
-    if ([_delegate respondsToSelector:@selector(onTopView:clickPAR:)])
-    {
-        [_delegate onTopView:self clickPAR:btn];
+        _parView = [[TCShowAVParView alloc] init];
+        _parView.delegate = self;
+        [self addSubview:_parView];
     }
 }
-#endif
 
 
 - (void)relayoutFrameOfSubViews
@@ -377,21 +366,48 @@
     
     
 #if kBetaVersion
-    [_roomTip sameWith:_close];
+    [_roomTip sameWith:_timeView];
     [_roomTip layoutToRightOf:_timeView margin:kDefaultMargin];
     [_roomTip scaleToLeftOf:_close margin:kDefaultMargin];
-    [_roomTip scaleToBelowOf:_timeView margin:_timeView.bounds.size.height/2];
-    
-    [_parButton sameWith:_roomTip];
-    [_parButton layoutBelow:_roomTip];
 #endif
+    
+    [self relayoutPARView];
+    
+}
+
+- (void)onAVParView:(TCShowAVParView *)par clickPar:(UIButton *)button
+{
+    if ([_delegate respondsToSelector:@selector(onTopView:clickPAR:)])
+    {
+        [_delegate onTopView:self clickPAR:button];
+    }
+}
+    
+- (void)onAVParView:(TCShowAVParView *)par clickPush:(UIButton *)button
+{
+    if ([_delegate respondsToSelector:@selector(onTopView:clickPush:)])
+    {
+        [_delegate onTopView:self clickPush:button];
+    }
+}
+
+- (void)relayoutPARView
+{
+    if (_parView)
+    {
+        [_parView sizeWith:CGSizeMake(45, 25)];
+        [_parView alignLeft:_timeView];
+        [_parView layoutBelow:_timeView margin:kDefaultMargin];
+        [_parView scaleToParentRightWithMargin:kDefaultMargin];
+        [_parView relayoutFrameOfSubViews];
+    }
 }
 
 - (void)configOwnViewsWith:(id<TCShowLiveRoomAble>)room
 {
     
 #if kBetaVersion
-    _roomTip.text = [NSString stringWithFormat:@"AV:%d IM:%@", [room liveAVRoomId], [room liveIMChatRoomId]];
+    _roomTip.text = [NSString stringWithFormat:@"AV:%d\nIM:%@", [room liveAVRoomId], [room liveIMChatRoomId]];
 #endif
 }
 @end

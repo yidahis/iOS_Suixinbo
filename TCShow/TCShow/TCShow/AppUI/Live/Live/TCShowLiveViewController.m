@@ -198,13 +198,64 @@
     
 }
 
-#if kBetaVersion
 - (void)onTopView:(TCShowLiveTopView *)topView clickPAR:(UIButton *)par
 {
-    
+    par.selected = !par.selected;
     [_liveView showPar:par.selected];
 }
-#endif
+
+- (void)onTopView:(TCShowLiveTopView *)topView clickPush:(UIButton *)par
+{
+    if (par.selected)
+    {
+       [(TCAVLiveRoomEngine *)_roomEngine asyncStopAllPushStreamCompletion:^(BOOL succ, NSString *tip) {
+          par.selected = !par.selected;
+       }];
+    }
+    else
+    {
+        __weak TCAVLiveRoomEngine *wr = (TCAVLiveRoomEngine *)_roomEngine;
+        __weak typeof(self) ws = self;
+        
+        UIActionSheet *testSheet = [[UIActionSheet alloc] init];//[UIActionSheet bk_actionSheetWithTitle:@"请选择照片源"];
+        [testSheet bk_addButtonWithTitle:@"HLS推流" handler:^{
+            [wr asyncStartPushStream:AV_ENCODE_HLS completion:^(BOOL succ, TCAVLiveRoomPushRequest *req) {
+                par.selected = succ;
+                [ws showPush:AV_ENCODE_HLS succ:succ request:req];
+            }];
+            
+        }];
+        [testSheet bk_addButtonWithTitle:@"RTMP推流" handler:^{
+            [wr asyncStartPushStream:AV_ENCODE_RTMP completion:^(BOOL succ, TCAVLiveRoomPushRequest *req) {
+                par.selected = succ;
+                [ws showPush:AV_ENCODE_RTMP succ:succ request:req];
+            }];
+            
+        }];
+        [testSheet bk_setCancelButtonWithTitle:@"取消" handler:nil];
+        [testSheet showInView:self.view];
+    }
+    
+}
+
+- (void)showPush:(AVEncodeType)type succ:(BOOL)succ request:(TCAVLiveRoomPushRequest *)req
+{
+    NSString *pushUrl = [req getPushUrl:type];
+    if (succ && pushUrl.length > 0)
+    {
+        UIAlertView *alert = [UIAlertView bk_showAlertViewWithTitle:@"推流地址" message:pushUrl cancelButtonTitle:@"拷至粘切板" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            [pasteboard setString:pushUrl];
+        }];
+        [alert show];
+    }
+    else
+    {
+        [[HUDHelper sharedInstance] tipMessage:@"推流不成功"];
+    }
+    
+}
+
 
 // 收到群聊天消息: (主要是文本类型)
 - (void)onIMHandler:(AVIMMsgHandler *)receiver recvGroupMsg:(id<AVIMMsgAble>)msg

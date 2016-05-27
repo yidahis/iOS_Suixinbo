@@ -117,9 +117,7 @@
     
     [_bottomView showLikeHeart:cache];
     
-#if kBetaVersion
     [self onRefreshPAR];
-#endif
 }
 #endif
 
@@ -141,13 +139,11 @@
 {
     [self addTopView];
     
-#if kBetaVersion
     _parTextView = [[UITextView alloc] init];
     _parTextView.hidden = YES;
     _parTextView.backgroundColor = [kLightGrayColor colorWithAlphaComponent:0.5];
     _parTextView.editable = NO;
     [self addSubview:_parTextView];
-#endif
     
     _msgView = [[TCShowLiveMessageView alloc] init];
     [self addSubview:_msgView];
@@ -248,7 +244,7 @@
 {
     CGRect rect = self.bounds;
     
-    [_topView setFrameAndLayout:CGRectMake(0, 0, rect.size.width, 80)];
+    [_topView setFrameAndLayout:CGRectMake(0, 0, rect.size.width, 110)];
     
     [_bottomView sizeWith:CGSizeMake(rect.size.width, 60)];
     [_bottomView alignParentBottomWithMargin:0];
@@ -263,11 +259,10 @@
     [_msgView scaleToAboveOf:_bottomView margin:kDefaultMargin];
     [_msgView relayoutFrameOfSubViews];
     
-#if kBetaVersion
     [_parTextView sameWith:_topView];
     [_parTextView layoutBelow:_topView margin:kDefaultMargin];
     [_parTextView scaleToAboveOf:_bottomView margin:kDefaultMargin];
-#endif
+
 }
 
 
@@ -332,12 +327,8 @@
 
 - (void)onTimViewTimeRefresh:(TCShowLiveTimeView *)topView
 {
-#if kBetaVersion
-    //    [self onRefreshPAR];
-#endif
-}
 
-#if kBetaVersion
+}
 
 - (void)onRefreshPAR
 {
@@ -361,9 +352,6 @@
         [[HUDHelper sharedInstance] tipMessage:@"PAR需要在相机打开情况下才有效"];
     }
 }
-
-
-#endif
 
 
 - (void)onClickSub:(id<AVMultiUserAble>)user

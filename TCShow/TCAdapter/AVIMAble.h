@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+/* 修改日志
+ *================================================================
+ * 时间: 20160526
+ * 改动项: 添加推流录制
+ * 描述: 详见AVCtrlState EAVCtrlState_PushStream 以及描述
+ *================================================================
+ *
+ */
+//
+
 
 
 // 前缀解释:
@@ -47,11 +57,22 @@ typedef NS_ENUM(NSInteger, AVCtrlState)
     EAVCtrlState_Speaker = 0x01,                // 是否开启了扬声器
     EAVCtrlState_Mic = 0x01 << 1,               // 是否开启了麦克风
     EAVCtrlState_Camera = 0x01 << 2,            // 是否打开了相机
-    EAVCtrlState_Beauty = 0x01 << 3,            // 是否打开了美颜：注意打开开相，
+    EAVCtrlState_Beauty = 0x01 << 3,            // 是否打开了美颜：注意打开相机之后才可以设置美颜
+
+    // 是否打开推流，因推流非常占用云后台资源，需要向后台申请资源，如果推流中出现问题，请到( https://www.qcloud.com/doc/product/268/旁路直播开发 )了解详细内容
+    // 不建议进入时默认打开，会影响进房速度
+    // 只有主播可以设置
+    // 如果有推流，退出直播时，一定要将推流先关掉，再执行退房流程
+    // 目前建议使用HLS,RTMP
+    // 以下四个是互斥的一次只能传一个
+    // 导致推流不成功的原因：推流的时候异常退出，业务后台去要强行关闭推流，如果不，则下次再使用相同的channelInfo.channelName进行推流，则会不成功，提求正在推流
+    EAVCtrlState_HLSStream = 0x01 << 4,         // HLS
+    EAVCtrlState_RTMPStream = 0x01 << 5,        // RTMP
+    EAVCtrlState_RAWStream = 0x01 << 6,         // RAW
+    EAVCtrlState_HLS_RTMP = EAVCtrlState_HLSStream | EAVCtrlState_RTMPStream,
     
-    //    EAVCtrlState_Camera = 0x01 << 2,            // 是否打开了相机
-    //    EAVCtrlState_FrontCamera = 0x01 << 3,       // 是否是前置摄像头
-    EAVCtrlState_All = EAVCtrlState_Mic | EAVCtrlState_Speaker | EAVCtrlState_Camera | EAVCtrlState_Beauty,
+    // 主播进入房间时的推荐配置
+    EAVCtrlState_All = EAVCtrlState_Mic | EAVCtrlState_Speaker | EAVCtrlState_Camera,
 };
 
 // 直播中用户的配置
