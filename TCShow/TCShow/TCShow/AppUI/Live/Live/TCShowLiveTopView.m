@@ -391,6 +391,14 @@
     }
 }
 
+- (void)onAVParView:(TCShowAVParView *)par clickRec:(UIButton *)button
+{
+    if ([_delegate respondsToSelector:@selector(onTopView:clickREC:)])
+    {
+        [_delegate onTopView:self clickREC:button];
+    }
+}
+
 - (void)relayoutPARView
 {
     if (_parView)
@@ -409,5 +417,10 @@
 #if kBetaVersion
     _roomTip.text = [NSString stringWithFormat:@"AV:%d\nIM:%@", [room liveAVRoomId], [room liveIMChatRoomId]];
 #endif
+}
+
+- (void)onRefrshPARView:(TCAVLiveRoomEngine *)engine
+{
+    [_parView onRefrshPARView:engine];
 }
 @end

@@ -776,7 +776,11 @@
     _enableChat = NO;
     
     [self onAsyncStopPushStreamOnExitRoom:^(BOOL succ, NSString *tip) {
+        
+        [self onAsyncStopRecordOnExitRoom:^(BOOL succ, TCAVLiveRoomRecordRequest *req) {
     [super exitLive];
+    }];
+    
     }];
     
 }
@@ -1008,6 +1012,8 @@
     }
     
     [self onEnterRoomCheckPush];
+    
+    [self onEnterRoomCheckRecord];
     
 }
 

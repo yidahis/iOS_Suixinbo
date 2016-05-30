@@ -20,6 +20,8 @@
 @property (nonatomic, strong) AVStreamerResp *pushResp; // 推流返回的结果
 
 - (instancetype)initWith:(id<AVRoomAble>)room type:(AVEncodeType)type context:(QAVContext *)engineContext;
+- (instancetype)initWith:(id<AVRoomAble>)room channelName:(NSString *)channelName type:(AVEncodeType)type context:(QAVContext *)engineContext;
+- (instancetype)initWith:(id<AVRoomAble>)room channelName:(NSString *)channelName channelDesc:(NSString *)channelDesc type:(AVEncodeType)type context:(QAVContext *)engineContext;
 
 - (NSString *)getHLSPushUrl;
 - (NSString *)getRTMPPushUrl;
@@ -46,6 +48,8 @@ typedef void (^TCAVPushCompletion)(BOOL succ, TCAVLiveRoomPushRequest *req);
 
 // 直播中使用手动方式开启
 - (void)asyncStartPushStream:(AVEncodeType)type completion:(TCAVPushCompletion)completion;
+- (void)asyncStartPushStream:(AVEncodeType)type channelName:(NSString *)name completion:(TCAVPushCompletion)completion;
+- (void)asyncStartPushStream:(AVEncodeType)type channelName:(NSString *)name channelDesc:(NSString *)desc completion:(TCAVPushCompletion)completion;
 
 // 直播中使用手动方式关闭
 - (void)asyncStopPushStream:(AVEncodeType)type completion:(TCAVCompletion)completion;

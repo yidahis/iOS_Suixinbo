@@ -46,6 +46,7 @@
 		925C833A1CD0C1EF00157101 /* LiveAVRoomIDRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 925C83391CD0C1EF00157101 /* LiveAVRoomIDRequest.m */; };
 		926DEC8C1CF6E73F00F9251B /* TCAVLiveRoomEngine+PushStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 926DEC8B1CF6E73F00F9251B /* TCAVLiveRoomEngine+PushStream.m */; };
 		926DEC8F1CF6F34A00F9251B /* TCAVTryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 926DEC8E1CF6F34A00F9251B /* TCAVTryItem.m */; };
+		927600E11CFC1A8B00BA9632 /* TCAVLiveRoomEngine+Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 927600E01CFC1A8B00BA9632 /* TCAVLiveRoomEngine+Record.m */; };
 		9277BB7D1CBF7E1B00B51809 /* TCShowLiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9277BB7C1CBF7E1B00B51809 /* TCShowLiveViewController.m */; };
 		9277BB801CBFA77700B51809 /* TCShowSettingBeautyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9277BB7F1CBFA77700B51809 /* TCShowSettingBeautyView.m */; };
 		928ADB121CBE66E4002CC4FF /* TCShowHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 928ADB111CBE66E4002CC4FF /* TCShowHost.m */; };
@@ -313,6 +314,8 @@
 		926DEC8B1CF6E73F00F9251B /* TCAVLiveRoomEngine+PushStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TCAVLiveRoomEngine+PushStream.m"; sourceTree = "<group>"; };
 		926DEC8D1CF6F34A00F9251B /* TCAVTryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAVTryItem.h; sourceTree = "<group>"; };
 		926DEC8E1CF6F34A00F9251B /* TCAVTryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCAVTryItem.m; sourceTree = "<group>"; };
+		927600DF1CFC1A8B00BA9632 /* TCAVLiveRoomEngine+Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TCAVLiveRoomEngine+Record.h"; sourceTree = "<group>"; };
+		927600E01CFC1A8B00BA9632 /* TCAVLiveRoomEngine+Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TCAVLiveRoomEngine+Record.m"; sourceTree = "<group>"; };
 		9277BB7B1CBF7E1B00B51809 /* TCShowLiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCShowLiveViewController.h; sourceTree = "<group>"; };
 		9277BB7C1CBF7E1B00B51809 /* TCShowLiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCShowLiveViewController.m; sourceTree = "<group>"; };
 		9277BB7E1CBFA77700B51809 /* TCShowSettingBeautyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCShowSettingBeautyView.h; sourceTree = "<group>"; };
@@ -1546,6 +1549,8 @@
 				92B7E1E31CF44E480008CC21 /* TCAVSharedContext.m */,
 				926DEC8D1CF6F34A00F9251B /* TCAVTryItem.h */,
 				926DEC8E1CF6F34A00F9251B /* TCAVTryItem.m */,
+				927600DF1CFC1A8B00BA9632 /* TCAVLiveRoomEngine+Record.h */,
+				927600E01CFC1A8B00BA9632 /* TCAVLiveRoomEngine+Record.m */,
 			);
 			path = AVEngine;
 			sourceTree = "<group>";
@@ -2075,6 +2080,7 @@
 				92285E321CD8D03A00F2D88E /* EditInfoViewController.m in Sources */,
 				925A50AA1CD0B58F002FF25F /* LiveHostHeartBeatRequest.m in Sources */,
 				92D2CBB91CC4E4D200501760 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
+				927600E11CFC1A8B00BA9632 /* TCAVLiveRoomEngine+Record.m in Sources */,
 				92560A7D1CE45F0A00622051 /* ReportHostView.m in Sources */,
 				92D2CBA81CC4E4D200501760 /* UIView+RelativeCoordinate.m in Sources */,
 				92D2CC181CC4E4D200501760 /* IMAAppDelegate.m in Sources */,

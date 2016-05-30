@@ -13,6 +13,16 @@
 
 - (instancetype)initWith:(id<AVRoomAble>)room type:(AVEncodeType)type context:(QAVContext *)engineContext
 {
+    return [self initWith:room channelName:[room liveTitle] type:type context:engineContext];
+}
+
+- (instancetype)initWith:(id<AVRoomAble>)room channelName:(NSString *)channelName type:(AVEncodeType)type context:(QAVContext *)engineContext
+{
+    return [self initWith:room channelName:channelName channelDesc:channelName type:type context:engineContext];
+}
+
+- (instancetype)initWith:(id<AVRoomAble>)room channelName:(NSString *)channelName channelDesc:(NSString *)channelDesc type:(AVEncodeType)type context:(QAVContext *)engineContext
+{
     if (self = [super init])
     {
         UInt32 roomid = (UInt32)[room liveAVRoomId];
@@ -24,13 +34,12 @@
         AVStreamInfo *avStreamInfo = [[AVStreamInfo alloc] init];
         avStreamInfo.encodeType = type;
         avStreamInfo.channelInfo = [[LVBChannelInfo alloc] init];
-        avStreamInfo.channelInfo.channelName = [room liveTitle];
-        avStreamInfo.channelInfo.channelDescribe = [room liveTitle];
+        avStreamInfo.channelInfo.channelName = channelName;
+        avStreamInfo.channelInfo.channelDescribe = channelDesc;
         self.pushParam = avStreamInfo;
     }
     return self;
 }
-
 - (NSString *)getPushUrl:(AVEncodeType)type
 {
     if (type == AV_ENCODE_HLS)
@@ -166,7 +175,7 @@ static NSString *const kTCAVLiveRoomEnginePushingMap = @"kTCAVLiveRoomEnginePush
 {
     if ([self checkBeforePush:type isEnterRoom:ise])
     {
-        [self startPushStream:type needCallBack:YES completion:nil];
+        [self startPushStream:type channelName:[_roomInfo liveTitle] channelDesc:[_roomInfo liveTitle] needCallBack:YES completion:nil];
     }
     
 }
@@ -232,12 +241,12 @@ static NSString *const kTCAVLiveRoomEnginePushingMap = @"kTCAVLiveRoomEnginePush
 }
 
 
-- (void)startPushStream:(AVEncodeType)type needCallBack:(BOOL)cb completion:(TCAVPushCompletion)completion
+- (void)startPushStream:(AVEncodeType)type channelName:(NSString *)channelName channelDesc:(NSString *)channelDesc needCallBack:(BOOL)cb completion:(TCAVPushCompletion)completion
 {
     if ([self beforeTryCheck:nil])
     {
         // 开始推流
-        [self pushStream:type needCallBack:cb completion:completion];
+        [self pushStream:type channelName:channelName channelDesc:channelDesc needCallBack:cb completion:completion];
     }
     else
     {
@@ -305,9 +314,11 @@ static NSString *const kTCAVLiveRoomEnginePushingMap = @"kTCAVLiveRoomEnginePush
     return nil;
 }
 
-- (void)pushStream:(AVEncodeType)type needCallBack:(BOOL)cb completion:(TCAVPushCompletion)completion
+
+
+- (void)pushStream:(AVEncodeType)type channelName:(NSString *)channelName channelDesc:(NSString *)channelDesc needCallBack:(BOOL)cb completion:(TCAVPushCompletion)completion
 {
-    TCAVLiveRoomPushRequest *pushRequest = [[TCAVLiveRoomPushRequest alloc] initWith:_roomInfo type:type context:_avContext];
+    TCAVLiveRoomPushRequest *pushRequest = [[TCAVLiveRoomPushRequest alloc] initWith:_roomInfo channelName:channelName channelDesc:channelDesc type:type context:_avContext];
     
     __weak TCAVLiveRoomEngine *ws = self;
     NSInteger state = [self getVailedPushState:type];
@@ -358,7 +369,7 @@ static NSString *const kTCAVLiveRoomEnginePushingMap = @"kTCAVLiveRoomEnginePush
     
     if (res != 0)
     {
-        DebugLog(@"调用IMSDK推流接口出错");
+        DebugLog(@"调用IMSDK推流接口出错:%d", res);
         if ([ws.delegate respondsToSelector:@selector(onAVEngine:onStartPush:pushRequest:)])
         {
             [ws.delegate onAVEngine:ws onStartPush:NO pushRequest:nil];
@@ -371,7 +382,22 @@ static NSString *const kTCAVLiveRoomEnginePushingMap = @"kTCAVLiveRoomEnginePush
 {
     if ([self checkBeforePush:type isEnterRoom:NO])
     {
-        [self startPushStream:type needCallBack:NO completion:completion];
+        [self startPushStream:type channelName:[_roomInfo liveTitle] channelDesc:[_roomInfo liveTitle] needCallBack:NO completion:completion];
+    }
+}
+
+- (void)asyncStartPushStream:(AVEncodeType)type channelName:(NSString *)name completion:(TCAVPushCompletion)completion
+{
+    if ([self checkBeforePush:type isEnterRoom:NO])
+    {
+        [self startPushStream:type channelName:name channelDesc:name needCallBack:NO completion:completion];
+    }
+}
+- (void)asyncStartPushStream:(AVEncodeType)type channelName:(NSString *)name channelDesc:(NSString *)desc completion:(TCAVPushCompletion)completion
+{
+    if ([self checkBeforePush:type isEnterRoom:NO])
+    {
+        [self startPushStream:type channelName:name channelDesc:desc needCallBack:NO completion:completion];
     }
 }
 

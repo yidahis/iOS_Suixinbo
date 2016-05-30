@@ -210,6 +210,7 @@
 		92377D2F1CEA0B31007AD22B /* IMAPlatformConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 92377C8C1CEA0B31007AD22B /* IMAPlatformConfig.m */; };
 		926DEC941CF738CF00F9251B /* TCAVLiveRoomEngine+PushStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 926DEC911CF738CF00F9251B /* TCAVLiveRoomEngine+PushStream.m */; };
 		926DEC951CF738CF00F9251B /* TCAVTryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 926DEC931CF738CF00F9251B /* TCAVTryItem.m */; };
+		927600E41CFC465300BA9632 /* TCAVLiveRoomEngine+Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 927600E31CFC465300BA9632 /* TCAVLiveRoomEngine+Record.m */; };
 		92B7E1E71CF455FD0008CC21 /* TCAVSharedContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B7E1E61CF455FD0008CC21 /* TCAVSharedContext.m */; };
 /* End PBXBuildFile section */
 
@@ -670,6 +671,8 @@
 		926DEC911CF738CF00F9251B /* TCAVLiveRoomEngine+PushStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TCAVLiveRoomEngine+PushStream.m"; sourceTree = "<group>"; };
 		926DEC921CF738CF00F9251B /* TCAVTryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAVTryItem.h; sourceTree = "<group>"; };
 		926DEC931CF738CF00F9251B /* TCAVTryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCAVTryItem.m; sourceTree = "<group>"; };
+		927600E21CFC465300BA9632 /* TCAVLiveRoomEngine+Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TCAVLiveRoomEngine+Record.h"; sourceTree = "<group>"; };
+		927600E31CFC465300BA9632 /* TCAVLiveRoomEngine+Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TCAVLiveRoomEngine+Record.m"; sourceTree = "<group>"; };
 		92B7E1E51CF455FD0008CC21 /* TCAVSharedContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAVSharedContext.h; sourceTree = "<group>"; };
 		92B7E1E61CF455FD0008CC21 /* TCAVSharedContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCAVSharedContext.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1417,6 +1420,8 @@
 		92377C1D1CEA0B31007AD22B /* AVEngine */ = {
 			isa = PBXGroup;
 			children = (
+				927600E21CFC465300BA9632 /* TCAVLiveRoomEngine+Record.h */,
+				927600E31CFC465300BA9632 /* TCAVLiveRoomEngine+Record.m */,
 				926DEC901CF738CF00F9251B /* TCAVLiveRoomEngine+PushStream.h */,
 				926DEC911CF738CF00F9251B /* TCAVLiveRoomEngine+PushStream.m */,
 				926DEC921CF738CF00F9251B /* TCAVTryItem.h */,
@@ -1736,6 +1741,7 @@
 				92377CE71CEA0B31007AD22B /* KeyValue.m in Sources */,
 				92377D041CEA0B31007AD22B /* AVGLRenderView.mm in Sources */,
 				92377CF81CEA0B31007AD22B /* UIView+Layout.m in Sources */,
+				927600E41CFC465300BA9632 /* TCAVLiveRoomEngine+Record.m in Sources */,
 				92377CC11CEA0B31007AD22B /* IOSDeviceConfig.m in Sources */,
 				92377CA01CEA0B31007AD22B /* KeyChainHelper.m in Sources */,
 				92B7E1E71CF455FD0008CC21 /* TCAVSharedContext.m in Sources */,

@@ -19,6 +19,8 @@
 
 #import "TCAVLiveRoomEngine+PushStream.h"
 
+#import "TCAVLiveRoomEngine+Record.h"
+
 #import "TCAVMultiLiveRoomEngine.h"
 
 #endif /* AVEngineHeaders_h */

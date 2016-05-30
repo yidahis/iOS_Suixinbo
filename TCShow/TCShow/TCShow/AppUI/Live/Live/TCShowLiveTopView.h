@@ -25,6 +25,7 @@
 @optional
 - (void)onTopView:(TCShowLiveTopView *)topView clickPAR:(UIButton *)par;
 - (void)onTopView:(TCShowLiveTopView *)topView clickPush:(UIButton *)push;
+- (void)onTopView:(TCShowLiveTopView *)topView clickREC:(UIButton *)rec;
 
 
 @end
@@ -102,5 +103,6 @@
 
 - (void)onRefrshPraiseAndAudience;
 
+- (void)onRefrshPARView:(TCAVLiveRoomEngine *)engine;
 
 @end

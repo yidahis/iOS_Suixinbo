@@ -124,6 +124,7 @@
 - (void)setRoomEngine:(TCAVLiveRoomEngine *)roomEngine
 {
     _roomEngine = roomEngine;
+    [_topView onRefrshPARView:roomEngine];
     _bottomView.roomEngine = roomEngine;
 }
 

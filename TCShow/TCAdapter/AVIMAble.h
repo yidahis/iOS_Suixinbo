@@ -65,13 +65,20 @@ typedef NS_ENUM(NSInteger, AVCtrlState)
     // 如果有推流，退出直播时，一定要将推流先关掉，再执行退房流程
     // 目前建议使用HLS,RTMP
     // 以下四个是互斥的一次只能传一个
-    // 导致推流不成功的原因：推流的时候异常退出，业务后台去要强行关闭推流，如果不，则下次再使用相同的channelInfo.channelName进行推流，则会不成功，提求正在推流
+    // 导致推流不成功的原因：推流的时候异常退出，业务后台去要强行关闭推流，如果不，则下次再使用相同的channelInfo.channelName进行推流，则会不成功，提示正在推流
     EAVCtrlState_HLSStream = 0x01 << 4,         // HLS
     EAVCtrlState_RTMPStream = 0x01 << 5,        // RTMP
     EAVCtrlState_RAWStream = 0x01 << 6,         // RAW
     EAVCtrlState_HLS_RTMP = EAVCtrlState_HLSStream | EAVCtrlState_RTMPStream,
     
+    
+    // 添加录制
+    // https://www.qcloud.com/doc/product/268/%E5%BD%95%E5%88%B6%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91
+    EAVCtrlState_Record = 0x01 << 7,            // 录制功能
+    
+    
     // 主播进入房间时的推荐配置
+    
     EAVCtrlState_All = EAVCtrlState_Mic | EAVCtrlState_Speaker | EAVCtrlState_Camera,
 };
 

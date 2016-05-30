@@ -10,7 +10,14 @@
 
 @implementation TCShowAVParView
 
+- (void)onRefrshPARView:(TCAVLiveRoomEngine *)engine
+{
+    BOOL hasPush = [engine hasPushStream];
+    _push.selected = hasPush;
 
+    BOOL hasRec = [engine hasRecord];
+    _rec.selected = hasRec;
+}
 - (void)addOwnViews
 {
     UIImage *nor = [UIImage imageWithColor:[RGB(220, 220, 220) colorWithAlphaComponent:0.5]];
@@ -46,6 +53,25 @@
     _push.layer.masksToBounds = YES;
     
     [self addSubview:_push];
+    
+    
+    
+    UIImage *recHig = [UIImage imageWithColor:[kBlueColor colorWithAlphaComponent:0.5]];
+    _rec = [[UIButton alloc] init];
+    
+    [_rec setTitle:@"REC" forState:UIControlStateNormal];
+    [_rec addTarget:self action:@selector(onClickRec:) forControlEvents:UIControlEventTouchUpInside];
+    _rec.titleLabel.font = kAppMiddleTextFont;
+    [_rec setTitleColor:kBlackColor forState:UIControlStateNormal];
+    [_rec setTitleColor:kWhiteColor forState:UIControlStateSelected];
+    
+    [_rec setBackgroundImage:nor forState:UIControlStateNormal];
+    [_rec setBackgroundImage:recHig forState:UIControlStateSelected];
+    
+    _rec.layer.cornerRadius = 4;
+    _rec.layer.masksToBounds = YES;
+    
+    [self addSubview:_rec];
 }
 
 
@@ -65,10 +91,18 @@
     }
 }
 
+- (void)onClickRec:(UIButton *)btn
+{
+    if ([_delegate respondsToSelector:@selector(onAVParView:clickRec:)])
+    {
+        [_delegate onAVParView:self clickRec:btn];
+    }
+}
+
 - (void)relayoutFrameOfSubViews
 {
     CGRect rect = self.bounds;
-    NSArray *array = @[_par, _push];
+    NSArray *array = @[_par, _push, _rec];
     [self gridViews:array inColumn:array.count size:CGSizeMake(80, 24) margin:CGSizeMake(3, 3) inRect:rect];
 }
 

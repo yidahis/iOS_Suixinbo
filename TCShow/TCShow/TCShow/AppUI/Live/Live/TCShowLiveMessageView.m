@@ -127,6 +127,11 @@
     return self;
 }
 
+#if kSupportIMMsgCache
+#define kScrollLiveMessaveTableView 1
+#else
+#define kScrollLiveMessaveTableView 1
+#endif
 
 
 - (void)layoutSubviews
@@ -136,7 +141,10 @@
     if (_tableView.contentSize.height > 210)
     {
         _tableView.frame = CGRectMake(0, self.bounds.size.height - 210, self.bounds.size.width, 210);
-        _tableView.contentOffset = CGPointMake(0, _tableView.contentSize.height - _tableView.bounds.size.height);;
+#if kScrollLiveMessaveTableView
+#else
+        _tableView.contentOffset = CGPointMake(0, _tableView.contentSize.height - _tableView.bounds.size.height);
+#endif
     }
     else
     {
@@ -165,8 +173,17 @@
 
 #define kTableViewMaxHeigh 250
 
+
+
+
 - (void)updateTableViewFrame:(CGFloat)heigt offsert:(CGFloat)scrolloff
 {
+#if kScrollLiveMessaveTableView
+    if (_liveMessages.count)
+    {
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_liveMessages.count - 1  inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+#else
     CGRect rect = _tableView.frame;
     rect.origin.y -= heigt;
     
@@ -184,6 +201,7 @@
         rect.size.height += heigt;
         _tableView.frame = rect;
     }
+#endif
 }
 
 - (void)insertMsg:(id<AVIMMsgAble>)item

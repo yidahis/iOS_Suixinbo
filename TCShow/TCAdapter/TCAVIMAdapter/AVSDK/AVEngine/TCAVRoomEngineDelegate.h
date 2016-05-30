@@ -12,6 +12,7 @@
 @class TCAVBaseRoomEngine;
 
 @class TCAVLiveRoomPushRequest;
+@class TCAVLiveRoomRecordRequest;
 
 @protocol TCAVRoomEngineDelegate <NSObject>
 
@@ -75,6 +76,9 @@
 
 // 添加推流返回
 - (void)onAVEngine:(TCAVBaseRoomEngine *)engine onStartPush:(BOOL)succ pushRequest:(TCAVLiveRoomPushRequest *)req;
+
+// 添加录制返回
+- (void)onAVEngine:(TCAVBaseRoomEngine *)engine onRecord:(BOOL)succ recordRequest:(TCAVLiveRoomRecordRequest *)req;
 
 @end
 

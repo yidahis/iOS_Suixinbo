@@ -13,6 +13,7 @@
 
 - (void)onAVParView:(TCShowAVParView *)par clickPar:(UIButton *)button;
 - (void)onAVParView:(TCShowAVParView *)par clickPush:(UIButton *)button;
+- (void)onAVParView:(TCShowAVParView *)par clickRec:(UIButton *)button;
 
 @end
 
@@ -21,8 +22,11 @@
 @protected
     UIButton *_par;     // PAR
     UIButton *_push;    // Push
+    UIButton *_rec;     // rec
 }
 
 @property (nonatomic, weak) id<TCShowAVParViewDelegate> delegate;
+
+- (void)onRefrshPARView:(TCAVLiveRoomEngine *)engine;
 
 @end

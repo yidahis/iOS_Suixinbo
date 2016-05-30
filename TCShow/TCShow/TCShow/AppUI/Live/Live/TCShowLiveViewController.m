@@ -86,6 +86,16 @@
     [resultview fadeIn:0.3 delegate:nil];
 }
 
+- (void)onStartPush:(BOOL)succ pushRequest:(TCAVLiveRoomPushRequest *)req
+{
+    [_liveView.topView onRefrshPARView:(TCAVLiveRoomEngine *)_roomEngine];
+}
+
+- (void)onStartRecord:(BOOL)succ recordRequest:(TCAVLiveRoomRecordRequest *)req
+{
+    [_liveView.topView onRefrshPARView:(TCAVLiveRoomEngine *)_roomEngine];
+}
+
 - (void)uiEndLive
 {
     DebugLog(@"");
@@ -234,6 +244,38 @@
         }];
         [testSheet bk_setCancelButtonWithTitle:@"取消" handler:nil];
         [testSheet showInView:self.view];
+    }
+    
+}
+
+- (void)onTopView:(TCShowLiveTopView *)topView clickREC:(UIButton *)rec
+{
+    if (rec.selected)
+    {
+        [(TCAVLiveRoomEngine *)_roomEngine asyncStopRecordCompletion:^(BOOL succ, TCAVLiveRoomRecordRequest *req) {
+            rec.selected = !rec.selected;
+            
+            NSString *fileId = @"";
+            if(req.recordFileIds != nil)
+            {
+                for(int index = 0; index < req.recordFileIds.count; index++)
+                {
+                    fileId = [fileId stringByAppendingString:[NSString stringWithFormat:@"%@\n",req.recordFileIds[index]]];
+                }
+            }
+            DebugLog(@"停止录制时的fileId = %@", fileId);
+            
+            UIAlertView *alert = [UIAlertView bk_showAlertViewWithTitle:nil message:fileId cancelButtonTitle:@"确定" otherButtonTitles:nil handler:nil];
+            [alert show];
+        }];
+    }
+    else
+    {
+        TCAVLiveRoomEngine *re = (TCAVLiveRoomEngine *)_roomEngine;
+        [re asyncStartRecordCompletion:^(BOOL succ, TCAVLiveRoomRecordRequest *req) {
+            rec.selected = succ;
+            [[HUDHelper sharedInstance] tipMessage:succ ? @"开始录制" : @"开启录制失败"];
+        }];
     }
     
 }
@@ -441,7 +483,17 @@
     
 }
 
+- (void)onAVEngine:(TCAVBaseRoomEngine *)engine onStartPush:(BOOL)succ pushRequest:(TCAVLiveRoomPushRequest *)req
+{
+    TCShowLiveUIViewController *uivc = (TCShowLiveUIViewController *)_liveView;
+    [uivc onStartPush:succ pushRequest:req];
+}
 
+- (void)onAVEngine:(TCAVBaseRoomEngine *)engine onRecord:(BOOL)succ recordRequest:(TCAVLiveRoomRecordRequest *)req
+{
+    TCShowLiveUIViewController *uivc = (TCShowLiveUIViewController *)_liveView;
+    [uivc onStartRecord:succ recordRequest:req];
+}
 
 @end
 
