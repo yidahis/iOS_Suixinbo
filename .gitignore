@@ -146,3 +146,5 @@ TCShow/TCAdapter/TCAVIMAdapter/Libs/QAVSDK.framework/Headers/QAVVideoCtrl.h
 TCShow/TCAdapter/TCAVIMAdapter/Libs/QAVSDK.framework/Info.plist
 
 TCShow/TCAdapter/TCAVIMAdapter/Libs/QAVSDK.framework/Modules/module.modulemap
+
+TCShow/TCShowWorkSpace.xcworkspace/xcuserdata/alexichen.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
