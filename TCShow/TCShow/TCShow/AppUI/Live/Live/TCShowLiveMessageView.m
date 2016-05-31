@@ -128,7 +128,7 @@
 }
 
 #if kSupportIMMsgCache
-#define kScrollLiveMessaveTableView 1
+#define kScrollLiveMessaveTableView 0
 #else
 #define kScrollLiveMessaveTableView 1
 #endif
