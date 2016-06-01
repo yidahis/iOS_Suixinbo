@@ -138,13 +138,14 @@
 
 - (void)addOwnViews
 {
-    [self addTopView];
     
     _parTextView = [[UITextView alloc] init];
     _parTextView.hidden = YES;
     _parTextView.backgroundColor = [kLightGrayColor colorWithAlphaComponent:0.5];
     _parTextView.editable = NO;
     [self addSubview:_parTextView];
+    
+    [self addTopView];
     
     _msgView = [[TCShowLiveMessageView alloc] init];
     [self addSubview:_msgView];
@@ -174,13 +175,13 @@
 
 - (void)onTapBlank:(UITapGestureRecognizer *)tap
 {
+    if (tap.state == UIGestureRecognizerStateEnded)
+    {
     if ([_bottomView isPureMode] || _inputViewShowing)
     {
         return;
     }
 
-    if (tap.state == UIGestureRecognizerStateEnded)
-    {
         if ([_inputView isInputViewActive])
         {
             [_inputView resignFirstResponder];

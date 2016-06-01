@@ -105,4 +105,8 @@
 
 - (void)onRefrshPARView:(TCAVLiveRoomEngine *)engine;
 
+
+// protected
+- (void)relayoutPARView;
+
 @end

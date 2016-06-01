@@ -370,6 +370,10 @@
             
             // 不处理Speaker
             // [_roomEngine asyncEnableSpeaker:NO completion:nil];
+            
+            [self changeToNormalGuestAuthAndRole:^(id selfPtr, BOOL isFinished) {
+                DebugLog(@"修改Auth以及Role到普通观众%@", isFinished ? @"成功" : @"失败");
+            }];
         }
         
         
@@ -516,5 +520,23 @@
     }
 }
 
+
+@end
+
+
+
+@implementation TCAVIMMIManager (RoleAndAuth)
+
+// 具体与Spear配置相关，请注意设置
+- (void)changeToInteractAuthAndRole:(CommonCompletionBlock)completion
+{
+    [_roomEngine changeToInteractAuthAndRole:completion];
+}
+
+// 当前是互动观众时，下麦时，使用
+- (void)changeToNormalGuestAuthAndRole:(CommonCompletionBlock)completion
+{
+    [_roomEngine changeToNormalGuestAuthAndRole:completion];
+}
 
 @end

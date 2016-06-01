@@ -26,6 +26,7 @@
 }
 
 @property (nonatomic, weak) id<TCShowAVParViewDelegate> delegate;
+@property (nonatomic, assign) BOOL isHostPar;
 
 - (void)onRefrshPARView:(TCAVLiveRoomEngine *)engine;
 

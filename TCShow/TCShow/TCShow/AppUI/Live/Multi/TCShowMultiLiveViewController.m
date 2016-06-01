@@ -232,6 +232,7 @@ static BOOL kRectHostCancelInteract = NO;
     id<IMUserAble> sender = [msg sender];
     
     __weak TCShowMultiUILiveViewController *ws = self;
+    __weak MultiAVIMMsgHandler *wm = (MultiAVIMMsgHandler *)_msgHandler;
     NSString *text = [NSString stringWithFormat:@"主播(%@)邀请您参加TA的互动直播", [sender imUserName]];
     UIAlertView *alert = [UIAlertView bk_showAlertViewWithTitle:@"互动直播邀请" message:text cancelButtonTitle:@"拒绝" otherButtonTitles:@[@"同意"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
         if (buttonIndex == 0)
@@ -239,7 +240,7 @@ static BOOL kRectHostCancelInteract = NO;
             if (!kRectHostCancelInteract)
             {
                 //  拒绝
-                [(MultiAVIMMsgHandler *)_msgHandler sendC2CAction:AVIMCMD_Multi_Interact_Refuse to:sender succ:nil fail:nil];
+                [wm sendC2CAction:AVIMCMD_Multi_Interact_Refuse to:sender succ:nil fail:nil];
             }
             
         }
@@ -247,15 +248,7 @@ static BOOL kRectHostCancelInteract = NO;
         {
             if (!kRectHostCancelInteract)
             {
-                // 同意
-                [(MultiAVIMMsgHandler *)_msgHandler sendC2CAction:AVIMCMD_Multi_Interact_Join to:sender succ:^{
-                    
-                    // 进行连麦操作
-                    [ws showSelfVideoToOther];
-                    
-                } fail:^(int code, NSString *msg) {
-                    DebugLog(@"code = %d, msg = %@", code, msg);
-                }];
+                [ws onRecvHostInteractChangeAuthAndRole:sender];
             }
         }
         
@@ -267,6 +260,38 @@ static BOOL kRectHostCancelInteract = NO;
     alert.tag = 2000;
     [alert show];
     kInteractAlert = alert;
+}
+
+- (void)onRecvHostInteractChangeAuthAndRole:(id<IMUserAble>)sender
+{
+    // 本地先修改权限
+    //                controller.multiManager ;
+    
+    // 然后修改role
+    // 再打开相机
+    
+    __weak TCShowMultiUILiveViewController *ws = self;
+    __weak MultiAVIMMsgHandler *wm = (MultiAVIMMsgHandler *)_msgHandler;
+    TCAVMultiLiveViewController *controller = (TCAVMultiLiveViewController *)_liveController;
+    [controller.multiManager changeToInteractAuthAndRole:^(TCAVMultiLiveRoomEngine *engine, BOOL isFinished) {
+        if (isFinished)
+        {
+            // 同意
+            [wm sendC2CAction:AVIMCMD_Multi_Interact_Join to:sender succ:^{
+                // 进行连麦操作
+                [ws showSelfVideoToOther];
+            } fail:^(int code, NSString *msg) {
+                [wm sendC2CAction:AVIMCMD_Multi_Interact_Refuse to:sender succ:nil fail:nil];
+                DebugLog(@"code = %d, msg = %@", code, msg);
+            }];
+        }
+        else
+        {
+            [wm sendC2CAction:AVIMCMD_Multi_Interact_Refuse to:sender succ:nil fail:nil];
+        }
+    }];
+    
+    
 }
 
 - (void)onRecvHostCancelInteract

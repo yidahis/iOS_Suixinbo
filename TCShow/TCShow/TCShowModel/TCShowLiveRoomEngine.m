@@ -39,30 +39,17 @@
 
 - (NSString *)roomControlRole
 {
-#if DEBUG
-    // 说明是开发
-    return @"TCShowDEV";
-    
-#else
-    
-#if kAppStoreVersion
-    // 上传AppStore时使用的配置
-    return @"TCShowAppStore";
-#else
-    
-#if kBetaVersion
-    // 说明是用于演示
-    return @"TCShowBeta";
-#else
-    // 说明是测试在用
-    return @"TCShowTest";
-#endif
-    
-#endif
-    
-#endif
-    
-    
+    // Spear上配置对应的有用户角色与配置
+    if ([self isHostLive])
+    {
+        // 主播进入直播间对应的角色名
+        return @"LiveHost";
+    }
+    else
+    {
+        // 观从进入直播间对应的角色名
+        return @"NormalGuest";
+    }
 }
 
 
@@ -95,33 +82,9 @@
     }];
 }
 
-- (NSString *)roomControlRole
+- (NSString *)interactUserRole
 {
-    
-#if DEBUG
-    // 说明是开发
-    return @"TCShowDEV";
-    
-#else
-    
-#if kAppStoreVersion
-    // 上传AppStore时使用的配置
-    return @"TCShowAppStore";
-#else
-    
-#if kBetaVersion
-    // 说明是用于演示
-    return @"TCShowBeta";
-#else
-    // 说明是测试在用
-    return @"TCShowTest";
-#endif
-    
-#endif
-    
-#endif
-    
-    
+    return @"InteractUser";
 }
 
 @end

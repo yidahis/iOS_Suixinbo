@@ -122,14 +122,14 @@
     _liveTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(onLiveTimer) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:_liveTimer forMode:NSRunLoopCommonModes];
     
-
+    
 }
 
 - (void)onLiveTimer
 {
     if ([self isHost])
     {
-
+        
         NSInteger dur = [_room liveDuration] + 1;
         [_room setLiveDuration:dur];
         
@@ -253,7 +253,7 @@
 
 - (void)onClickClose
 {
-        
+    
     if (_delegate && [_delegate respondsToSelector:@selector(onTopViewCloseLive:)])
     {
         [_delegate onTopViewCloseLive:self];
@@ -269,12 +269,12 @@
 }
 - (void)pauseLive
 {
-        
+    
     [_timeView pauseLive];
 }
 - (void)resumeLive
 {
-        
+    
     [_timeView resumeLive];
 }
 
@@ -285,7 +285,7 @@
 
 - (void)onClickHost
 {
-        
+    
     if (_delegate && [_delegate respondsToSelector:@selector(onTopViewClickHost:host:)])
     {
         [_delegate onTopViewClickHost:self host:[_room liveHost]];
@@ -294,7 +294,7 @@
 
 - (void)addOwnViewsWith:(id<TCShowLiveRoomAble>)room
 {
-        
+    
     _timeView = [[TCShowLiveTimeView alloc] initWith:room];
     
     if (![[[IMAPlatform sharedInstance].host imUserId] isEqualToString:[[room liveHost] imUserId]]) {
@@ -323,32 +323,33 @@
     [self addSubview:_roomTip];
 #endif
     
-//    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-//    layout.itemSize = CGSizeMake(40, 40);
-//    layout.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2);
-//    layout.minimumInteritemSpacing = 1;
-//    layout.minimumLineSpacing = 1;
-//    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-//    
-//    _userlist = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
-//    _userlist.backgroundColor = [UIColor clearColor];
-//    [_userlist registerClass:[LiveUserViewCell class] forCellWithReuseIdentifier:@"LiveUserViewCell"];
-//    _userlist.delegate = self;
-//    _userlist.dataSource = self;
-//    _userlist.backgroundColor = [kLightGrayColor colorWithAlphaComponent:0.3];
-//    [self addSubview:_userlist];
-    if ([[IMAPlatform sharedInstance].host isCurrentLiveHost:room])
-{
+    //    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    //    layout.itemSize = CGSizeMake(40, 40);
+    //    layout.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2);
+    //    layout.minimumInteritemSpacing = 1;
+    //    layout.minimumLineSpacing = 1;
+    //    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    //
+    //    _userlist = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
+    //    _userlist.backgroundColor = [UIColor clearColor];
+    //    [_userlist registerClass:[LiveUserViewCell class] forCellWithReuseIdentifier:@"LiveUserViewCell"];
+    //    _userlist.delegate = self;
+    //    _userlist.dataSource = self;
+    //    _userlist.backgroundColor = [kLightGrayColor colorWithAlphaComponent:0.3];
+    //    [self addSubview:_userlist];
+//    if ([[IMAPlatform sharedInstance].host isCurrentLiveHost:room])
+//    {
         _parView = [[TCShowAVParView alloc] init];
         _parView.delegate = self;
+    _parView.isHostPar = [[[room liveHost] imUserId] isEqualToString:[[IMAPlatform sharedInstance].host imUserId]];
         [self addSubview:_parView];
-    }
+//    }
 }
 
 
 - (void)relayoutFrameOfSubViews
 {
-        
+    
     CGRect rect = self.bounds;
     [_timeView sizeWith:CGSizeMake(rect.size.width/2, 50)];
     [_timeView alignParentTopWithMargin:15];
@@ -359,10 +360,10 @@
     [_close alignParentTopWithMargin:15];
     [_close alignParentRightWithMargin:15];
     
-//    rect.origin.y += 15 + 50;
-//    rect.size.height -= 15 + 50;
-//    rect = CGRectInset(rect, 0, kDefaultMargin);
-//    _userlist.frame = rect;
+    //    rect.origin.y += 15 + 50;
+    //    rect.size.height -= 15 + 50;
+    //    rect = CGRectInset(rect, 0, kDefaultMargin);
+    //    _userlist.frame = rect;
     
     
 #if kBetaVersion
@@ -382,7 +383,7 @@
         [_delegate onTopView:self clickPAR:button];
     }
 }
-    
+
 - (void)onAVParView:(TCShowAVParView *)par clickPush:(UIButton *)button
 {
     if ([_delegate respondsToSelector:@selector(onTopView:clickPush:)])

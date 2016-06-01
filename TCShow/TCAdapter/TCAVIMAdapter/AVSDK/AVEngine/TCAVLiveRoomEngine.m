@@ -10,7 +10,7 @@
 
 @interface TCAVLiveRoomEngine ()
 {
-
+    
     // Mic重试
     NSInteger   _handleMicTryCount;
     BOOL        _isHandlingMic;
@@ -453,10 +453,10 @@
                     }
                     else
                     {
-                    // 打开相机重试
-                    [ws tryEnableCamera:enable needNotify:notify completion:completion];
+                        // 打开相机重试
+                        [ws tryEnableCamera:enable needNotify:notify completion:completion];
+                    }
                 }
-            }
             }
             else
             {
@@ -471,7 +471,7 @@
                 // 互斥操作时，不会走回调
                 [ws onEnableCameraComplete:camerid enable:enable result:result needNotify:notify completion:completion];
             }
-            
+
         }
     }
     else
@@ -577,8 +577,8 @@
                     }
                     else
                     {
-                    [ws trySwitchCameraWith:completion];
-                }
+                        [ws trySwitchCameraWith:completion];
+                    }
                     
                 }
             }];
@@ -778,9 +778,9 @@
     [self onAsyncStopPushStreamOnExitRoom:^(BOOL succ, NSString *tip) {
         
         [self onAsyncStopRecordOnExitRoom:^(BOOL succ, TCAVLiveRoomRecordRequest *req) {
-    [super exitLive];
-    }];
-    
+            [super exitLive];
+        }];
+        
     }];
     
 }
@@ -1186,6 +1186,20 @@
         [ah setAvCtrlState:nstate];
     }
     DebugLog(@"Host Ctrl State : %p state = %d", _IMUser, (int)[ah avCtrlState]);
+}
+
+- (UInt64)roomAuthBitMap
+{
+    if ([self isHostLive])
+    {
+        // 主播权限全开
+        return QAV_AUTH_BITS_DEFAULT;
+    }
+    else
+    {
+        // 观众只开接收权限
+        return QAV_AUTH_BITS_JOIN_ROOM | QAV_AUTH_BITS_RECV_AUDIO | QAV_AUTH_BITS_RECV_VIDEO | QAV_AUTH_BITS_RECV_SUB;
+    }
 }
 
 @end

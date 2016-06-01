@@ -12,7 +12,13 @@
 {
     
     NSInteger _isRequestAllViewTryCount;
+    
+    // 正在切换AuthAndRole
+    BOOL      _isSwitchAuthAndRole;
+    BOOL      _isSwitchToInteract;  // YES:从Guest--->Inteact, NO:Inteact--->Guest
 }
+
+@property (nonatomic, copy) CommonCompletionBlock switchAutoRoleCompletion;
 
 @end
 
@@ -326,6 +332,100 @@
     return _isSupportBeauty && _isRoomAlive && _hasEnabelCamera;
 }
 
+//===============================================================================
+// 切换用户角色与权限相关
+
+// 具体与Spear配置相关，请注意设置
+- (void)changeToInteractAuthAndRole:(CommonCompletionBlock)completion
+{
+    [self changeToInteract:YES completion:completion];
+}
+
+- (void)changeToInteract:(BOOL)isInteract completion:(CommonCompletionBlock)completion
+{
+    if (_isSwitchAuthAndRole)
+    {
+        DebugLog(@"正在切换role或auth，请稍后再试");
+        if (completion)
+        {
+            completion(self, NO);
+        }
+        return;
+    }
+    
+    if ([self beforeTryCheck:nil])
+    {
+        _isSwitchAuthAndRole = YES;
+        _isSwitchToInteract = isInteract;
+        self.switchAutoRoleCompletion = completion;
+        QAVMultiRoom *room = (QAVMultiRoom *)_avContext.room;
+        [room ChangeAuthoritybyBit:isInteract ? QAV_AUTH_BITS_DEFAULT : [self roomAuthBitMap] orstring:nil delegate:self];
+    }
+    else
+    {
+        if (completion)
+        {
+            completion(self, NO);
+        }
+    }
+}
+
+- (void)OnChangeAuthority:(int)ret_code
+{
+    BOOL succ = ret_code == QAV_OK;
+    DebugLog(@"修改用户Auth至%@%@", _isSwitchToInteract ? @"互动观众" : @"普通观众", succ ? @"成功" : @"失败");
+    if (succ)
+    {
+        // 修改权限成功
+        NSString *role = _isSwitchToInteract ? [self interactUserRole] : [self roomControlRole];
+        QAVResult res = [self changeAVControlRole:role];
+        
+        if (res != QAV_OK)
+        {
+            
+            if (self.switchAutoRoleCompletion)
+            {
+                self.switchAutoRoleCompletion(self, NO);
+            }
+            self.switchAutoRoleCompletion = nil;
+            _isSwitchAuthAndRole = NO;
+        }
+    }
+    else
+    {
+        if (self.switchAutoRoleCompletion)
+        {
+            self.switchAutoRoleCompletion(self, NO);
+        }
+        self.switchAutoRoleCompletion = nil;
+        _isSwitchAuthAndRole = NO;
+    }
+}
+
+- (void)OnChangeRoleDelegate:(int)ret_code
+{
+    BOOL succ = ret_code == QAV_OK;
+    
+    DebugLog(@"修改用户Role至%@%@", _isSwitchToInteract ? @"互动观众" : @"普通观众", succ ? @"成功" : @"失败");
+    if (self.switchAutoRoleCompletion)
+    {
+        self.switchAutoRoleCompletion(self, succ);
+    }
+    self.switchAutoRoleCompletion = nil;
+    
+    _isSwitchAuthAndRole = NO;
+    
+    if ([_delegate respondsToSelector:@selector(onAVEngine:changeRole:tipInfo:)])
+    {
+        [_delegate onAVEngine:self changeRole:succ tipInfo:succ ? @"修改成功" : @"修改失败"];
+    }
+}
+
+// 当前是互动观众时，下麦时，使用
+- (void)changeToNormalGuestAuthAndRole:(CommonCompletionBlock)completion
+{
+    [self changeToInteract:NO completion:completion];
+}
 
 @end
 
@@ -341,6 +441,11 @@
 {
     // 非主播才去进行请求
     // do nothing，多人互动时，因界面上存在资源分配，交由- (void)onAVEngine:(TCAVBaseRoomEngine *)engine users:(NSArray *)users event:(QAVUpdateEvent)event; 中处理
+}
+
+- (NSString *)interactUserRole
+{
+    return nil;
 }
 
 

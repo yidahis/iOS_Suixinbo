@@ -503,17 +503,22 @@
     param.roomID = [_roomInfo liveAVRoomId];
     param.audioCategory = 0;
     param.controlRole = [self roomControlRole];
-    param.authBitMap = QAV_AUTH_BITS_DEFAULT;
+    param.authBitMap = [self roomAuthBitMap];
     param.autoCreateRoom = [self isHostLive];
     param.videoRecvMode = VIDEO_RECV_MODE_SEMI_AUTO_RECV_CAMERA_VIDEO;
     return param;
 }
 
+- (UInt64)roomAuthBitMap
+{
+    return QAV_AUTH_BITS_DEFAULT;
+}
+
 - (NSString *)roomControlRole
 {
-    // 具体与云平台speae引擎配置有关
+    // 具体与云平台spear引擎配置有关
     // 所返回的内容必须要与云端一致
-    // 若返回nil，使用默认配置
+    // 若返回nil或返回与Spear上没有角色，则使用默认配置
     return nil;
 }
 

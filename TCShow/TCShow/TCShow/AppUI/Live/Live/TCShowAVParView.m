@@ -14,7 +14,7 @@
 {
     BOOL hasPush = [engine hasPushStream];
     _push.selected = hasPush;
-
+    
     BOOL hasRec = [engine hasRecord];
     _rec.selected = hasRec;
 }
@@ -102,7 +102,7 @@
 - (void)relayoutFrameOfSubViews
 {
     CGRect rect = self.bounds;
-    NSArray *array = @[_par, _push, _rec];
+    NSArray *array = _isHostPar ? @[_par, _push, _rec] : @[_par];
     [self gridViews:array inColumn:array.count size:CGSizeMake(80, 24) margin:CGSizeMake(3, 3) inRect:rect];
 }
 

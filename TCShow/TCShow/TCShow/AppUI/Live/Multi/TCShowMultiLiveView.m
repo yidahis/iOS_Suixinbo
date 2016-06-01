@@ -47,6 +47,10 @@
         [_parView scaleToParentRightWithMargin:kDefaultMargin];
         [_parView relayoutFrameOfSubViews];
     }
+    else
+    {
+        [super relayoutPARView];
+    }
 }
 
 @end
@@ -66,6 +70,7 @@
 - (void)relayoutFrameOfSubViews
 {
     CGRect rect = self.bounds;
+    
     
     [_topView setFrameAndLayout:CGRectMake(0, 0, rect.size.width, 110)];
     
@@ -91,7 +96,6 @@
     [_parTextView sameWith:_topView];
     [_parTextView layoutBelow:_topView margin:kDefaultMargin];
     [_parTextView scaleToAboveOf:_bottomView margin:kDefaultMargin];
-
 }
 
 @end

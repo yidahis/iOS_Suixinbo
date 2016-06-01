@@ -154,7 +154,6 @@
     if (func != _lastFunc)
     {
         [self showFunc:func];
-        [self slideInFrom:kFTAnimationBottom duration:0.25 delegate:nil];
     }
     
     _lastFloatBeauty = ([roomEngine getBeauty] * 10)/100.0;

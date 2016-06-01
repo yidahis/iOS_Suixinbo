@@ -11,10 +11,10 @@
 @interface TCShowLiveView : UIView<TCShowLiveBottomViewDelegate, TCShowLiveTimeViewDelegate>
 {
 @protected
-    TCShowLiveTopView           *_topView;
+    UITextView                  *_parTextView;
     
 @protected
-    UITextView                  *_parTextView;
+    TCShowLiveTopView           *_topView;
 
     
     TCShowLiveMessageView       *_msgView;

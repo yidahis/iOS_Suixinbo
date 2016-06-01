@@ -124,9 +124,11 @@
 
 // 创建房间的信息，重写此方法来修改房间参数
 - (QAVMultiParam *)createdAVRoomParam;
+- (UInt64)roomAuthBitMap;
 
-// 增加此方法方便用户调试时，将不同的版本作隔离，避免因修改参数导致其他版本不能观看
+// 增加此方法方便用户处理在直播过程中通过配置不同的角色名，控制直播效果
 // TCAdapter中使用的默认值，具体如何操作，可看Demo中的配置
+// 具体示例参考TCShowLiveRoomEngine
 - (NSString *)roomControlRole;
 
 // 进入AVRoom成功之后要进行的操作

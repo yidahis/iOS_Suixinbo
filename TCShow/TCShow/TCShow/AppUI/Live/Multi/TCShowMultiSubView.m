@@ -154,10 +154,13 @@
 
 - (void)onClick:(UITapGestureRecognizer *)tap
 {
+    if (tap.state == UIGestureRecognizerStateEnded)
+    {    
     if ([_delegate respondsToSelector:@selector(onMultiSubViewClick:)])
     {
         [_delegate onMultiSubViewClick:self];
     }
+}
 }
 
 //// 对应因视频中断，导致没有画面过来

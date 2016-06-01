@@ -128,3 +128,22 @@
 
 @end
 
+
+
+// 用户上麦时，由Guest变为Interact，需要1.先修改权限 2.再修改Role，最后才开Camera/mic
+// 用户下麦时，由Interact变为Guest，需要先关Camera/mic, 1.先修改权限 2.再修改Role
+// 该分类主要处理Role跟权限问题
+// 对应云后端的需要配置三个Role:  Host/Interact/Guest
+//
+@interface TCAVIMMIManager (RoleAndAuth)
+
+// 具体与Spear配置相关，请注意设置
+// completion为异步回调，注意内存汇露
+- (void)changeToInteractAuthAndRole:(CommonCompletionBlock)completion;
+
+// 当前是互动观众时，下麦时，使用
+// completion为异步回调，注意内存汇露
+- (void)changeToNormalGuestAuthAndRole:(CommonCompletionBlock)completion;
+
+@end
+
