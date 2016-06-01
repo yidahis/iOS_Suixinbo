@@ -133,6 +133,10 @@ static NSString *const kTCAVLiveRoomEngineRecordTryItem = @"kTCAVLiveRoomEngineR
 {
     if ([self beforeTryCheck:nil])
     {
+        if (!self.recordTryItem)
+        {
+            self.recordTryItem =  [[TCAVTryItem alloc] initWith:kRecordTryIndex];
+        }
         // 开始推流
         [self startLiveRecord:info needCallBack:cb completion:completion];
     }

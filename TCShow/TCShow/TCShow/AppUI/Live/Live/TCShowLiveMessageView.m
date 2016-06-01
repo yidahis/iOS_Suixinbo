@@ -128,9 +128,9 @@
 }
 
 #if kSupportIMMsgCache
-#define kScrollLiveMessaveTableView 0
+#define kScrollLiveMessageTableView 0
 #else
-#define kScrollLiveMessaveTableView 1
+#define kScrollLiveMessageTableView 1
 #endif
 
 
@@ -141,7 +141,7 @@
     if (_tableView.contentSize.height > 210)
     {
         _tableView.frame = CGRectMake(0, self.bounds.size.height - 210, self.bounds.size.width, 210);
-#if kScrollLiveMessaveTableView
+#if kScrollLiveMessageTableView
 #else
         _tableView.contentOffset = CGPointMake(0, _tableView.contentSize.height - _tableView.bounds.size.height);
 #endif
@@ -178,7 +178,7 @@
 
 - (void)updateTableViewFrame:(CGFloat)heigt offsert:(CGFloat)scrolloff
 {
-#if kScrollLiveMessaveTableView
+#if kScrollLiveMessageTableView
     if (_liveMessages.count)
     {
         [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_liveMessages.count - 1  inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
