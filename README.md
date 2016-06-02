@@ -28,4 +28,9 @@ AVSDK : http://tcshowsdks-10022853.file.myqcloud.com/20160531/Libs.zip  下载�
 
 ##随心播的Spear的配置
 因随心播的参数配置较高，因此对主播上行带宽有要求
-![spear配置](https://raw.githubusercontent.com/zhaoyang21cn/iOS_Suixinbo/master/QQ%E6%88%AA%E5%9B%BE20160520170339.jpg)
+现提供随心播中主播配置：
+![spear配置](https://raw.githubusercontent.com/zhaoyang21cn/iOS_Suixinbo/master/LiveHost.jpeg)
+观众配置：
+![spear配置](https://raw.githubusercontent.com/zhaoyang21cn/iOS_Suixinbo/master/NormalGuest.jpeg)
+互动观众配置：
+![spear配置](https://raw.githubusercontent.com/zhaoyang21cn/iOS_Suixinbo/master/InteractUser.jpeg)
