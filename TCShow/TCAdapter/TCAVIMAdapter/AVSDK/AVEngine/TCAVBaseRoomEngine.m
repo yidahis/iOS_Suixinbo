@@ -511,6 +511,7 @@
 
 - (UInt64)roomAuthBitMap
 {
+    // 权限默认全开
     return QAV_AUTH_BITS_DEFAULT;
 }
 

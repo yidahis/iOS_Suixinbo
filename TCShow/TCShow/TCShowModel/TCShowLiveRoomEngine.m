@@ -82,9 +82,25 @@
     }];
 }
 
+- (NSString *)roomControlRole
+{
+    // Spear上配置对应的有用户角色与配置
+    if ([self isHostLive])
+    {
+        // 主播进入直播间对应的角色名
+        return @"LiveHost";
+    }
+    else
+    {
+        // 观从进入直播间对应的角色名
+        return @"NormalGuest";
+    }
+}
+
 - (NSString *)interactUserRole
 {
     return @"InteractUser";
 }
+
 
 @end
