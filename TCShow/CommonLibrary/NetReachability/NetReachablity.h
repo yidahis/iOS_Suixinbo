@@ -9,7 +9,7 @@
 #ifndef CommonLibrary_NetReachablity_h
 #define CommonLibrary_NetReachablity_h
 
-#define kSupportNetReachablity 0
+
 
 #if kSupportNetReachablity
 

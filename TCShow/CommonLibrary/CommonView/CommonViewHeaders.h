@@ -9,7 +9,6 @@
 #ifndef CommonLibrary_CommonViewHeaders_h
 #define CommonLibrary_CommonViewHeaders_h
 
-#define kSupportUnusedCommonView 0
 
 #import "MenuButton.h"
 
@@ -23,6 +22,9 @@
 #import "ImageTitleButton.h"
 
 #import "KeyValueTableViewController.h"
-#endif
 
 #import "MenuTableViewController.h"
+
+
+#endif
+

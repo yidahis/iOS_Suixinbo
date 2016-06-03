@@ -95,7 +95,7 @@
         }
     }];
 }
-
+#if kIsTCShowSupportIMCustom
 - (void)asyncSetGender:(BOOL)woman succ:(TIMSucc)succ fail:(TIMFail)fail
 {
     NSDictionary *customDic = @{@"gender" : @(woman)};
@@ -128,9 +128,8 @@
             }
         }];
     }
-    
-    
 }
+#endif
 
 - (void)asyncGetProfileOf:(id<IMUserAble>)user succ:(void (^)(TIMUserProfile *profile))succ fail:(TIMFail)fail
 {

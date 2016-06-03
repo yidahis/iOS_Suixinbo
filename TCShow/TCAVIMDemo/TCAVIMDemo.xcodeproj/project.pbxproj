@@ -667,6 +667,9 @@
 		92377C8C1CEA0B31007AD22B /* IMAPlatformConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMAPlatformConfig.m; sourceTree = "<group>"; };
 		92377C8D1CEA0B31007AD22B /* IMAPlatformHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMAPlatformHeaders.h; sourceTree = "<group>"; };
 		92377C8E1CEA0B31007AD22B /* TIMAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIMAdapter.h; sourceTree = "<group>"; };
+		92553E711D006B7E00BE2D6C /* CommonLibraryMacroConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonLibraryMacroConfig.h; sourceTree = "<group>"; };
+		92553E721D006B9000BE2D6C /* TCAdapterConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAdapterConfig.h; sourceTree = "<group>"; };
+		92553E731D006B9800BE2D6C /* TIMAdapterConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIMAdapterConfig.h; sourceTree = "<group>"; };
 		926DEC901CF738CF00F9251B /* TCAVLiveRoomEngine+PushStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TCAVLiveRoomEngine+PushStream.h"; sourceTree = "<group>"; };
 		926DEC911CF738CF00F9251B /* TCAVLiveRoomEngine+PushStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TCAVLiveRoomEngine+PushStream.m"; sourceTree = "<group>"; };
 		926DEC921CF738CF00F9251B /* TCAVTryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAVTryItem.h; sourceTree = "<group>"; };
@@ -907,6 +910,7 @@
 				92377B681CEA0B31007AD22B /* Color */,
 				92377B6D1CEA0B31007AD22B /* CommonLibrary.h */,
 				92377B6E1CEA0B31007AD22B /* CommonLibraryConfig.h */,
+				92553E711D006B7E00BE2D6C /* CommonLibraryMacroConfig.h */,
 				92377B6F1CEA0B31007AD22B /* CommonView */,
 				92377B7F1CEA0B31007AD22B /* DebugMacro */,
 				92377B821CEA0B31007AD22B /* FBKVOController */,
@@ -1384,6 +1388,7 @@
 		92377C181CEA0B31007AD22B /* TCAdapter */ = {
 			isa = PBXGroup;
 			children = (
+				92553E721D006B9000BE2D6C /* TCAdapterConfig.h */,
 				92377C191CEA0B31007AD22B /* AVIMAble.h */,
 				92377C1A1CEA0B31007AD22B /* TCAdapterHeader.h */,
 				92377C1B1CEA0B31007AD22B /* TCAVIMAdapter */,
@@ -1512,6 +1517,7 @@
 		92377C521CEA0B31007AD22B /* TIMAdapter */ = {
 			isa = PBXGroup;
 			children = (
+				92553E731D006B9800BE2D6C /* TIMAdapterConfig.h */,
 				92377C531CEA0B31007AD22B /* AVIM */,
 				92377C631CEA0B31007AD22B /* Localizable.strings */,
 				92377C661CEA0B31007AD22B /* Framework */,

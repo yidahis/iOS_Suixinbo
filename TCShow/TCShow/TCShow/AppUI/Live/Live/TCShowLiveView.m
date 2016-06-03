@@ -205,8 +205,14 @@
     
     _inputView.text = nil;
     [_inputView resignFirstResponder];
+    
+#if kSupportFTAnimation
     [_inputView fadeOut:0.3 delegate:nil];
     [_bottomView fadeIn:0.3 delegate:nil];
+#else
+    _inputView.hidden = YES;
+    _bottomView.hidden = NO;
+#endif
     
 }
 
@@ -276,6 +282,7 @@
 
 - (void)onBottomViewSwitchToPureMode:(TCShowLiveBottomView *)bottomView
 {
+#if kSupportFTAnimation
     if (_inputView && !_inputView.hidden)
     {
         if (_inputView.isInputViewActive)
@@ -291,14 +298,43 @@
     [_msgView changeToMode:YES];
     _msgHandler.isPureMode = YES;
     [_msgView slideOutTo:kFTAnimationLeft duration:0.25 delegate:nil];
+#else
+    
+    if (_inputView && !_inputView.hidden)
+    {
+        if (_inputView.isInputViewActive)
+        {
+            [_inputView resignFirstResponder];
+        }
+        
+        _inputView.hidden = YES;
+        
+    }
+    _isPureMode = YES;
+    _topView.hidden = YES;
+    [_msgView changeToMode:YES];
+    _msgHandler.isPureMode = YES;
+    _msgView.hidden = YES;
+    
+#endif
 }
 - (void)onBottomViewSwitchToNonPureMode:(TCShowLiveBottomView *)bottomView
 {
+#if kSupportFTAnimation
     _isPureMode = NO;
     [_topView slideInFrom:kFTAnimationTop duration:0.25 delegate:nil];
     [_msgView changeToMode:NO];
     _msgHandler.isPureMode = NO;
     [_msgView slideInFrom:kFTAnimationLeft duration:0.25 delegate:nil];
+#else
+    _isPureMode = NO;
+    _topView.hidden = NO;
+    [_msgView changeToMode:NO];
+    _msgHandler.isPureMode = NO;
+    _msgView.hidden = NO;
+    
+#endif
+    
 }
 
 - (void)onBottomViewSwitchToMessage:(TCShowLiveBottomView *)bottomView fromButton:(UIButton *)button
@@ -308,6 +344,9 @@
         return;
     }
     _inputViewShowing = YES;
+    
+#if kSupportFTAnimation
+    
     [self animation:^(id selfPtr) {
         [_inputView becomeFirstResponder];
         [_bottomView fadeOut:0.25 delegate:nil];
@@ -316,6 +355,13 @@
         button.enabled = YES;
         _inputViewShowing = NO;
     }];
+#else
+    [_inputView becomeFirstResponder];
+    _bottomView.hidden = YES;
+    _inputView.hidden = YES;
+    button.enabled = YES;
+    _inputViewShowing = NO;
+#endif
 }
 
 - (void)onBottomViewSendPraise:(TCShowLiveBottomView *)bottomView fromButton:(UIButton *)button

@@ -9,11 +9,6 @@
 #ifndef CommonLibrary_UIFramework_h
 #define CommonLibrary_UIFramework_h
 
-
-#define kSupportLibraryPage 1
-#define kSupportPopupView 0
-#define kSupportScrollController 0
-
 #import "UIViewController+Layout.h"
 #import "CommonBaseViewController.h"
 #import "NavigationViewController.h"

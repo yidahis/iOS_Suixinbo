@@ -10,18 +10,7 @@
 #define CommonLibrary_CommonCatetory_h
 
 
-#define kSupportGTM64 0
-#define kSupportKeyChainHelper 0
-#define kSupportMKMapViewZoomLevel 0
-#define kSupportNSDataCommon 0
-#define kSupportUIImageImageEffect 0
-#define kSupportNSObjectKVOCategory 0
 
-#define kSupportModifyFrame 0
-#define kSupportUIImageNonCommon 0
-#define kSupportModifyFrame 0
-
-#define kSupportUIViewEffect 0
 
 #import "UIImage+TintColor.h"
 #import "UIImage+Alpha.h"

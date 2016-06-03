@@ -13,32 +13,6 @@
 @implementation IMAPlatform (TCAVLive)
 
 
-#if DEBUG
-// 调试状态下
-// 是否使用AVChatRoom创建直播聊天室
-// 使用聊天室主要来验证性能，直正直播时，使用AVChatRoom
-#define kSupportAVChatRoom 1
-
-// 是否因定群ID
-#define kSupportFixLiveChatRoomID 1
-
-#if kSupportAVChatRoom
-#define kAVChatRoomType @"AVChatRoom"
-#else
-#define kAVChatRoomType @"ChatRoom"
-#endif
-
-#else
-
-// Release下
-#define kSupportAVChatRoom 1
-#define kSupportFixLiveChatRoomID 1
-#define kAVChatRoomType @"AVChatRoom"
-
-#endif
-
-
-
 - (void)asyncExitHistoryAVChatRoom
 {
     [[TIMGroupManager sharedInstance] GetGroupList:^(NSArray *list) {

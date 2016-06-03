@@ -25,7 +25,7 @@
 #pragma mark 初始化Tab
 - (void)initTabBar
 {
-    [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor flatTealColor] size:CGSizeMake(2, 2)]];
+    [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor flatWhiteColor] size:CGSizeMake(2, 2)]];
     [[UITabBar appearance] setTintColor:kRedColor];
     
     //viewcontrollers

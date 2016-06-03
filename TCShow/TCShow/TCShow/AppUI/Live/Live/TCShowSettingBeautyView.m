@@ -151,12 +151,16 @@
 
 - (void)close
 {
+#if kSupportFTAnimation
     [self animation:^(id selfPtr) {
         [_slider slideOutTo:kFTAnimationBottom duration:0.25 delegate:nil];
         [self fadeOut:0.25 delegate:nil];
     } duration:0.3 completion:^(id selfPtr) {
         [self removeFromSuperview];
     }];
+#else
+    [self removeFromSuperview];
+#endif
 }
 
 - (void)setBeauty:(CGFloat)beauty

@@ -83,11 +83,17 @@
 
 - (void)show
 {
+#if kSupportFTAnimation
     [self animation:^(id selfPtr) {
         [_tipLabel slideInFrom:kFTAnimationTop duration:0.25 delegate:nil];
         [_tableView slideInFrom:kFTAnimationTop duration:0.25 delegate:nil];
         [_backView fadeIn:0.25 delegate:nil];
     } duration:0.3 completion:nil];
+#else
+    _tipLabel.hidden = NO;
+    _tableView.hidden = NO;
+    _backView.hidden = NO;
+#endif
 }
 
 - (void)onTapBack:(UITapGestureRecognizer *)tap
@@ -100,6 +106,7 @@
 
 - (void)hide
 {
+    #if kSupportFTAnimation
     [self animation:^(id selfPtr) {
         [_tipLabel slideOutTo:kFTAnimationTop duration:0.25 delegate:nil];
         [_tableView slideOutTo:kFTAnimationTop duration:0.25 delegate:nil];
@@ -107,6 +114,9 @@
     } duration:0.3 completion:^(id selfPtr) {
         [self removeFromSuperview];
     }];
+#else
+    [self removeFromSuperview];
+#endif
 }
 
 - (void)relayoutFrameOfSubViews

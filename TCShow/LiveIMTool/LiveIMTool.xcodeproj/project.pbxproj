@@ -167,6 +167,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		92553E6E1D006A4900BE2D6C /* CommonLibraryMacroConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonLibraryMacroConfig.h; sourceTree = "<group>"; };
+		92553E6F1D006A5700BE2D6C /* TIMAdapterConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIMAdapterConfig.h; sourceTree = "<group>"; };
+		92553E701D006A5E00BE2D6C /* TCAdapterConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAdapterConfig.h; sourceTree = "<group>"; };
 		92D2C9C11CC4E37900501760 /* LiveIMTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveIMTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92D2C9C51CC4E37900501760 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		92D2C9C71CC4E37900501760 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -618,6 +621,7 @@
 				92D2CCFB1CC4EE3F00501760 /* Color */,
 				92D2CD001CC4EE3F00501760 /* CommonLibrary.h */,
 				92D2CD011CC4EE3F00501760 /* CommonLibraryConfig.h */,
+				92553E6E1D006A4900BE2D6C /* CommonLibraryMacroConfig.h */,
 				92D2CD021CC4EE3F00501760 /* CommonView */,
 				92D2CD121CC4EE3F00501760 /* DebugMacro */,
 				92D2CD151CC4EE3F00501760 /* FBKVOController */,
@@ -1095,6 +1099,7 @@
 		92D2CDAB1CC4EE3F00501760 /* TCAdapter */ = {
 			isa = PBXGroup;
 			children = (
+				92553E701D006A5E00BE2D6C /* TCAdapterConfig.h */,
 				92D2CDAC1CC4EE3F00501760 /* AVIMAble.h */,
 				92D2CDE11CC4EE3F00501760 /* TIMAdapter */,
 			);
@@ -1105,6 +1110,7 @@
 		92D2CDE11CC4EE3F00501760 /* TIMAdapter */ = {
 			isa = PBXGroup;
 			children = (
+				92553E6F1D006A5700BE2D6C /* TIMAdapterConfig.h */,
 				92D2CDE21CC4EE3F00501760 /* AVIM */,
 				92D2CDF01CC4EE3F00501760 /* Localizable.strings */,
 				92D2CDF31CC4EE3F00501760 /* Framework */,

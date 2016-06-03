@@ -186,7 +186,7 @@ NSString *const kTCShow_LocationFailNotification = @"kTCShow_LocationFailNotific
         }
     }];
 }
-
+#if kIsTCShowSupportIMCustom
 - (BOOL)gender
 {
     NSDictionary *dic = self.profile.customInfo;
@@ -202,6 +202,6 @@ NSString *const kTCShow_LocationFailNotification = @"kTCShow_LocationFailNotific
     }
     return NO;
 }
-
+#endif
 
 @end

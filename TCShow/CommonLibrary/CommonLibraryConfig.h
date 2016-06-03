@@ -9,39 +9,75 @@
 #ifndef CommonLibraryConfig_h
 #define CommonLibraryConfig_h
 
-// 暂未用到
-#define kAppBakgroundColor          RGBOF(0xEFEFF4)
+// CommonLibrary中的样式配置
+
+#ifndef kAppBakgroundColor
+// 背景色
+#define kAppBakgroundColor          kWhiteColor
+#endif
+
+#ifndef kAppModalBackgroundColor
+// 模态框内容背景色
 #define kAppModalBackgroundColor    [kBlackColor colorWithAlphaComponent:0.6]
+#endif
+
+#ifndef kAppModalDimbackgroundColor
+// 模态框dim的背景色
 #define kAppModalDimbackgroundColor [RGB(16, 16, 16) colorWithAlphaComponent:0.3]
+#endif
 
-// TIMChat没有在此处设置
-// 主色调
-// 导航按钮
-#define kNavBarThemeColor             RGBOF(0xDC4B53)
-#define kNavBarHighlightThemeColor    RGB(161, 92, 154)
+// 导航主色调
+#ifndef kNavBarThemeColor
+#define kNavBarThemeColor             nil
+#endif
 
+#ifndef kDefaultCellHeight
 // 默认TableViewCell高度
 #define kDefaultCellHeight 50
+#endif
+
+#ifndef kDefaultMargin
 // 默认界面之间的间距
 #define kDefaultMargin     8
+#endif
 
+#ifndef kMainTextColor
 // 默认的字体颜色
 #define kMainTextColor                kBlackColor
+#endif
 
+#ifndef kDetailTextColor
 #define kDetailTextColor              RGB(145, 145, 145)
+#endif
 
-
+#ifndef kDownRefreshLoadOver
 #define kDownRefreshLoadOver    @"没有更多了"
+#endif
 
+#ifndef kDownReleaseToRefresh
 #define kDownReleaseToRefresh   @"松开即可更新..."
+#endif
 
+#ifndef kDownDragUpToRefresh
 #define kDownDragUpToRefresh    @"上拉即可更新..."
+#endif
 
+#ifndef kDownRefreshLoading
 #define kDownRefreshLoading     @"加载中..."
+#endif
 
+
+#ifndef kCommonLargeTextFont
 // CommonLibrary中常用的字体
 #define kCommonLargeTextFont       [UIFont systemFontOfSize:16]
+#endif
+
+#ifndef kCommonMiddleTextFont
 #define kCommonMiddleTextFont      [UIFont systemFontOfSize:14]
+#endif
+
+#ifndef kCommonSmallTextFont
 #define kCommonSmallTextFont       [UIFont systemFontOfSize:12]
+#endif
 
 #endif /* CommonLibraryConfig_h */

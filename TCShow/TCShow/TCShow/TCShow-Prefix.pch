@@ -9,20 +9,22 @@
 #ifndef TCShow_Prefix_h
 #define TCShow_Prefix_h
 
-#define kTextRedColor       RGBOF(0xD54A45)
+// CommonLibrary与TCAdapter自定义控制
+// 以及代码全局配置
+#import "ConstHeader.h"
 
-#define kTCShowMultiSubViewSize CGSizeMake(80, 120)
-
-
+// CommonLibrary
 #import "CommonLibrary.h"
 
+// TCAdapter
 #import "TCAdapterHeader.h"
+
+
 
 #import "TCShowModelHeader.h"
 
 #import "CustomUIHeader.h"
 
-#import "ConstHeader.h"
 
 #import "AppDelegate.h"
 

@@ -10,9 +10,6 @@
 #ifndef CommonLibrary_AnimationHeaders_h
 #define CommonLibrary_AnimationHeaders_h
 
-#define kSupportADTransition 0
-#define kSupportFTAnimation 1
-
 #if kSupportADTransition
 #import "ADHeaders.h"
 #endif

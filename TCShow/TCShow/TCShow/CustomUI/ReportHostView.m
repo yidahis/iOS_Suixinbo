@@ -101,6 +101,7 @@
 
 - (void)onClick:(UIButton *)btn
 {
+#if kSupportFTAnimation
     [self animation:^(id selfPtr) {
         [_backView fadeOut:0.25 delegate:nil];
         [_contentView slideOutTo:kFTAnimationTop duration:0.25 delegate:nil];
@@ -112,12 +113,24 @@
         }
         [self removeFromSuperview];
     }];
+#else
+    if (_cancel != btn)
+    {
+        [[HUDHelper sharedInstance] tipMessage:@"举报成功"];
+    }
+    [self removeFromSuperview];
+#endif
 }
 
 - (void)showUser:(id<IMUserAble>)user
 {
+#if kSupportFTAnimation
     [_backView fadeIn:0.25 delegate:nil];
     [_contentView slideInFrom:kFTAnimationTop duration:0.25 delegate:nil];
+#else
+    _backView.hidden = NO;
+    _contentView.hidden = NO;
+#endif
 }
 
 @end

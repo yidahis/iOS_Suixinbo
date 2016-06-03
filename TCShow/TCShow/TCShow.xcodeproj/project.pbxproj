@@ -279,6 +279,9 @@
 		922C36811CDC3253008518F5 /* TCAVIMMIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCAVIMMIManager.m; sourceTree = "<group>"; };
 		9235FD311CD065B800AADB2A /* TCAVFrameDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAVFrameDispatcher.h; sourceTree = "<group>"; };
 		9235FD321CD065B800AADB2A /* TCAVFrameDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCAVFrameDispatcher.m; sourceTree = "<group>"; };
+		92553E6B1D00529700BE2D6C /* CommonLibraryMacroConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonLibraryMacroConfig.h; sourceTree = "<group>"; };
+		92553E6C1D005FDC00BE2D6C /* TCAdapterConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCAdapterConfig.h; sourceTree = "<group>"; };
+		92553E6D1D00658400BE2D6C /* TIMAdapterConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TIMAdapterConfig.h; sourceTree = "<group>"; };
 		92560A781CE45EE000622051 /* UserProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileView.h; sourceTree = "<group>"; };
 		92560A791CE45EE000622051 /* UserProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileView.m; sourceTree = "<group>"; };
 		92560A7B1CE45F0A00622051 /* ReportHostView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportHostView.h; sourceTree = "<group>"; };
@@ -1022,6 +1025,7 @@
 				92D2CA631CC4E4D200501760 /* Color */,
 				92D2CA681CC4E4D200501760 /* CommonLibrary.h */,
 				92D2CA691CC4E4D200501760 /* CommonLibraryConfig.h */,
+				92553E6B1D00529700BE2D6C /* CommonLibraryMacroConfig.h */,
 				92D2CA6A1CC4E4D200501760 /* CommonView */,
 				92D2CA7A1CC4E4D200501760 /* DebugMacro */,
 				92D2CA7D1CC4E4D200501760 /* FBKVOController */,
@@ -1501,6 +1505,7 @@
 			children = (
 				92D2CB141CC4E4D200501760 /* AVIMAble.h */,
 				92D2CB151CC4E4D200501760 /* TCAdapterHeader.h */,
+				92553E6C1D005FDC00BE2D6C /* TCAdapterConfig.h */,
 				922C36801CDC3253008518F5 /* TCAVIMMIManager.h */,
 				922C36811CDC3253008518F5 /* TCAVIMMIManager.m */,
 				92D2CB161CC4E4D200501760 /* TCAVIMAdapter */,
@@ -1635,6 +1640,7 @@
 				92D2CB6F1CC4E4D200501760 /* IMAUI */,
 				92D2CB721CC4E4D200501760 /* Playform */,
 				92D2CB821CC4E4D200501760 /* TIMAdapter.h */,
+				92553E6D1D00658400BE2D6C /* TIMAdapterConfig.h */,
 			);
 			path = TIMAdapter;
 			sourceTree = "<group>";

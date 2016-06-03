@@ -9,6 +9,9 @@
 #ifndef CommonLibrary_CommonLibrary_h
 #define CommonLibrary_CommonLibrary_h
 
+#import "CommonLibraryMacroConfig.h"
+
+
 #import "CommonLibraryConfig.h"
 
 //

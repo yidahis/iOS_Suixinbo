@@ -29,6 +29,7 @@ extern NSString *const kTCShow_LocationFailNotification;
 @property (nonatomic, copy) NSString *liveCover;            // 直播封面地址
 
 - (void)startLbs;
-
+#if kIsTCShowSupportIMCustom
 - (BOOL)gender;
+#endif
 @end

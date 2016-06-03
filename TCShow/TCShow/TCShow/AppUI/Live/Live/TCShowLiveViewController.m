@@ -83,7 +83,10 @@
     }];
     [self.view addSubview:resultview];
     [resultview setFrameAndLayout:self.view.bounds];
+    
+#if kSupportFTAnimation
     [resultview fadeIn:0.3 delegate:nil];
+#endif
 }
 
 - (void)onStartPush:(BOOL)succ pushRequest:(TCAVLiveRoomPushRequest *)req

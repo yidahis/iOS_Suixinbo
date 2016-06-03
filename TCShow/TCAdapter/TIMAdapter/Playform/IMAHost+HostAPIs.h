@@ -19,7 +19,9 @@
 
 - (void)asyncSetSignature:(NSString *)signature succ:(TIMSucc)succ fail:(TIMFail)fail;
 
+#if kIsTCShowSupportIMCustom
 - (void)asyncSetGender:(BOOL)woman succ:(TIMSucc)succ fail:(TIMFail)fail;
+#endif
 
 - (void)asyncGetProfileOf:(id<IMUserAble>)user succ:(void (^)(TIMUserProfile *profile))succ fail:(TIMFail)fail;
 

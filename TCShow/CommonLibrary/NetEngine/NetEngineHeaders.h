@@ -9,8 +9,6 @@
 #ifndef CommonLibrary_NetEngineHeaders_h
 #define CommonLibrary_NetEngineHeaders_h
 
-#define kSupportMKNetworkKit 0
-
 #if kSupportMKNetworkKit
 #import "MKNetworkKit.h"
 #endif

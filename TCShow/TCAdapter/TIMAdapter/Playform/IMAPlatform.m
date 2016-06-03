@@ -93,7 +93,9 @@ static Class kHostClass = Nil;
     
     // Demo中使用了自定义字段，如果用户的App没有将这行注释// setting.userCustom
     TIMFriendshipSetting *setting =  [[TIMFriendshipSetting alloc] init];
+#if kIsTCShowSupportIMCustom
     setting.userCustom = @[kIMCustomFlag];
+#endif
     setting.friendFlags = 0xFFFFFFFF;
     [manager initFriendshipSetting:setting];
     [manager enableFriendshipProxy];

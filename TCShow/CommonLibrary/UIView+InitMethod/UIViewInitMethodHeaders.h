@@ -9,9 +9,6 @@
 #ifndef CommonLibrary_UIViewInitMethodHeaders_h
 #define CommonLibrary_UIViewInitMethodHeaders_h
 
-#define kSupportUIViewInitMethod 1
-
-
 #import "UILabel+InitMethod.h"
 
 #if kSupportUIViewInitMethod
