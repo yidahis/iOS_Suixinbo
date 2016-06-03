@@ -289,7 +289,10 @@ static BOOL kIsAlertingForceOfflineOnLiving = NO;
 // HOST/Guest进入直播回调
 - (void)onAVEngine:(TCAVBaseRoomEngine *)avEngine enterRoom:(id<AVRoomAble>)room succ:(BOOL)succ tipInfo:(NSString *)tip
 {
+    if (succ)
+    {
     [self addNetwokChangeListner];
+    }
     [self onEnterLiveSucc:succ tipInfo:tip];
 }
 
@@ -297,6 +300,7 @@ static BOOL kIsAlertingForceOfflineOnLiving = NO;
 // HOST/Guest退出直播回调
 - (void)onAVEngine:(TCAVBaseRoomEngine *)avEngine exitRoom:(id<AVRoomAble>)room succ:(BOOL)succ tipInfo:(NSString *)tip
 {
+    [[HUDHelper sharedInstance] syncStopLoading];
     if ([IMAPlatform sharedInstance].offlineExitLivingBlock)
     {
         [IMAPlatform sharedInstance].offlineExitLivingBlock();
