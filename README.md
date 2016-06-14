@@ -2,9 +2,9 @@
 因GitHub有文件大小限制，以及微云限制，现将IMSDK以及AVSDK上传到腾讯云COS上。
 更新时，请到对应的地址进行更新，并添加到工程下面对应的目录下
 
-IMSDK : http://tcshowsdks-10022853.file.myqcloud.com/20160531/IMSDK.zip 下载后解压，然后再放至对应放到工程目录  TCShow/TCAdapter/TIMAdapter/Framework/IMSDK
+IMSDK : http://tcshowsdks-10022853.file.myqcloud.com/20160608/IMSDK.zip 下载后解压，然后再放至对应放到工程目录  TCShow/TCAdapter/TIMAdapter/Framework/IMSDK
 
-AVSDK : http://tcshowsdks-10022853.file.myqcloud.com/20160531/Libs.zip  下载后解压，然后再放至对应放到工程目录  TCShow/TCAdapter/TCAVIMAdapter/Libs
+AVSDK : http://tcshowsdks-10022853.file.myqcloud.com/20160608/Libs.zip  下载后解压，然后再放至对应放到工程目录  TCShow/TCAdapter/TCAVIMAdapter/Libs
 
 新版本随心播经过重构，完善了功能，处理了大量的异常情况，请开发者在编码过程中注意，异常情况包括如下：
 
